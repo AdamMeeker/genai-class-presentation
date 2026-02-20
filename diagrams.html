@@ -1,0 +1,168 @@
+<!-- Enhanced CSS-based diagrams for GENAI presentation -->
+<style>
+.architecture-viz {
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+    padding: 40px;
+    border-radius: 15px;
+    position: relative;
+    min-height: 400px;
+}
+
+.arch-node {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #00d9ff;
+    border-radius: 10px;
+    padding: 15px 25px;
+    position: absolute;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.arch-node.center {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+    border-color: #ff6b35;
+    box-shadow: 0 0 40px rgba(255, 107, 53, 0.5);
+    font-weight: bold;
+}
+
+.arch-node.channel {
+    background: rgba(0, 217, 255, 0.1);
+    border-color: #00d9ff;
+}
+
+.arch-node.skill {
+    background: rgba(138, 43, 226, 0.1);
+    border-color: #8a2be2;
+}
+
+.arch-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, #00d9ff 0%, transparent 100%);
+    transform-origin: left center;
+    opacity: 0.6;
+    animation: flow 2s linear infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(0, 217, 255, 0.6); }
+}
+
+@keyframes flow {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.3; }
+}
+
+.timeline-viz {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    position: relative;
+}
+
+.timeline-item {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 0 10px;
+    backdrop-filter: blur(10px);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.timeline-item:hover {
+    transform: translateY(-10px);
+}
+
+.timeline-arrow {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    font-size: 40px;
+    color: #00d9ff;
+    animation: slide 1.5s ease-in-out infinite;
+}
+
+@keyframes slide {
+    0%, 100% { transform: translateX(0); opacity: 0.5; }
+    50% { transform: translateX(5px); opacity: 1; }
+}
+
+.channel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 30px;
+}
+
+.channel-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+    border: 2px solid #00d9ff;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.channel-card:hover {
+    transform: scale(1.05);
+    border-color: #ff6b35;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+}
+
+.channel-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.tool-comparison {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    padding: 20px;
+}
+
+.tool-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #00d9ff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tool-card:hover {
+    background: rgba(0, 217, 255, 0.1);
+    transform: translateY(-5px);
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.star {
+    color: #ffd700;
+    font-size: 18px;
+}
+
+.star.empty {
+    color: rgba(255, 255, 255, 0.2);
+}
+</style>

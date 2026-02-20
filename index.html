@@ -35,10 +35,21 @@
         .timeline-item { 
             text-align: center; 
             flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.2);
+        }
+        .timeline-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.4);
         }
         .timeline-item h4 { 
             color: #00d9ff; 
             margin-bottom: 10px;
+            font-size: 1.2em;
         }
         .comparison-table { 
             font-size: 0.7em; 
@@ -57,6 +68,7 @@
             border-radius: 10px;
             font-size: 1.2em;
             margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
         .warning-box {
             background: #ff6b6b22;
@@ -65,10 +77,59 @@
             margin: 20px 0;
         }
         .architecture-diagram {
-            background: #1e2738;
-            padding: 20px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+            padding: 30px;
+            border-radius: 15px;
             margin: 20px 0;
+            position: relative;
+            min-height: 400px;
+            overflow: hidden;
+        }
+        .arch-node {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #00d9ff;
+            border-radius: 10px;
+            padding: 12px 20px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+            animation: pulse 3s ease-in-out infinite;
+            margin: 10px;
+        }
+        .arch-node.highlight {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            border-color: #ff6b35;
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+            font-weight: bold;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 217, 255, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(0, 217, 255, 0.6); }
+        }
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .channel-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+            border: 2px solid #00d9ff;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .channel-card:hover {
+            transform: scale(1.05);
+            border-color: #ff6b35;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+        .channel-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: block;
         }
     </style>
 </head>
@@ -82,7 +143,7 @@
                 <h3>From Copilot to Claude Code to OpenClaw</h3>
                 <p>
                     <strong>Adam Meeker</strong><br>
-                    MBA Professor & Consultant<br>
+                    Adjunct Instructor & Consultant<br>
                     GENAI Class - University of Iowa MSBA Program
                 </p>
                 <p style="font-size: 0.8em; color: #888;">
@@ -160,53 +221,44 @@
             <section>
                 <h2>System Architecture</h2>
                 <div class="architecture-diagram">
-                    <pre><code class="language-mermaid" style="font-size: 0.5em;">
-graph TB
-    subgraph Channels
-        Signal[📱 Signal]
-        iMessage[💬 iMessage]
-        WhatsApp[💚 WhatsApp]
-        Web[🌐 Web Dashboard]
-    end
-    
-    subgraph OpenClaw[OpenClaw Gateway - Mac Mini]
-        Core[Core Engine]
-        Skills[Skills System]
-        MCP[MCP Tools]
-        Memory[Memory & Context]
-    end
-    
-    subgraph Infrastructure
-        n8n[n8n Automation]
-        Sonos[Sonos Audio]
-        Email[Email APIs]
-        Calendar[Calendar]
-        Planner[Microsoft Planner]
-    end
-    
-    subgraph External
-        Claude[Claude API]
-        Ollama[Ollama - Local LLM]
-    end
-    
-    Signal --> Core
-    iMessage --> Core
-    WhatsApp --> Core
-    Web --> Core
-    
-    Core --> Skills
-    Core --> MCP
-    Core --> Memory
-    
-    Skills --> n8n
-    Skills --> Sonos
-    Skills --> Email
-    Skills --> Calendar
-    Skills --> Planner
-    
-    Core --> Claude
-    Core --> Ollama
-                    </code></pre>
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h3 style="color: #00d9ff; font-size: 0.9em; margin-bottom: 20px;">Communication Channels</h3>
+                        <div style="display: flex; justify-content: center; gap: 15px;">
+                            <span class="arch-node">📱 Signal</span>
+                            <span class="arch-node">💬 iMessage</span>
+                            <span class="arch-node">💚 WhatsApp</span>
+                            <span class="arch-node">🌐 Web</span>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 30px 0;">
+                        <h3 style="color: #ff6b35; font-size: 1em; margin-bottom: 15px;">OpenClaw Gateway (Mac Mini)</h3>
+                        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                            <span class="arch-node highlight">⚙️ Core Engine</span>
+                            <span class="arch-node highlight">🎯 Skills System</span>
+                            <span class="arch-node highlight">🔧 MCP Tools</span>
+                            <span class="arch-node highlight">🧠 Memory & Context</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-around; margin-top: 30px;">
+                        <div style="text-align: center;">
+                            <h4 style="color: #8a2be2; font-size: 0.9em; margin-bottom: 15px;">Infrastructure</h4>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <span class="arch-node">⚡ n8n Automation</span>
+                                <span class="arch-node">🔊 Sonos Audio</span>
+                                <span class="arch-node">📧 Email APIs</span>
+                                <span class="arch-node">📅 Calendar</span>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="color: #00d9ff; font-size: 0.9em; margin-bottom: 15px;">AI Models</h4>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <span class="arch-node">🤖 Claude API</span>
+                                <span class="arch-node">🏠 Ollama (Local)</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -229,13 +281,38 @@ graph TB
             <section>
                 <h2>Multi-Channel Power</h2>
                 <h3>One AI, Everywhere You Are</h3>
-                <ul>
-                    <li><strong>Signal:</strong> Primary channel - secure, private, voice messages</li>
-                    <li><strong>iMessage:</strong> Family integration, native iOS experience</li>
-                    <li><strong>WhatsApp:</strong> International reach</li>
-                    <li><strong>Web Dashboard:</strong> Full-featured web interface via Tailscale</li>
-                    <li><strong>All synced:</strong> Same context, same memory, same skills</li>
-                </ul>
+                <div class="channel-grid">
+                    <div class="channel-card">
+                        <span class="channel-icon">📱</span>
+                        <h4 style="color: #00d9ff; margin: 10px 0;">Signal</h4>
+                        <p style="font-size: 0.85em;">Primary channel<br>Secure & private<br>Voice messages</p>
+                    </div>
+                    <div class="channel-card">
+                        <span class="channel-icon">💬</span>
+                        <h4 style="color: #00d9ff; margin: 10px 0;">iMessage</h4>
+                        <p style="font-size: 0.85em;">Family integration<br>Native iOS<br>Seamless sync</p>
+                    </div>
+                    <div class="channel-card">
+                        <span class="channel-icon">💚</span>
+                        <h4 style="color: #00d9ff; margin: 10px 0;">WhatsApp</h4>
+                        <p style="font-size: 0.85em;">International reach<br>2B+ users<br>Universal access</p>
+                    </div>
+                    <div class="channel-card">
+                        <span class="channel-icon">🌐</span>
+                        <h4 style="color: #00d9ff; margin: 10px 0;">Web Dashboard</h4>
+                        <p style="font-size: 0.85em;">Full-featured UI<br>Tailscale VPN<br>Desktop power</p>
+                    </div>
+                    <div class="channel-card">
+                        <span class="channel-icon">📞</span>
+                        <h4 style="color: #00d9ff; margin: 10px 0;">Voice Calls</h4>
+                        <p style="font-size: 0.85em;">Phone callable<br>Obama voice TTS<br>Real-time AI</p>
+                    </div>
+                    <div class="channel-card">
+                        <span class="channel-icon">🔄</span>
+                        <h4 style="color: #ff6b35; margin: 10px 0;">All Synced</h4>
+                        <p style="font-size: 0.85em;">Same context<br>Same memory<br>Same skills</p>
+                    </div>
+                </div>
                 <div class="demo-placeholder">
                     📍 DEMO: Switching channels mid-conversation
                 </div>
@@ -356,7 +433,7 @@ Workflow:
                 <div style="text-align: left; font-size: 0.8em;">
                     <p><strong>Meeker Technologies setup (total time: ~3 hours):</strong></p>
                     <ul>
-                        <li><strong>Website:</strong> Hugo + PaperMod theme → Cloudflare Pages</li>
+                        <li><strong>Website:</strong> Hugo + PaperMod theme → Azure Static Web Apps (free tier)</li>
                         <li><strong>Invoicing:</strong> Invoice Ninja self-hosted (clients.meekertechnologies.com)</li>
                         <li><strong>Contracts:</strong> DocuSeal for e-signatures (contracts.meekertechnologies.com)</li>
                         <li><strong>Analytics:</strong> Metabase for client dashboards</li>
@@ -459,7 +536,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
                     <li><strong>Student Submission Pipeline:</strong> Email trigger → Fabric analysis → Grading checklist</li>
                     <li><strong>Client Onboarding:</strong> Form → Invoice + Contract + Planner task + Welcome email</li>
                     <li><strong>System Health:</strong> Monitor Proxmox + services → Alert if issues</li>
-                    <li><strong>Blog Publishing:</strong> File trigger → Hugo build → Cloudflare Pages deploy</li>
+                    <li><strong>Blog Publishing:</strong> File trigger → Hugo build → Azure Static Web Apps deploy</li>
                 </ul>
                 <div class="demo-placeholder" style="margin-top: 30px;">
                     📍 DEMO: n8n workflow visualization
