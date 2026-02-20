@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Personal AI Infrastructure - GENAI Class</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/black.css">
+    <style>
+        :root {
+            --r-background-color: #0a0e27;
+            --r-main-color: #e8e8e8;
+            --r-heading-color: #00d9ff;
+            --r-link-color: #42affa;
+        }
+        .reveal h1, .reveal h2, .reveal h3 { 
+            color: var(--r-heading-color); 
+            text-transform: none;
+        }
+        .reveal code { 
+            background: #1e2738; 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+        }
+        .reveal pre code { 
+            background: #1e2738; 
+            padding: 20px; 
+            max-height: 500px;
+        }
+        .timeline { 
+            display: flex; 
+            justify-content: space-around; 
+            margin: 40px 0;
+        }
+        .timeline-item { 
+            text-align: center; 
+            flex: 1;
+        }
+        .timeline-item h4 { 
+            color: #00d9ff; 
+            margin-bottom: 10px;
+        }
+        .comparison-table { 
+            font-size: 0.7em; 
+            margin: 20px 0;
+        }
+        .comparison-table th { 
+            background: #1e2738; 
+            padding: 10px;
+        }
+        .comparison-table td { 
+            padding: 8px; 
+        }
+        .demo-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .warning-box {
+            background: #ff6b6b22;
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .architecture-diagram {
+            background: #1e2738;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Title Slide -->
+            <section>
+                <h1>Building Personal AI Infrastructure</h1>
+                <h3>From Copilot to Claude Code to OpenClaw</h3>
+                <p>
+                    <strong>Adam Meeker</strong><br>
+                    MBA Professor & Consultant<br>
+                    GENAI Class - University of Iowa MSBA Program
+                </p>
+                <p style="font-size: 0.8em; color: #888;">
+                    Follow along: adammeeker.com/blog
+                </p>
+            </section>
+
+            <!-- About Me -->
+            <section>
+                <h2>Who Am I?</h2>
+                <ul>
+                    <li><strong>Day Job:</strong> Customer Experience Analytics Manager at Agilent Technologies</li>
+                    <li><strong>Teaching:</strong> MSBA & BBA courses at University of Iowa since 2018</li>
+                    <li><strong>Consulting:</strong> Meeker Technologies - AI systems that empower workers</li>
+                    <li><strong>Background:</strong> Failed out of Iowa State (1.08 GPA) → Comeback story → 5 degrees</li>
+                </ul>
+                <p style="margin-top: 40px; font-style: italic; color: #888;">
+                    "Failing doesn't define you - what you do next does."
+                </p>
+            </section>
+
+            <!-- The Journey -->
+            <section>
+                <h2>The Journey: Evolution of Personal AI</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>🤖 Copilot Era</h4>
+                        <p>2023-2024</p>
+                        <ul style="font-size: 0.8em; text-align: left;">
+                            <li>Microsoft Copilot</li>
+                            <li>Locked ecosystem</li>
+                            <li>Mixed results</li>
+                            <li>Limited control</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>🧠 PAI + Claude Code</h4>
+                        <p>2024-2025</p>
+                        <ul style="font-size: 0.8em; text-align: left;">
+                            <li>User-friendly</li>
+                            <li>Flexible</li>
+                            <li>Any system</li>
+                            <li>Local control</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>🚀 OpenClaw</h4>
+                        <p>2025-Present</p>
+                        <ul style="font-size: 0.8em; text-align: left;">
+                            <li>Production-ready</li>
+                            <li>Multi-channel</li>
+                            <li>Always-on</li>
+                            <li>Infrastructure</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What is OpenClaw -->
+            <section>
+                <h2>What is OpenClaw?</h2>
+                <blockquote style="font-size: 0.9em;">
+                    "OpenClaw transforms Claude into a personal infrastructure that works across all your devices and communication channels."
+                </blockquote>
+                <ul>
+                    <li><strong>Multi-channel AI:</strong> Signal, WhatsApp, iMessage, Web, Telegram</li>
+                    <li><strong>Always-on:</strong> Runs 24/7 on your own hardware</li>
+                    <li><strong>Skills system:</strong> Extensible capabilities via modular skills</li>
+                    <li><strong>MCP integration:</strong> Model Context Protocol for tool calling</li>
+                    <li><strong>Privacy-first:</strong> Your data stays on your infrastructure</li>
+                </ul>
+            </section>
+
+            <!-- Architecture Overview -->
+            <section>
+                <h2>System Architecture</h2>
+                <div class="architecture-diagram">
+                    <pre><code class="language-mermaid" style="font-size: 0.5em;">
+graph TB
+    subgraph Channels
+        Signal[📱 Signal]
+        iMessage[💬 iMessage]
+        WhatsApp[💚 WhatsApp]
+        Web[🌐 Web Dashboard]
+    end
+    
+    subgraph OpenClaw[OpenClaw Gateway - Mac Mini]
+        Core[Core Engine]
+        Skills[Skills System]
+        MCP[MCP Tools]
+        Memory[Memory & Context]
+    end
+    
+    subgraph Infrastructure
+        n8n[n8n Automation]
+        Sonos[Sonos Audio]
+        Email[Email APIs]
+        Calendar[Calendar]
+        Planner[Microsoft Planner]
+    end
+    
+    subgraph External
+        Claude[Claude API]
+        Ollama[Ollama - Local LLM]
+    end
+    
+    Signal --> Core
+    iMessage --> Core
+    WhatsApp --> Core
+    Web --> Core
+    
+    Core --> Skills
+    Core --> MCP
+    Core --> Memory
+    
+    Skills --> n8n
+    Skills --> Sonos
+    Skills --> Email
+    Skills --> Calendar
+    Skills --> Planner
+    
+    Core --> Claude
+    Core --> Ollama
+                    </code></pre>
+                </div>
+            </section>
+
+            <!-- My Setup -->
+            <section>
+                <h2>My Infrastructure</h2>
+                <ul style="font-size: 0.85em;">
+                    <li><strong>Mac Mini (10.0.0.166):</strong> OpenClaw gateway, n8n orchestration, Obsidian vault</li>
+                    <li><strong>Windows PC (10.0.0.168):</strong> PAI system, Outlook automation, Chatterbox TTS</li>
+                    <li><strong>Proxmox Cluster:</strong> n8n, Home Assistant, SearXNG, services</li>
+                    <li><strong>Cloudflare:</strong> Tunnels for public services (Invoice Ninja, DocuSeal)</li>
+                    <li><strong>Tailscale VPN:</strong> Secure access to internal services</li>
+                </ul>
+                <p style="margin-top: 30px; font-size: 0.8em; color: #888;">
+                    Total investment: ~$2,500 hardware + ~$50/month services
+                </p>
+            </section>
+
+            <!-- Channel Capabilities -->
+            <section>
+                <h2>Multi-Channel Power</h2>
+                <h3>One AI, Everywhere You Are</h3>
+                <ul>
+                    <li><strong>Signal:</strong> Primary channel - secure, private, voice messages</li>
+                    <li><strong>iMessage:</strong> Family integration, native iOS experience</li>
+                    <li><strong>WhatsApp:</strong> International reach</li>
+                    <li><strong>Web Dashboard:</strong> Full-featured web interface via Tailscale</li>
+                    <li><strong>All synced:</strong> Same context, same memory, same skills</li>
+                </ul>
+                <div class="demo-placeholder">
+                    📍 DEMO: Switching channels mid-conversation
+                </div>
+            </section>
+
+            <!-- Skills System -->
+            <section>
+                <h2>Skills: The Real Power</h2>
+                <p>Skills are modular capabilities that extend what your AI can do.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 0.75em; margin-top: 30px;">
+                    <div>
+                        <h4 style="color: #00d9ff;">Communication</h4>
+                        <ul>
+                            <li>Email triage & drafting</li>
+                            <li>Calendar management</li>
+                            <li>Apple Notes & Reminders</li>
+                            <li>iMessage automation</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #00d9ff;">Productivity</h4>
+                        <ul>
+                            <li>Microsoft Planner tasks</li>
+                            <li>Document generation</li>
+                            <li>GitHub operations</li>
+                            <li>n8n workflow control</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #00d9ff;">Analysis</h4>
+                        <ul>
+                            <li>Fabric patterns (243+)</li>
+                            <li>Research & synthesis</li>
+                            <li>Content extraction</li>
+                            <li>Student work grading</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #00d9ff;">Infrastructure</h4>
+                        <ul>
+                            <li>System health monitoring</li>
+                            <li>Backup automation</li>
+                            <li>Audio generation & mixing</li>
+                            <li>Web scraping (4-tier fallback)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skill Deep Dive: Email -->
+            <section>
+                <h2>Skill Deep Dive: Email Automation</h2>
+                <h3>Zero-Touch Inbox Management</h3>
+                <pre><code class="language-plaintext" style="font-size: 0.5em;">
+Workflow:
+1. Fetch unread emails via Outlook API
+2. Classify using local Ollama (zero API cost)
+   → STUDENT, CLIENT, VENDOR, SPAM, etc.
+3. Route to appropriate folders
+4. For important emails:
+   → Draft reply using Claude
+   → Save as Outlook draft
+   → Flag for review
+   → Notify via Signal
+5. For spam/newsletters:
+   → Auto-unsubscribe
+   → Move to trash
+                </code></pre>
+                <p style="font-size: 0.8em; margin-top: 20px;">
+                    <strong>Result:</strong> Wake up to organized inbox + drafted replies
+                </p>
+            </section>
+
+            <!-- Case Study 1: CFO -->
+            <section>
+                <h2>Case Study: Regional CFO</h2>
+                <h3>PAI for Conservative Adoption</h3>
+                <div style="text-align: left; font-size: 0.85em;">
+                    <p><strong>Challenge:</strong> CFO of regional manufacturing company drowning in email, needed ERP integration</p>
+                    <p><strong>Why PAI over OpenClaw:</strong></p>
+                    <ul>
+                        <li>Less aggressive, ad-hoc behavior</li>
+                        <li>Start slow, build trust gradually</li>
+                        <li>Local execution, full control</li>
+                        <li>No always-on proactive actions</li>
+                    </ul>
+                    <p><strong>Solution:</strong></p>
+                    <ul>
+                        <li>Email triage skill (Outlook API automation)</li>
+                        <li>ERP integration (Acumatica API)</li>
+                        <li>Morning calendar briefing</li>
+                        <li>Draft generator for common requests</li>
+                    </ul>
+                    <p><strong>Outcome:</strong> 2-3 hours saved daily, high satisfaction</p>
+                </div>
+            </section>
+
+            <!-- Case Study 2: Teaching -->
+            <section>
+                <h2>Case Study: Teaching Automation</h2>
+                <h3>BAIS 6040 & 4150 Course Management</h3>
+                <ul style="font-size: 0.85em;">
+                    <li><strong>Student submissions →</strong> Auto-grading with Fabric patterns</li>
+                    <li><strong>Email questions →</strong> Drafts saved in Outlook for review</li>
+                    <li><strong>Office hours →</strong> Transcription + summarization</li>
+                    <li><strong>Assignment creation →</strong> Template generation from prompts</li>
+                    <li><strong>Grade posting →</strong> Integration with Canvas LMS</li>
+                </ul>
+                <div class="demo-placeholder" style="margin-top: 30px;">
+                    📍 DEMO: Student email → Auto-draft reply
+                </div>
+            </section>
+
+            <!-- Case Study 3: Consulting -->
+            <section>
+                <h2>Case Study: Business Generation</h2>
+                <h3>Website, Contracts, Invoicing in Minutes</h3>
+                <div style="text-align: left; font-size: 0.8em;">
+                    <p><strong>Meeker Technologies setup (total time: ~3 hours):</strong></p>
+                    <ul>
+                        <li><strong>Website:</strong> Hugo + PaperMod theme → Cloudflare Pages</li>
+                        <li><strong>Invoicing:</strong> Invoice Ninja self-hosted (clients.meekertechnologies.com)</li>
+                        <li><strong>Contracts:</strong> DocuSeal for e-signatures (contracts.meekertechnologies.com)</li>
+                        <li><strong>Analytics:</strong> Metabase for client dashboards</li>
+                        <li><strong>Automation:</strong> n8n workflows for onboarding/billing</li>
+                    </ul>
+                    <p style="margin-top: 20px;"><strong>Traditional approach:</strong> Weeks of setup, thousands in fees</p>
+                    <p><strong>AI-assisted approach:</strong> Weekend project, mostly open-source</p>
+                </div>
+            </section>
+
+            <!-- Tool Comparison -->
+            <section>
+                <h2>When to Use What?</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            <th>Best For</th>
+                            <th>Limitations</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ChatGPT</strong></td>
+                            <td>Quick questions, brainstorming</td>
+                            <td>No memory, no integrations</td>
+                            <td>$20/mo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Copilot/Copilot Pro</strong></td>
+                            <td>M365 integration, office tasks</td>
+                            <td>Locked to Microsoft ecosystem</td>
+                            <td>$30/mo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Claude Code</strong></td>
+                            <td>Complex coding tasks, deep work</td>
+                            <td>Session-based, not always-on</td>
+                            <td>Pay-per-use</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PAI</strong></td>
+                            <td>Conservative adoption, local control</td>
+                            <td>Manual triggers, less proactive</td>
+                            <td>Free (local)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OpenClaw</strong></td>
+                            <td>Always-on infrastructure, multi-channel</td>
+                            <td>Requires setup, self-hosted</td>
+                            <td>API costs only</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- MCP Deep Dive -->
+            <section>
+                <h2>Model Context Protocol (MCP)</h2>
+                <h3>The Secret Sauce of Tool Integration</h3>
+                <p style="font-size: 0.85em;">MCP is Anthropic's standard for connecting AI models to external tools and data sources.</p>
+                <pre><code class="language-typescript" style="font-size: 0.5em;">
+// Example MCP server for email automation
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+
+const server = new Server({
+  name: "email-automation",
+  version: "1.0.0"
+}, {
+  capabilities: {
+    tools: {}
+  }
+});
+
+server.setRequestHandler(ListToolsRequestSchema, async () => ({
+  tools: [
+    {
+      name: "triage_inbox",
+      description: "Classify and route emails to folders",
+      inputSchema: { type: "object", properties: { limit: { type: "number" } } }
+    },
+    {
+      name: "draft_reply",
+      description: "Generate email reply draft",
+      inputSchema: { type: "object", properties: { email_id: { type: "string" } } }
+    }
+  ]
+}));
+                </code></pre>
+            </section>
+
+            <!-- n8n Integration -->
+            <section>
+                <h2>n8n: The Orchestration Layer</h2>
+                <h3>Visual Workflow Automation</h3>
+                <ul style="font-size: 0.85em;">
+                    <li><strong>Morning DJ Briefing:</strong> Calendar + Weather + Tasks → Obama voice → Sonos</li>
+                    <li><strong>Student Submission Pipeline:</strong> Email trigger → Fabric analysis → Grading checklist</li>
+                    <li><strong>Client Onboarding:</strong> Form → Invoice + Contract + Planner task + Welcome email</li>
+                    <li><strong>System Health:</strong> Monitor Proxmox + services → Alert if issues</li>
+                    <li><strong>Blog Publishing:</strong> File trigger → Hugo build → Cloudflare Pages deploy</li>
+                </ul>
+                <div class="demo-placeholder" style="margin-top: 30px;">
+                    📍 DEMO: n8n workflow visualization
+                </div>
+            </section>
+
+            <!-- Morning Briefing -->
+            <section>
+                <h2>Feature Highlight: Morning DJ Briefing</h2>
+                <h3>Wake Up to Your Personal Radio Station</h3>
+                <pre><code class="language-plaintext" style="font-size: 0.55em;">
+Workflow (runs daily 6:45 AM):
+1. Fetch calendar events (next 48h)
+2. Get weather forecast (Tiffin, Iowa)
+3. Pull Microsoft Planner tasks (top priorities)
+4. Check email for urgent items
+5. Generate briefing script with Claude
+6. Convert to Obama voice (Chatterbox TTS)
+7. Mix with intro/outro music
+8. Play on bathroom Sonos speaker
+9. Send text summary via Signal
+                </code></pre>
+                <p style="font-size: 0.8em; margin-top: 20px;">
+                    <strong>Result:</strong> Professional DJ briefing while getting ready
+                </p>
+            </section>
+
+            <!-- Infrastructure Details -->
+            <section>
+                <h2>Under the Hood: My Stack</h2>
+                <div style="font-size: 0.75em; text-align: left;">
+                    <h4 style="color: #00d9ff;">Hardware</h4>
+                    <ul>
+                        <li>Mac Mini M2 Pro - OpenClaw gateway</li>
+                        <li>Windows PC - PAI, Ollama, Outlook automation</li>
+                        <li>2x Proxmox nodes - VM/container hosting</li>
+                    </ul>
+                    
+                    <h4 style="color: #00d9ff;">Key Services</h4>
+                    <ul>
+                        <li><strong>n8n:</strong> Workflow automation (http://10.0.0.120:5678)</li>
+                        <li><strong>SearXNG:</strong> Self-hosted meta-search</li>
+                        <li><strong>Caddy:</strong> HTTPS reverse proxy with auto Let's Encrypt</li>
+                        <li><strong>Cloudflare Tunnels:</strong> Public access to select services</li>
+                        <li><strong>Tailscale:</strong> Zero-trust VPN for internal access</li>
+                    </ul>
+                    
+                    <h4 style="color: #00d9ff;">Data Storage</h4>
+                    <ul>
+                        <li>Obsidian vault (iCloud sync) - Memory & notes</li>
+                        <li>Git repositories - Code & config</li>
+                        <li>Local SQLite - Session data</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Security & Risks -->
+            <section>
+                <h2>⚠️ Security & Risks</h2>
+                <div class="warning-box">
+                    <h3>USE AT YOUR OWN RISK</h3>
+                    <p>This is bleeding-edge technology with real security implications:</p>
+                </div>
+                <ul style="font-size: 0.85em; text-align: left;">
+                    <li><strong>Prompt Injection:</strong> Malicious emails/messages could manipulate AI behavior</li>
+                    <li><strong>Data Leakage:</strong> AI might inadvertently expose sensitive information</li>
+                    <li><strong>API Costs:</strong> Runaway automation can get expensive fast</li>
+                    <li><strong>System Access:</strong> AI has broad permissions - mistakes have consequences</li>
+                    <li><strong>Privacy:</strong> Transcripts contain everything - secure your infrastructure</li>
+                </ul>
+            </section>
+
+            <!-- Best Practices -->
+            <section>
+                <h2>Security Best Practices</h2>
+                <ol style="font-size: 0.85em; text-align: left;">
+                    <li><strong>Least Privilege:</strong> Only grant necessary permissions</li>
+                    <li><strong>Review Automation:</strong> Start with human-in-the-loop for critical actions</li>
+                    <li><strong>Monitor Costs:</strong> Set API spending limits and alerts</li>
+                    <li><strong>Secure Infrastructure:</strong> VPN, firewall, encrypted storage</li>
+                    <li><strong>Audit Logs:</strong> Keep detailed records in Obsidian/git</li>
+                    <li><strong>Gradual Rollout:</strong> Test extensively before full automation</li>
+                    <li><strong>Backup Strategy:</strong> Regular backups of configs and memory</li>
+                    <li><strong>Secrets Management:</strong> Never commit API keys, use env vars</li>
+                </ol>
+            </section>
+
+            <!-- Lessons Learned -->
+            <section>
+                <h2>Lessons Learned</h2>
+                <ul style="font-size: 0.85em;">
+                    <li><strong>Start simple:</strong> Don't build everything at once</li>
+                    <li><strong>Document obsessively:</strong> Future you will thank present you</li>
+                    <li><strong>Version control everything:</strong> Git is your safety net</li>
+                    <li><strong>Local-first when possible:</strong> Ollama for classification saves $$$</li>
+                    <li><strong>Test in isolation:</strong> Debug skills individually before integration</li>
+                    <li><strong>Embrace failure:</strong> Things will break - build resilience</li>
+                    <li><strong>Community matters:</strong> OpenClaw Discord is invaluable</li>
+                </ul>
+            </section>
+
+            <!-- What's Next -->
+            <section>
+                <h2>What's Next for Me</h2>
+                <ul>
+                    <li><strong>Agilent AI Center of Excellence:</strong> Position as AI expert when it forms</li>
+                    <li><strong>Azure AI Certification:</strong> Formalize expertise</li>
+                    <li><strong>Consulting Growth:</strong> 2-3 clients, $10K revenue in 2026</li>
+                    <li><strong>Advanced Automation:</strong> Full email zero-touch inbox</li>
+                    <li><strong>Multi-agent Systems:</strong> Specialized sub-agents for different domains</li>
+                    <li><strong>Voice-first Interface:</strong> Phone-callable PAI system</li>
+                </ul>
+            </section>
+
+            <!-- Student Takeaways -->
+            <section>
+                <h2>Key Takeaways for You</h2>
+                <ol style="font-size: 0.9em;">
+                    <li><strong>AI is infrastructure,</strong> not just a chatbot</li>
+                    <li><strong>Control matters:</strong> Own your data and systems</li>
+                    <li><strong>Skills compound:</strong> Each capability multiplies the others</li>
+                    <li><strong>Start small, iterate:</strong> You don't need everything day one</li>
+                    <li><strong>Privacy vs Convenience:</strong> Understand the tradeoffs</li>
+                    <li><strong>The tech is ready:</strong> You can build this today</li>
+                </ol>
+            </section>
+
+            <!-- Getting Started Guide -->
+            <section>
+                <h2>Getting Started: Your Path</h2>
+                <div style="font-size: 0.75em; text-align: left;">
+                    <h4 style="color: #00d9ff;">Option 1: Minimal (Weekend project)</h4>
+                    <ul>
+                        <li>Install OpenClaw on your laptop</li>
+                        <li>Connect one channel (Signal or web)</li>
+                        <li>Add 2-3 basic skills</li>
+                        <li>Cost: ~$20/month Claude API</li>
+                    </ul>
+                    
+                    <h4 style="color: #00d9ff;">Option 2: Moderate (1-2 months)</h4>
+                    <ul>
+                        <li>Dedicated Mac Mini or Linux server</li>
+                        <li>Multi-channel setup</li>
+                        <li>n8n for automation</li>
+                        <li>Custom skills for your workflow</li>
+                        <li>Cost: ~$500 hardware + $50/month</li>
+                    </ul>
+                    
+                    <h4 style="color: #00d9ff;">Option 3: Full Stack (3-6 months)</h4>
+                    <ul>
+                        <li>Everything I've shown you today</li>
+                        <li>Proxmox cluster, PAI integration, full automation</li>
+                        <li>Cost: ~$2,500 hardware + $50-100/month</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Prerequisites -->
+            <section>
+                <h2>Technical Prerequisites</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; font-size: 0.8em;">
+                    <div>
+                        <h4 style="color: #00d9ff;">Required Knowledge</h4>
+                        <ul>
+                            <li>Command line basics</li>
+                            <li>Git fundamentals</li>
+                            <li>Environment variables</li>
+                            <li>API concepts</li>
+                            <li>JSON structure</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #00d9ff;">Helpful (Not Required)</h4>
+                        <ul>
+                            <li>Docker basics</li>
+                            <li>TypeScript/Python</li>
+                            <li>Networking fundamentals</li>
+                            <li>Linux system administration</li>
+                            <li>API development</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 30px; font-style: italic; color: #888;">
+                    If you can write Python and use terminal, you can build this.
+                </p>
+            </section>
+
+            <!-- Resources -->
+            <section>
+                <h2>Resources & Documentation</h2>
+                <ul style="font-size: 0.85em;">
+                    <li><strong>OpenClaw:</strong> <a href="https://docs.openclaw.ai">docs.openclaw.ai</a> | <a href="https://github.com/openclaw/openclaw">GitHub</a></li>
+                    <li><strong>My Blog:</strong> <a href="https://adammeeker.com/blog">adammeeker.com/blog</a></li>
+                    <li><strong>Discord Community:</strong> <a href="https://discord.com/invite/clawd">discord.com/invite/clawd</a></li>
+                    <li><strong>Skills Hub:</strong> <a href="https://clawhub.com">clawhub.com</a></li>
+                    <li><strong>Fabric Patterns:</strong> <a href="https://github.com/danielmiessler/fabric">github.com/danielmiessler/fabric</a></li>
+                    <li><strong>n8n Docs:</strong> <a href="https://docs.n8n.io">docs.n8n.io</a></li>
+                </ul>
+                <p style="margin-top: 40px; font-size: 0.9em;">
+                    <strong>Student setup guide included in takeaway materials →</strong>
+                </p>
+            </section>
+
+            <!-- Q&A -->
+            <section>
+                <h2>Questions?</h2>
+                <p style="font-size: 1.2em; margin: 60px 0;">
+                    Let's discuss implementation, security, costs, or anything else.
+                </p>
+                <div style="font-size: 0.85em; color: #888;">
+                    <p><strong>Contact:</strong></p>
+                    <p>adam@meekertechnologies.com</p>
+                    <p>adammeeker.com/blog</p>
+                </div>
+            </section>
+
+            <!-- Thank You -->
+            <section>
+                <h1>Thank You!</h1>
+                <h3>Go Build Something Amazing</h3>
+                <p style="margin-top: 60px;">
+                    <strong>Remember:</strong> The magic you're looking for is in the work you're avoiding.
+                </p>
+                <p style="font-size: 0.8em; color: #888; margin-top: 40px;">
+                    Presentation & setup guide available in your handout materials
+                </p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/highlight/highlight.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: true,
+            transition: 'slide',
+            plugins: [ RevealNotes, RevealHighlight ],
+            slideNumber: 'c/t',
+            showSlideNumber: 'all'
+        });
+    </script>
+</body>
+</html>
