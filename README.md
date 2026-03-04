@@ -1,119 +1,242 @@
-# GENAI Class Presentation - Personal AI Infrastructure
+# Building a Personal AI Operating System
 
-**Presenter:** Adam Meeker  
-**Class:** GENAI - University of Iowa MSBA Program  
-**Date:** February 20, 2026
+> Presentation for University of Iowa MSBA Generative AI Course  
+> Adam Meeker · Meeker Technologies · 2026
 
-## Contents
+---
 
-### 📊 Presentation
-- **File:** `index.html`
-- **Format:** HTML (reveal.js)
-- **Duration:** ~30 minutes
-- **View:** Open `index.html` in any modern browser
+## Overview
 
-### 📚 Student Materials
-- **Setup Guide:** `student-setup-guide.md` - Comprehensive walkthrough
-- **Quick Reference:** `quick-reference.md` - One-page cheat sheet
-- **Resources:** Links to all tools and documentation
+This presentation demonstrates a complete Personal AI Operating System — a sophisticated network of 14 specialized AI agents running 24/7, integrated with home infrastructure, business tools, and daily workflows.
 
-## Viewing the Presentation
+**Target Audience:** MSBA students — technically capable, ambitious, want to build their own systems.
 
-### Local Viewing
-1. Navigate to this directory
-2. Open `index.html` in your browser
-3. Use arrow keys or click to navigate slides
-4. Press `Esc` for overview, `S` for speaker notes
+**Core Thesis:** AI is not a tool. It's infrastructure. And you should run your own.
 
-### Hosting Online (Optional)
-```bash
-# Serve locally
-python3 -m http.server 8000
-# Then open http://localhost:8000
+---
 
-# Or use any static hosting (GitHub Pages, Netlify, etc.)
+## The System (Quick Facts)
+
+- **14 specialized agents** — each with distinct personas, domains, and voices
+- **3-tier hardware** — Mac mini M4 + 2 Proxmox nodes (~$2,000 total)
+- **20-page dashboard** — Mission Control (Next.js, dark theme)
+- **6 cloned voices** — Chatterbox TTS, MPS-accelerated, local inference
+- **Multiple integrations** — M365, Home Assistant, Signal, Email, n8n, Invoice Ninja, DocuSeal
+- **Continuous operation** — cron jobs, autonomous email triage, morning briefings
+- **Cost:** ~$50-100/month ongoing (API + services)
+
+---
+
+## Files in This Directory
+
+```
+genai-class/
+├── index.html              ← Main Reveal.js presentation (39 slides)
+├── reveal/                 ← Reveal.js library files (do not edit)
+├── agent-intros.json       ← Voice intro scripts for all 14 agents
+├── student-kit/            ← Complete starter kit for students
+│   ├── README.md           ← Overview + architecture diagram
+│   ├── QUICKSTART.md       ← 30-minute setup guide
+│   ├── agents/             ← All 14 agent templates + design philosophy
+│   │   ├── README.md
+│   │   ├── barack.md       ← Chief of Staff
+│   │   ├── olivia.md       ← Executive Enforcer
+│   │   ├── marcus.md       ← Research & Intelligence
+│   │   ├── riley.md        ← Communications & Writing
+│   │   ├── matlock.md      ← Legal Counsel
+│   │   ├── sterling.md     ← Business Operations
+│   │   ├── vega.md         ← Quantitative Finance
+│   │   ├── sage.md         ← Teaching Assistant
+│   │   ├── forge.md        ← Infrastructure Engineer
+│   │   ├── maxwell.md      ← PR & Communications
+│   │   ├── quinn.md        ← Personal & Family
+│   │   ├── taylor.md       ← Lifestyle & Scheduling
+│   │   ├── inbox.md        ← Email Triage
+│   │   ├── dev.md          ← Software Engineering
+│   │   └── template.md     ← Blank template to copy
+│   ├── prompts/            ← Copy-paste into Claude Code
+│   │   ├── build-mission-control.md
+│   │   ├── build-agent-team.md
+│   │   ├── build-voice-system.md
+│   │   └── build-integrations.md
+│   ├── docs/               ← Technical documentation
+│   │   ├── architecture.md
+│   │   ├── openclaw-setup.md
+│   │   ├── hardware.md
+│   │   └── integrations.md
+│   └── examples/
+│       └── morning-briefing.md  ← Full automation walkthrough
+└── README.md               ← This file
 ```
 
-## Key Topics Covered
+---
 
-1. **The Journey:** Copilot → Claude Code + PAI → OpenClaw
-2. **Architecture:** Skills, MCP, multi-channel infrastructure
-3. **Channel Capabilities:** Signal, iMessage, WhatsApp, Web
-4. **Real Case Studies:**
-   - Regional CFO email automation (PAI)
-   - Teaching automation (BAIS courses)
-   - Business generation (Meeker Technologies)
-5. **Tool Comparison:** When to use ChatGPT vs Copilot vs Claude Code vs PAI vs OpenClaw
-6. **Security & Risks:** Prompt injection, data leakage, best practices
-7. **Getting Started:** Minimal, Intermediate, Advanced paths
+## Presenting the Deck
 
-## Demo Placeholders
+### Opening the Presentation
 
-Throughout the presentation, you'll see purple boxes with "📍 DEMO" markers. These are live demo points where Adam will show:
+```bash
+# Navigate to directory
+cd ~/clawd/presentations/genai-class/
 
-- Switching channels mid-conversation
-- n8n workflow visualization
-- Student email → auto-draft reply
-- And more...
+# Open in browser
+open index.html
 
-## For Students
+# Or serve via local server (if needed)
+python3 -m http.server 8000
+# Then open: http://localhost:8000/index.html
+```
 
-### Getting Started
-1. Read `student-setup-guide.md` for detailed instructions
-2. Check `quick-reference.md` for commands and links
-3. Join the OpenClaw Discord community
-4. Follow Adam's blog for ongoing updates
+### Keyboard Controls
 
-### Cost Breakdown
-- **Minimal Setup:** $0-20/month (laptop + Claude API)
-- **Intermediate:** $500 initial + $20-50/month (dedicated server)
-- **Advanced:** $1,500-2,500 initial + $50-100/month (full infrastructure)
+- **Arrow keys** — navigate slides
+- **F** — fullscreen
+- **S** — speaker notes (if added)
+- **ESC** — overview mode
+- **B** — blank screen (pause)
 
-### Time Investment
-- **Weekend:** Basic working setup
-- **1-2 weeks:** Intermediate with automation
-- **1-3 months:** Full infrastructure like Adam's
+### Slide Count
 
-## Resources
+39 slides covering:
+1. Title + About Adam
+2. Problem statement (why one big brain fails)
+3. Solution (treat AI as infrastructure)
+4. System philosophy
+5. Architecture overview
+6. Hardware layer
+7. Gateway layer (OpenClaw)
+8. Agent team (14 agents across 6 domains)
+9. Model selection strategy
+10. Voice system
+11. Mission Control dashboard
+12. Key integrations (Planner, Email, Home Assistant, Business tools)
+13. Memory system
+14. Security & privacy
+15. Real results / use cases
+16. Cost breakdown
+17. How to build your own (3 levels)
+18. Student starter kit
+19. Claude Code as builder
+20. Resources + Q&A
 
-### Official
-- OpenClaw Docs: https://docs.openclaw.ai
-- OpenClaw GitHub: https://github.com/openclaw/openclaw
-- Discord: https://discord.com/invite/clawd
-- Skills Hub: https://clawhub.com
+---
 
-### Adam's Resources
-- Blog: https://adammeeker.com/blog
-- Email: adam@meekertechnologies.com
-- Meeker Technologies: meekertechnologies.com
+## Student Starter Kit
 
-### Related Projects
-- PAI: https://github.com/danielmiessler/pai
-- Fabric: https://github.com/danielmiessler/fabric
-- n8n: https://n8n.io
-- Ollama: https://ollama.com
+The `student-kit/` directory is a complete, standalone resource that students can use to build their own AI operating system.
 
-## Security Notice
+**Key principle:** Every prompt file is copy-paste ready for Claude Code. Students can literally build their own system by following the prompts.
 
-⚠️ **USE AT YOUR OWN RISK**
+### Quick Start Path for Students
 
-This technology is powerful and still evolving. Be aware of:
-- Prompt injection risks
-- Data leakage possibilities
-- API cost management
-- Privacy implications
+1. **Read:** `student-kit/README.md` — understand the architecture
+2. **Do:** `student-kit/QUICKSTART.md` — 30-minute setup (Level 1)
+3. **Build:** Use prompts in `student-kit/prompts/` to expand (Level 2-3)
+4. **Customize:** Adapt agent templates in `student-kit/agents/` for their own domains
 
-Always start with human-in-the-loop for critical actions.
+---
 
-## Questions?
+## Design System
 
-Contact Adam:
-- Email: adam@meekertechnologies.com
-- Office hours: By appointment
-- Discord: Find me in the OpenClaw community
+The presentation uses a dark cyberpunk aesthetic:
+
+- **Background:** #0a0a0f (near black)
+- **Accent:** #00d9ff (cyan)
+- **Secondary:** #a855f7 (purple)
+- **Success:** #22c55e (green)
+- **Text:** #e2e8f0 (light gray)
+
+Emoji-heavy, visual, professional but not corporate boring.
+
+---
+
+## Agent Voice Intros
+
+`agent-intros.json` contains 2-3 sentence intro scripts for each of the 14 agents, written in character. These can be used for:
+
+- TTS demo during the presentation
+- Student understanding of agent personas
+- Template for students creating their own agent voices
+
+Example usage:
+```bash
+# Generate intro audio for Barack
+cat agent-intros.json | jq -r '.barack' | \
+  curl -X POST http://localhost:4126/v1/text-to-speech/obama \
+    -H "Content-Type: application/json" \
+    -d @- -o barack-intro.mp3
+```
+
+---
+
+## Updating the Presentation
+
+To modify the presentation:
+
+1. Edit `index.html` directly (it's all inline HTML/CSS/JS)
+2. Keep the existing `reveal/` directory (library files)
+3. Test locally: `open index.html`
+4. Commit changes: `git add . && git commit -m "Update presentation"`
+
+The presentation is completely self-contained — no build step, no npm install, just open the HTML file.
+
+---
+
+## GitHub Repository (Future)
+
+This starter kit is intended to be published to GitHub as:
+```
+github.com/adammeeker/personal-ai-os-starter
+```
+
+Students can then:
+```bash
+git clone https://github.com/adammeeker/personal-ai-os-starter.git
+cd personal-ai-os-starter
+# Follow QUICKSTART.md
+```
+
+---
+
+## Learning Outcomes
+
+By the end of this presentation + hands-on work with the starter kit, students should be able to:
+
+1. **Understand** the architectural difference between "AI chatbot" and "AI infrastructure"
+2. **Design** a multi-agent system with specialized roles and clear boundaries
+3. **Implement** OpenClaw with 3-5 agents on their own Mac (Level 1)
+4. **Integrate** at least one external service (calendar, email, or tasks)
+5. **Build** a simple Mission Control dashboard using Claude Code
+6. **Evaluate** model selection tradeoffs (Haiku vs. Sonnet vs. Opus)
+7. **Deploy** cron-based automations (morning briefing, email digest)
+8. **Explain** the privacy and security implications of local-first AI infrastructure
+
+---
+
+## Contact & Support
+
+**Adam Meeker**  
+Email: adam@meekertechnologies.com  
+Blog: adammeeker.com/blog  
+LinkedIn: linkedin.com/in/adammeeker
+
+**For Students:**
+- Office hours: [TBD via class schedule]
+- Questions: Post in class discussion board or email directly
+- Troubleshooting: Check `docs/openclaw-setup.md` troubleshooting section first
+
+---
+
+## Version History
+
+- **2026-03-03:** Complete rebuild — new presentation, full student kit, all 14 agents documented
+- **2026-02-XX:** Original version (now outdated)
+
+---
 
 ## License
 
-Presentation materials created by Adam Meeker for educational purposes.
-
-OpenClaw is open source - see https://github.com/openclaw/openclaw for license details.
+Presentation content: © 2026 Adam Meeker  
+Student starter kit: MIT License (free to use, modify, distribute)  
+OpenClaw: See openclaw.ai/license  
+Claude API: See anthropic.com/terms
