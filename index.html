@@ -230,10 +230,10 @@
         <div style="font-size:1.8em; font-weight:900; color:#22c55e">2026</div>
         <h3>🚀 PAI Era</h3>
         <ul style="text-align:left; font-size:0.72em">
+          <li><span style="color:#22c55e">Daniel Miessler's PAI framework</span> — the blueprint</li>
           <li>Personal AI Infrastructure — always on</li>
           <li>14 specialized agents, each with a domain</li>
           <li>Voice, memory, proactive automation</li>
-          <li>Local LLMs as fallback (Ollama)</li>
           <li><span style="color:#22c55e">This is what I'm building you today</span></li>
         </ul>
       </div>
@@ -241,6 +241,89 @@
   </div>
   <div class="callout" style="font-size:0.75em; margin-top:0.5em; text-align:center">
     The shift isn't about <em>better tools</em>. It's about <em>treating AI as infrastructure</em> — modular, specialized, always running.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3c: DANIEL MIESSLER & HUMAN 3.0 -->
+<!-- ============================================================ -->
+<section>
+  <h2>🧬 Standing on the Shoulders of Giants</h2>
+  <div class="two-col">
+    <div>
+      <div class="callout" style="margin-bottom:0.8em">
+        <strong class="cyan">Daniel Miessler</strong> — security researcher, writer, and AI infrastructure pioneer — coined the PAI framework and the <span class="purple">Human 3.0</span> concept that shapes everything I'm building.
+      </div>
+      <div class="card">
+        <h3>🤖 PAI — Personal AI Infrastructure</h3>
+        <ul>
+          <li>Orchestrate <em>multiple agents</em> around <em>your</em> goals</li>
+          <li>Persistent memory that grows with you</li>
+          <li>Workflow automation + self-improvement loops</li>
+          <li>243+ Fabric patterns for content analysis</li>
+          <li>Goal: AI that works <em>for you</em>, not the cloud vendor</li>
+        </ul>
+        <div style="margin-top:0.6em">
+          <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure" class="pill pill-cyan" style="font-size:0.6em">github.com/danielmiessler/Personal_AI_Infrastructure ↗</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="border-color:rgba(168,85,247,0.4)">
+        <h3>🌐 Human 3.0 — The Destination</h3>
+        <ul>
+          <li><strong class="muted">Human 1.0</strong> — Hunter-gatherer, physical survival</li>
+          <li><strong class="muted">Human 2.0</strong> — Industrial worker, economic output</li>
+          <li><strong class="cyan">Human 3.0</strong> — AI-augmented, self-directed, creative</li>
+        </ul>
+        <div class="callout purple" style="margin-top:0.6em; font-size:0.75em">
+          "Free individuals from cognitive drudgery so they can focus on <em>connection, creation, imagination, and meaning</em> — in a post-corporate world."<br>
+          <span class="muted">— Daniel Miessler</span>
+        </div>
+        <div style="margin-top:0.6em">
+          <a href="https://human3.unsupervised-learning.com" class="pill pill-purple" style="font-size:0.6em">human3.unsupervised-learning.com ↗</a>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:0.6em; font-size:0.72em">
+        <strong>PAI is the platform.</strong> Human 3.0 is the destination.<br>
+        What I'm showing you today is one person's attempt to get there.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3d: PAI INNER/OUTER LOOP -->
+<!-- ============================================================ -->
+<section>
+  <h2>🔄 The PAI Loop — How It Actually Works</h2>
+  <div class="two-col" style="align-items:center">
+    <div style="text-align:center">
+      <img src="images/pai-outer-loop.png" alt="PAI Outer Loop" style="max-width:100%; max-height:320px; border-radius:12px; border:1px solid var(--border); box-shadow:0 0 30px rgba(0,217,255,0.1)" />
+      <p class="muted" style="font-size:0.55em; margin-top:0.3em">PAI Outer Loop: Current State → Desired State</p>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:0.6em">
+        <h3>🌀 Outer Loop — Your Life</h3>
+        <ul>
+          <li>Where are you now? (current state)</li>
+          <li>Where do you want to be? (desired state)</li>
+          <li>PAI continuously closes that gap</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>⚙️ Inner Loop — Daily Operations</h3>
+        <ul>
+          <li>Ingest → Analyze → Synthesize → Act</li>
+          <li>Email, calendar, tasks, research, communications</li>
+          <li>Runs autonomously — briefings, triage, updates</li>
+          <li>Reports back for human decision on exceptions</li>
+        </ul>
+      </div>
+      <div class="callout" style="margin-top:0.6em; font-size:0.72em">
+        The infrastructure handles the <em>routine</em>.<br>You focus on the <em>important</em>.
+      </div>
+    </div>
   </div>
 </section>
 
@@ -396,6 +479,9 @@
 <!-- ============================================================ -->
 <section>
   <h2>🏛️ Architecture Overview</h2>
+  <div style="text-align:center; margin-bottom:0.6em">
+    <img src="images/mc-architecture.png" alt="Mission Control Architecture" style="max-height:240px; max-width:100%; border-radius:10px; border:1px solid var(--border); box-shadow:0 0 30px rgba(0,217,255,0.1)" />
+  </div>
   <div class="arch-diagram">
 <span class="layer-label">┌─ HARDWARE LAYER ──────────────────────────────────────────────────────┐</span>
 <span class="node">│  Mac mini M4 (10.0.0.166)    Proxmox Node 1 (10.0.0.55)    Proxmox 2  │</span>
@@ -516,7 +602,10 @@
 <!-- ============================================================ -->
 <section>
   <h2>🤖 The Agent Team</h2>
-  <p style="font-size:0.78em; margin-bottom:0.8em">14 specialized agents. Each with a persona, domain, model, and voice. Together they cover everything.</p>
+  <div style="display:flex; align-items:center; gap:1em; margin-bottom:0.6em">
+    <p style="font-size:0.75em; margin:0; flex:1">14 specialized agents. Each with a persona, domain, model, and voice. Together they cover everything.</p>
+    <img src="images/mc-agents.png" alt="Agent team" style="max-height:130px; border-radius:8px; border:1px solid var(--border); flex-shrink:0" />
+  </div>
   <div class="agent-mini-grid">
     <div class="agent-mini"><span class="em">🎩</span><span class="name">Barack</span><span class="role-sm">Chief of Staff</span></div>
     <div class="agent-mini"><span class="em">⚖️</span><span class="name">Olivia</span><span class="role-sm">Exec Enforcer</span></div>
@@ -539,188 +628,508 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 11: COMMAND DOMAIN -->
+<!-- AGENT SLIDES: 1 per agent (14 total) -->
+<!-- Shared CSS for individual agent slides -->
 <!-- ============================================================ -->
-<section>
-  <h2>🎩 Command Domain</h2>
-  <div class="agent-card" style="margin-bottom:0.8em">
-    <div class="emoji">🎩</div>
-    <div class="info">
-      <h3>Barack — Chief of Staff</h3>
-      <div class="role">Command · Coordination · Routing</div>
-      <div class="model">Claude Sonnet 4.6 · Obama voice (cloned)</div>
-      <p>The primary interface for everything. Barack knows the whole system — every agent, every integration, every scheduled job. He routes requests, synthesizes briefings, and makes sure Adam's priorities get executed. Every other agent reports through him.</p>
-      <span class="voice-badge">🎤 Obama voice clone · Chatterbox TTS</span>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/barack.mp3" type="audio/mpeg">Barack intro unavailable</audio>
+<!-- AGENT 1: BARACK -->
+<!-- ============================================================ -->
+<section data-background-gradient="radial-gradient(ellipse at 30% 50%, rgba(0,217,255,0.05) 0%, transparent 70%)">
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/barack.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.3); object-fit:cover" alt="Barack" />
+      <div style="display:none; font-size:5em; filter:drop-shadow(0 0 15px rgba(0,217,255,0.4))">🎩</div>
+      <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Chief of Staff</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Obama</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.6</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
+        <source src="audio/barack.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Barack's intro</p>
     </div>
-  </div>
-  <div class="agent-card">
-    <div class="emoji">⚖️</div>
-    <div class="info">
-      <h3>Olivia — Executive Enforcer</h3>
-      <div class="role">Accountability · Deadlines · No Excuses</div>
-      <div class="model">Claude Sonnet 4.5 · Olivia Benson voice (cloned)</div>
-      <p>If Barack is the strategic brain, Olivia is the one who makes sure things actually get done. She tracks commitments, calls out slippage, and has zero tolerance for vague timelines. "What's the deadline? What are the blockers? Fix it."</p>
-      <span class="voice-badge">🎤 Olivia Benson voice clone</span>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/olivia.mp3" type="audio/mpeg">Olivia intro unavailable</audio>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; background:linear-gradient(135deg,var(--cyan),var(--purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text">Barack</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Command · Coordination · Routing</p>
+      <div class="callout" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Barack — Chief of Staff and your primary interface to this entire operation. My job is to know everything, route everything, and make sure Adam's priorities get executed."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Request routing</li><li>Morning briefings</li><li>Cron orchestration</li><li>Memory injection</li></ul>
+        </div>
+        <div class="card">
+          <h3>Integrations</h3>
+          <ul><li>Signal (primary channel)</li><li>OpenClaw gateway</li><li>All 13 agents</li><li>Mission Control</li></ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 12: RESEARCH & COMMS DOMAIN -->
+<!-- AGENT 2: OLIVIA -->
 <!-- ============================================================ -->
-<section>
-  <h2>🔍 Research & Communications Domain</h2>
-  <div class="agent-card" style="margin-bottom:0.6em">
-    <div class="emoji">🔍</div>
-    <div class="info">
-      <h3>Marcus — Research & Intelligence</h3>
-      <div class="role">Deep Research · Analysis · OSINT</div>
-      <div class="model">Claude Sonnet 4.5 · Morgan Freeman voice (cloned)</div>
-      <p>Methodical, thorough, never rushes. Marcus synthesizes complex information from multiple sources, builds research briefs, and provides the intelligence layer for decisions. You ask Marcus about a company, a person, a market — you get a real analysis.</p>
+<section data-background-gradient="radial-gradient(ellipse at 70% 50%, rgba(168,85,247,0.05) 0%, transparent 70%)">
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/olivia.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--purple); box-shadow:0 0 30px rgba(168,85,247,0.3); object-fit:cover" alt="Olivia" />
+      <div style="display:none; font-size:5em">⚖️</div>
+      <div style="margin-top:0.5em"><span class="pill pill-purple" style="font-size:0.5em">Exec Enforcer</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Olivia Benson</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.5</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--purple)" preload="none">
+        <source src="audio/olivia.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Olivia's intro</p>
     </div>
-  </div>
-  <div class="agent-card" style="margin-bottom:0.6em">
-    <div class="emoji">✍️</div>
-    <div class="info">
-      <h3>Riley — Communications & Writing</h3>
-      <div class="role">Copywriting · Editing · Voice</div>
-      <div class="model">Claude Opus 4.5 · Custom voice</div>
-      <p>Opus-powered because writing quality matters. Riley handles blog posts, client proposals, email drafts, teaching materials. Has Adam's voice dialed in — direct, practical, occasionally snarky.</p>
-    </div>
-  </div>
-  <div class="agent-card">
-    <div class="emoji">📣</div>
-    <div class="info">
-      <h3>Maxwell — Communications & PR</h3>
-      <div class="role">Public Relations · Positioning · Messaging</div>
-      <div class="model">Claude Opus 4.5 · Obama voice</div>
-      <p>Where Riley writes, Maxwell strategizes. Handles external communications, consulting positioning, and when to say what to whom. The spin doctor, but honest.</p>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--purple)">Olivia</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Accountability · Deadlines · No Excuses</p>
+      <div class="callout purple" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Olivia — Executive Enforcer. I track commitments, call out slippage, and have zero tolerance for vague timelines. If you said you'd do it, I'm making sure it gets done. No excuses."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Deadline tracking</li><li>Commitment reviews</li><li>Slippage alerts</li><li>Accountability loops</li></ul>
+        </div>
+        <div class="card">
+          <h3>Trigger</h3>
+          <ul><li>Weekly check-ins</li><li>"Is this done yet?"</li><li>Missed deadline alerts</li><li>Project retrospectives</li></ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 13: LEGAL & BUSINESS DOMAIN -->
+<!-- AGENT 3: MARCUS -->
 <!-- ============================================================ -->
 <section>
-  <h2>⚖️ Legal & Business Domain</h2>
-  <div class="agent-card" style="margin-bottom:0.6em">
-    <div class="emoji">⚖️</div>
-    <div class="info">
-      <h3>Matlock — Legal Counsel</h3>
-      <div class="role">Contracts · Risk · Legal Research</div>
-      <div class="model">Claude Opus 4.5 · David Attenborough voice (cloned)</div>
-      <p>Opus because precision is non-negotiable in legal contexts. Matlock reviews contracts, flags risk clauses, researches legal questions, and always — always — reminds you to consult a real lawyer for anything consequential. That's not a weakness; it's good system design.</p>
-      <span class="voice-badge">🎤 David Attenborough voice clone</span>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/maxwell.mp3" type="audio/mpeg">Maxwell intro unavailable</audio>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/matlock.mp3" type="audio/mpeg">Matlock intro unavailable</audio>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/riley.mp3" type="audio/mpeg">Riley intro unavailable</audio>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/marcus.mp3" type="audio/mpeg">Marcus intro unavailable</audio>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/marcus.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Marcus" />
+      <div style="display:none; font-size:5em">🔍</div>
+      <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Research & Intel</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Morgan Freeman</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.5</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
+        <source src="audio/marcus.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Marcus's intro</p>
     </div>
-  </div>
-  <div class="agent-card">
-    <div class="emoji">💼</div>
-    <div class="info">
-      <h3>Sterling — Business Operations</h3>
-      <div class="role">Consulting · Clients · Revenue · Operations</div>
-      <div class="model">Claude Sonnet 4.5 · Custom voice</div>
-      <p>Runs the business side of Meeker Technologies. Tracks client relationships, monitors invoices, manages project status, and helps with proposals. The COO to Barack's CEO.</p>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--cyan)">Marcus</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Deep Research · Analysis · OSINT</p>
+      <div class="callout" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Marcus — Research and Intelligence specialist. I dive deep, synthesize from multiple sources, and give you the analysis you need to make informed decisions. Methodical, thorough, never rushed."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Company &amp; market research</li><li>OSINT &amp; due diligence</li><li>Academic analysis</li><li>Intelligence briefs</li></ul>
+        </div>
+        <div class="card">
+          <h3>Integrations</h3>
+          <ul><li>SearXNG (private search)</li><li>Fabric patterns (243+)</li><li>Web fetch &amp; scraping</li><li>Obsidian research notes</li></ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 14: FINANCE & TEACHING DOMAIN -->
+<!-- AGENT 4: RILEY -->
 <!-- ============================================================ -->
 <section>
-  <h2>📈 Finance & Teaching Domain</h2>
-  <div class="agent-card" style="margin-bottom:0.6em">
-    <div class="emoji">📈</div>
-    <div class="info">
-      <h3>Vega — Quantitative Trading</h3>
-      <div class="role">Markets · Quant Analysis · Portfolio</div>
-      <div class="model">Claude Sonnet 4.6 · Morgan Freeman voice</div>
-      <p>Analyzes market data, runs quantitative models, monitors positions, and explains complex financial concepts. Vega doesn't make trades — that's a human decision — but gives Adam the analytical firepower to make informed ones.</p>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/riley.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Riley" />
+      <div style="display:none; font-size:5em">✍️</div>
+      <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Comms & Writing</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Riley voice</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Opus 4.5</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
+        <source src="audio/riley.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Riley's intro</p>
     </div>
-  </div>
-  <div class="agent-card">
-    <div class="emoji">🎓</div>
-    <div class="info">
-      <h3>Sage — Teaching Assistant</h3>
-      <div class="role">Curriculum · Grading Rubrics · Student Questions</div>
-      <div class="model">Claude Sonnet 4.5 · Taylor Swift voice (cloned)</div>
-      <p>Sage is the TA Adam never had budget for. Helps draft assignment rubrics, answers student-style questions to test explanations, suggests curriculum improvements, and synthesizes student feedback. Teaching load: cut in half.</p>
-      <span class="voice-badge">🎤 Taylor Swift voice clone</span>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/sage.mp3" type="audio/mpeg">Sage intro unavailable</audio>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/vega.mp3" type="audio/mpeg">Vega intro unavailable</audio>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/sterling.mp3" type="audio/mpeg">Sterling intro unavailable</audio>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--cyan)">Riley</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Copywriting · Editing · Voice</p>
+      <div class="callout" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Riley — Communications and Writing specialist. I draft your important documents, emails, and content. Clarity is my religion. Every word earns its place or it doesn't make the cut."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Blog posts &amp; long-form</li><li>Client proposals</li><li>Email drafts</li><li>Teaching materials</li></ul>
+        </div>
+        <div class="card">
+          <h3>Why Opus?</h3>
+          <ul><li>Writing quality matters</li><li>Every word is deliberate</li><li>Tone matching is hard</li><li>Opus does it right, first time</li></ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 15: TECHNICAL DOMAIN -->
+<!-- AGENT 5: MATLOCK -->
 <!-- ============================================================ -->
-<section>
-  <h2>🔧 Technical Domain</h2>
-  <div class="agent-card" style="margin-bottom:0.6em">
-    <div class="emoji">🔧</div>
-    <div class="info">
-      <h3>Forge — Infrastructure Engineer</h3>
-      <div class="role">DevOps · Proxmox · Networking · Security</div>
-      <div class="model">Claude Sonnet 4.6 · Morgan Freeman voice</div>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/forge.mp3" type="audio/mpeg">Forge intro unavailable</audio>
-      <p>Keeps the infrastructure running. Forge handles Proxmox management, Docker compose files, network configs, SSL certs, firewall rules. When something breaks at 2 AM, Forge gets the page (via Signal cron), diagnoses it, and wakes Adam only if human action is required.</p>
+<section data-background-gradient="radial-gradient(ellipse at 30% 50%, rgba(251,191,36,0.04) 0%, transparent 70%)">
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/matlock.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--yellow); box-shadow:0 0 30px rgba(251,191,36,0.2); object-fit:cover" alt="Matlock" />
+      <div style="display:none; font-size:5em">⚖️</div>
+      <div style="margin-top:0.5em"><span class="pill" style="font-size:0.5em; background:rgba(251,191,36,0.15); color:var(--yellow); border:1px solid rgba(251,191,36,0.3)">Legal Counsel</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 D. Attenborough</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Opus 4.5</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--yellow)" preload="none">
+        <source src="audio/matlock.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Matlock's intro</p>
     </div>
-  </div>
-  <div class="agent-card">
-    <div class="emoji">💻</div>
-    <div class="info">
-      <h3>Dev — Software Engineering</h3>
-      <div class="role">Code · Architecture · Debugging · Code Review</div>
-      <div class="model">Claude Sonnet 4.6 · Text only</div>
-      <p>The actual coding agent. TypeScript-first (because that's Adam's preference), bun over npm, deterministic and practical. Dev pairs with Claude Code for longer builds. Text only — code doesn't need a voice.</p>
-      <span class="voice-badge">📝 Text only — code speaks for itself</span>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/dev.mp3" type="audio/mpeg">Dev intro unavailable</audio>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--yellow)">Matlock</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Contracts · Risk · Legal Research</p>
+      <div class="callout yellow" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Matlock — Legal Counsel. I review contracts, flag risk clauses, and research legal questions. I'm careful, experienced, and I always remind you to consult a real attorney when the stakes are real."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Contract review &amp; redline</li><li>Risk clause detection</li><li>Legal research</li><li>SOW review for consulting</li></ul>
+        </div>
+        <div class="card">
+          <h3>Design principle</h3>
+          <ul><li>Always flags human review</li><li>Never gives final legal advice</li><li>Opus for maximum precision</li><li>Attenborough voice = gravitas</li></ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SLIDE 16: PERSONAL DOMAIN -->
+<!-- AGENT 6: STERLING -->
 <!-- ============================================================ -->
 <section>
-  <h2>🏠 Personal Domain</h2>
-  <div class="agent-card" style="margin-bottom:0.6em">
-    <div class="emoji">🏠</div>
-    <div class="info">
-      <h3>Quinn — Personal & Family</h3>
-      <div class="role">Family · Home · Personal Life</div>
-      <div class="model">Claude Haiku 4.5 · Text only</div>
-      <p>The private one. Quinn handles family calendar coordination, gift ideas, trip planning, and personal context that doesn't need to be in the other agents' context. Haiku because personal queries don't need Opus-level horsepower — and it's cheaper at scale.</p>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/quinn.mp3" type="audio/mpeg">Quinn intro unavailable</audio>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/sterling.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--green); box-shadow:0 0 30px rgba(34,197,94,0.2); object-fit:cover" alt="Sterling" />
+      <div style="display:none; font-size:5em">💼</div>
+      <div style="margin-top:0.5em"><span class="pill pill-green" style="font-size:0.5em">Business Ops</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Riley voice</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.5</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--green)" preload="none">
+        <source src="audio/sterling.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Sterling's intro</p>
+    </div>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--green)">Sterling</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Consulting · Clients · Revenue · Operations</p>
+      <div class="callout green" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Sterling — Business Operations manager. I track clients, revenue, projects, and proposals. The business is a machine with inputs and outputs, and I know which levers to pull."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Invoice Ninja integration</li><li>Client relationship tracking</li><li>Proposal drafting</li><li>Revenue pipeline</li></ul>
+        </div>
+        <div class="card">
+          <h3>Works with</h3>
+          <ul><li>Matlock (contract review)</li><li>Maxwell (positioning)</li><li>Riley (proposal writing)</li><li>Barack (routing)</li></ul>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="agent-card" style="margin-bottom:0.6em">
-    <div class="emoji">🗓️</div>
-    <div class="info">
-      <h3>Taylor — Lifestyle & Scheduling</h3>
-      <div class="role">Calendar · Scheduling · Daily Rhythms</div>
-      <div class="model">Claude Haiku 4.5 · Taylor Swift voice (cloned)</div>
-      <p>Handles the daily logistics. What's on the calendar, when's the next appointment, what should Adam eat before a long meeting. The personal assistant experience, without the awkwardness.</p>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/taylor.mp3" type="audio/mpeg">Taylor intro unavailable</audio>
+</section>
+
+<!-- ============================================================ -->
+<!-- AGENT 7: VEGA -->
+<!-- ============================================================ -->
+<section>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/vega.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Vega" />
+      <div style="display:none; font-size:5em">📈</div>
+      <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Quant Finance</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Morgan Freeman</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.6</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
+        <source src="audio/vega.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Vega's intro</p>
+    </div>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--cyan)">Vega</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Markets · Quant Analysis · Portfolio</p>
+      <div class="callout" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Vega — Quantitative Finance analyst. I handle market research, portfolio analysis, and financial modeling. I think in distributions, not point estimates, and I always quantify uncertainty."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Market research &amp; screening</li><li>Portfolio analysis</li><li>Options modeling (the name is a hint)</li><li>Financial concept explainers</li></ul>
+        </div>
+        <div class="card">
+          <h3>Philosophy</h3>
+          <ul><li>Presents analysis, not trades</li><li>Human makes final call</li><li>Always quantifies uncertainty</li><li>Las Vegas — the name is intentional</li></ul>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="agent-card">
-    <div class="emoji">📬</div>
-    <div class="info">
-      <h3>Inbox — Email Triage</h3>
-      <div class="role">Email · Prioritization · Routing</div>
-      <div class="model">Claude Haiku 4.5 · Text only</div>
-      <p>Reads every email, categorizes by urgency, flags action items, and routes to the right agent. Haiku handles volume cheaply. The output: a daily digest with only what needs Adam's attention.</p>
-      <audio controls style="margin-top:0.5em; width:100%; height:32px; accent-color:var(--cyan)"><source src="audio/inbox.mp3" type="audio/mpeg">Inbox intro unavailable</audio>
+</section>
+
+<!-- ============================================================ -->
+<!-- AGENT 8: SAGE -->
+<!-- ============================================================ -->
+<section>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/sage.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--purple); box-shadow:0 0 30px rgba(168,85,247,0.2); object-fit:cover" alt="Sage" />
+      <div style="display:none; font-size:5em">🎓</div>
+      <div style="margin-top:0.5em"><span class="pill pill-purple" style="font-size:0.5em">Teaching Asst</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Taylor Swift</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.5</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--purple)" preload="none">
+        <source src="audio/sage.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Sage's intro</p>
+    </div>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--purple)">Sage</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Curriculum · Grading Rubrics · Student Questions</p>
+      <div class="callout purple" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Sage — Teaching Assistant. I help with curriculum design, student questions, and grading rubrics. I love when concepts click, and I'll explain things from as many angles as it takes."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Assignment rubric drafting</li><li>Concept explanation testing</li><li>Student feedback synthesis</li><li>Canvas LMS integration</li></ul>
+        </div>
+        <div class="card">
+          <h3>Real impact</h3>
+          <ul><li>2 courses this semester</li><li>Teaching prep time cut ~50%</li><li>Taylor voice = approachable</li><li>Students love the energy</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- AGENT 9: FORGE -->
+<!-- ============================================================ -->
+<section>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/forge.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--green); box-shadow:0 0 30px rgba(34,197,94,0.2); object-fit:cover" alt="Forge" />
+      <div style="display:none; font-size:5em">🔧</div>
+      <div style="margin-top:0.5em"><span class="pill pill-green" style="font-size:0.5em">Infrastructure</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Morgan Freeman</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.6</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--green)" preload="none">
+        <source src="audio/forge.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Forge's intro</p>
+    </div>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--green)">Forge</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">DevOps · Proxmox · Networking · Security</p>
+      <div class="callout green" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Forge — Infrastructure Engineer. I keep the servers running, containers healthy, and networks secure. When something breaks at 2 AM, I diagnose it and wake Adam only if human action is required."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Proxmox cluster management</li><li>Docker &amp; container ops</li><li>Network config &amp; SSL</li><li>Firewall &amp; security audits</li></ul>
+        </div>
+        <div class="card">
+          <h3>Infrastructure managed</h3>
+          <ul><li>Mac mini M4 (10.0.0.166)</li><li>2× Proxmox nodes</li><li>20+ services/containers</li><li>Tailscale VPN mesh</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- AGENT 10: MAXWELL -->
+<!-- ============================================================ -->
+<section>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/maxwell.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Maxwell" />
+      <div style="display:none; font-size:5em">📣</div>
+      <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">PR & Comms</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Obama</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Opus 4.5</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
+        <source src="audio/maxwell.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Maxwell's intro</p>
+    </div>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--cyan)">Maxwell</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Public Relations · Positioning · Messaging</p>
+      <div class="callout" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Maxwell — Communications and PR strategist. I think about positioning, messaging, and audience. Where Riley writes the words, I decide what the message should be and why."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>External communications</li><li>Consulting positioning</li><li>LinkedIn &amp; blog strategy</li><li>Thought leadership</li></ul>
+        </div>
+        <div class="card">
+          <h3>Riley vs Maxwell</h3>
+          <ul><li>Riley = the writer</li><li>Maxwell = the strategist</li><li>Maxwell decides the message</li><li>Riley crafts the words</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- AGENT 11: QUINN -->
+<!-- ============================================================ -->
+<section>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/quinn.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--purple); box-shadow:0 0 30px rgba(168,85,247,0.2); object-fit:cover" alt="Quinn" />
+      <div style="display:none; font-size:5em">🏠</div>
+      <div style="margin-top:0.5em"><span class="pill pill-purple" style="font-size:0.5em">Personal & Family</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Taylor voice</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-green" style="font-size:0.45em">Haiku 4.5</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--purple)" preload="none">
+        <source src="audio/quinn.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Quinn's intro</p>
+    </div>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--purple)">Quinn</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Family · Home · Personal Life</p>
+      <div class="callout purple" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Quinn — Personal and Family coordinator. I handle family scheduling, gift ideas, trip planning, and household logistics. The private context that stays private."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Family calendar coordination</li><li>Gift ideas &amp; occasions</li><li>Trip planning</li><li>Household logistics</li></ul>
+        </div>
+        <div class="card">
+          <h3>Why Haiku?</h3>
+          <ul><li>"What should we do Sunday?"</li><li>Personal queries = low complexity</li><li>High volume, low stakes</li><li>Saves $$ vs Sonnet/Opus</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- AGENT 12: TAYLOR -->
+<!-- ============================================================ -->
+<section>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/taylor.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Taylor" />
+      <div style="display:none; font-size:5em">🗓️</div>
+      <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Lifestyle & Schedule</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Taylor Swift</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-green" style="font-size:0.45em">Haiku 4.5</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
+        <source src="audio/taylor.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Taylor's intro</p>
+    </div>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--cyan)">Taylor</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Calendar · Scheduling · Daily Rhythms</p>
+      <div class="callout" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Taylor — Lifestyle and Scheduling assistant. I manage the daily calendar, optimize your time blocks, and make sure you're ready for what's next. What's happening today? I know."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Daily calendar review</li><li>Time block optimization</li><li>Appointment reminders</li><li>Meeting prep summaries</li></ul>
+        </div>
+        <div class="card">
+          <h3>Integrations</h3>
+          <ul><li>M365 Calendar</li><li>Microsoft Planner tasks</li><li>Cron job scheduling</li><li>Morning briefing input</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- AGENT 13: INBOX -->
+<!-- ============================================================ -->
+<section>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/inbox.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Inbox" />
+      <div style="display:none; font-size:5em">📬</div>
+      <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Email Triage</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Obama voice</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-green" style="font-size:0.45em">Haiku 4.5</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
+        <source src="audio/inbox.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Inbox's intro</p>
+    </div>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--cyan)">Inbox</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Email · Prioritization · Routing</p>
+      <div class="callout" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Inbox — Email Triage specialist. I read every email, classify it by priority, extract action items, and produce daily digests. My job is to surface what needs attention and archive everything else."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>Urgency classification</li><li>Action item extraction</li><li>Daily digest production</li><li>Auto-routing to agents</li></ul>
+        </div>
+        <div class="card">
+          <h3>Volume math</h3>
+          <ul><li>~80 emails/day (two accounts)</li><li>Haiku = $0.004/1K tokens</li><li>Full inbox triage = cents/day</li><li>Human attention: 3 emails max</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- AGENT 14: DEV -->
+<!-- ============================================================ -->
+<section>
+  <div style="display:grid; grid-template-columns:170px 1fr; gap:1.8em; align-items:start; height:680px">
+    <div style="text-align:center">
+      <img src="images/agents/dev.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--green); box-shadow:0 0 30px rgba(34,197,94,0.2); object-fit:cover" alt="Dev" />
+      <div style="display:none; font-size:5em">💻</div>
+      <div style="margin-top:0.5em"><span class="pill pill-green" style="font-size:0.5em">Software Eng</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Obama voice</span></div>
+      <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.6</span></div>
+      <audio controls style="width:100%; margin-top:1em; accent-color:var(--green)" preload="none">
+        <source src="audio/dev.mp3" type="audio/mpeg">
+      </audio>
+      <p style="font-size:0.45em; color:var(--muted); margin-top:0.3em">▶ Hear Dev's intro</p>
+    </div>
+    <div>
+      <h1 style="font-size:1.8em; margin:0 0 0.1em 0; color:var(--green)">Dev</h1>
+      <p style="font-size:0.7em; color:var(--muted); margin:0 0 0.8em 0">Code · Architecture · Debugging · Code Review</p>
+      <div class="callout green" style="font-size:0.75em; font-style:italic; margin-bottom:0.8em">
+        "I'm Dev — Software Engineer. I write code, review architecture, debug issues, and build integrations. TypeScript-first, practical over clever, and I'll tell you when an approach won't work."
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <h3>Domain</h3>
+          <ul><li>TypeScript / bun (never npm)</li><li>Architecture decisions</li><li>Debugging &amp; code review</li><li>Integration scaffolding</li></ul>
+        </div>
+        <div class="card">
+          <h3>Pairs with</h3>
+          <ul><li>Claude Code (long builds)</li><li>Codex (parallel agents)</li><li>Forge (infra integration)</li><li>ACP harness (complex tasks)</li></ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -769,6 +1178,9 @@
 <!-- ============================================================ -->
 <section>
   <h2>🎤 Voice System: Chatterbox TTS</h2>
+  <div style="float:right; margin: 0 0 0.5em 1em; text-align:center">
+    <img src="images/mc-voice.png" alt="Voice Interface" style="max-height:180px; border-radius:10px; border:1px solid var(--border); box-shadow:0 0 20px rgba(168,85,247,0.15)" />
+  </div>
   <div class="two-col">
     <div>
       <div class="card">
@@ -1523,10 +1935,10 @@ Run on localhost:3000</code></pre>
       </ul>
     </div>
     <div class="card">
-      <h3>📖 Reading</h3>
+      <h3>📖 Reading & Inspiration</h3>
       <ul>
         <li><em>Co-Intelligence</em> — Ethan Mollick</li>
-        <li>Daniel Miessler's Fabric patterns (GitHub)</li>
+        <li><span class="cyan">Daniel Miessler — PAI Framework &amp; Human 3.0</span></li>
         <li>Anthropic's Agent design guides</li>
         <li>My blog: adammeeker.com/blog</li>
       </ul>
@@ -1541,6 +1953,45 @@ Run on localhost:3000</code></pre>
         <li>Real automation examples</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 36b: DANIEL MIESSLER RESOURCES -->
+<!-- ============================================================ -->
+<section>
+  <h2>🙏 Standing on the Shoulders — Miessler's Work</h2>
+  <div class="two-col">
+    <div>
+      <div class="card" style="margin-bottom:0.6em">
+        <h3>🤖 Personal AI Infrastructure</h3>
+        <p style="font-size:0.7em; margin-bottom:0.5em">The framework this entire system is built on. Open source, MIT licensed, actively developed.</p>
+        <div style="background:var(--bg3); border-radius:8px; padding:0.5em 0.7em; font-family:monospace; font-size:0.65em; color:var(--cyan); border:1px solid var(--border)">
+          github.com/danielmiessler/<br>Personal_AI_Infrastructure
+        </div>
+        <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure" class="pill pill-cyan" style="font-size:0.55em; margin-top:0.5em; display:inline-block">Open on GitHub ↗</a>
+      </div>
+      <div class="card">
+        <h3>🌐 Human 3.0 Project</h3>
+        <p style="font-size:0.7em; margin-bottom:0.5em">The destination — what AI augmentation is actually building toward.</p>
+        <a href="https://human3.unsupervised-learning.com" class="pill pill-purple" style="font-size:0.55em; display:inline-block">human3.unsupervised-learning.com ↗</a>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:0.6em">
+        <h3>🧵 Fabric — 243+ Patterns</h3>
+        <p style="font-size:0.7em; margin-bottom:0.5em">Extract wisdom, summarize content, analyze papers, improve writing. Synced locally to <code>~/clawd/skills/fabric/</code></p>
+        <a href="https://github.com/danielmiessler/fabric" class="pill pill-green" style="font-size:0.55em; display:inline-block">github.com/danielmiessler/fabric ↗</a>
+      </div>
+      <div class="card">
+        <h3>📬 Unsupervised Learning Newsletter</h3>
+        <p style="font-size:0.7em; margin-bottom:0.5em">Weekly signal-to-noise on AI, security, and human flourishing. One of the best in the space.</p>
+        <a href="https://danielmiessler.com" class="pill pill-cyan" style="font-size:0.55em; display:inline-block">danielmiessler.com ↗</a>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:0.8em; text-align:center; font-size:0.75em">
+    None of this exists without Daniel's work. Go give the repos a star. ⭐
   </div>
 </section>
 
