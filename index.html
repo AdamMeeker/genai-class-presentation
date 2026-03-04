@@ -230,7 +230,7 @@
         <div style="font-size:1.8em; font-weight:900; color:#22c55e">2026</div>
         <h3>🚀 PAI Era</h3>
         <ul style="text-align:left; font-size:0.72em">
-          <li><span style="color:#22c55e">Daniel Miessler's PAI framework</span> — the blueprint</li>
+          <li><span style="color:#22c55e">Daniel Miessler's PAI</span> + <span class="cyan">OpenClaw</span> — the stack</li>
           <li>Personal AI Infrastructure — always on</li>
           <li>14 specialized agents, each with a domain</li>
           <li>Voice, memory, proactive automation</li>
@@ -629,7 +629,42 @@
 
 <!-- ============================================================ -->
 <!-- AGENT SLIDES: 1 per agent (14 total) -->
-<!-- Shared CSS for individual agent slides -->
+<!-- ============================================================ -->
+<!-- TEAM INTRO: BARACK INTRODUCES THE TEAM -->
+<!-- ============================================================ -->
+<section data-background-gradient="radial-gradient(ellipse at 50% 50%, rgba(0,217,255,0.06) 0%, transparent 70%)">
+  <div style="text-align:center; margin-bottom:0.8em">
+    <img src="images/agents/barack.png" style="width:100px; height:100px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.4); object-fit:cover; vertical-align:middle; margin-right:0.5em" alt="Barack" />
+    <h2 style="display:inline; vertical-align:middle">🎩 Meet the Team</h2>
+  </div>
+  <div class="callout" style="font-size:0.82em; font-style:italic; text-align:center; margin-bottom:1em; border-left:none; border-top:3px solid var(--cyan); border-radius:8px">
+    "Welcome. Before we dive in, let me introduce you to the team — fourteen agents, each with a domain, a model, and a voice."<br>
+    <span class="muted" style="font-size:0.85em">— Barack, Chief of Staff</span>
+  </div>
+  <div style="text-align:center; margin-bottom:0.8em">
+    <audio controls style="accent-color:var(--cyan); width:80%; max-width:500px" preload="none">
+      <source src="audio/barack-intro.mp3" type="audio/mpeg">
+    </audio>
+    <p class="muted" style="font-size:0.5em; margin-top:0.2em">▶ Play Obama-voiced team introduction</p>
+  </div>
+  <div class="agent-mini-grid">
+    <div class="agent-mini"><span class="em">🎩</span><span class="name">Barack</span><span class="role-sm">obama</span></div>
+    <div class="agent-mini"><span class="em">⚖️</span><span class="name">Olivia</span><span class="role-sm">olivia</span></div>
+    <div class="agent-mini"><span class="em">🔍</span><span class="name">Marcus</span><span class="role-sm">rishi</span></div>
+    <div class="agent-mini"><span class="em">✍️</span><span class="name">Riley</span><span class="role-sm">karen</span></div>
+    <div class="agent-mini"><span class="em">⚖️</span><span class="name">Matlock</span><span class="role-sm">daniel_gb</span></div>
+    <div class="agent-mini"><span class="em">💼</span><span class="name">Sterling</span><span class="role-sm">moira</span></div>
+    <div class="agent-mini"><span class="em">📈</span><span class="name">Vega</span><span class="role-sm">alex</span></div>
+    <div class="agent-mini"><span class="em">🎓</span><span class="name">Sage</span><span class="role-sm">lekha</span></div>
+    <div class="agent-mini"><span class="em">🔧</span><span class="name">Forge</span><span class="role-sm">nicky</span></div>
+    <div class="agent-mini"><span class="em">📣</span><span class="name">Maxwell</span><span class="role-sm">samantha</span></div>
+    <div class="agent-mini"><span class="em">🏠</span><span class="name">Quinn</span><span class="role-sm">fiona</span></div>
+    <div class="agent-mini"><span class="em">🗓️</span><span class="name">Taylor</span><span class="role-sm">taylor</span></div>
+    <div class="agent-mini"><span class="em">📬</span><span class="name">Inbox</span><span class="role-sm">yuna</span></div>
+    <div class="agent-mini"><span class="em">💻</span><span class="name">Dev</span><span class="role-sm">tessa</span></div>
+  </div>
+</section>
+
 <!-- ============================================================ -->
 <!-- AGENT 1: BARACK -->
 <!-- ============================================================ -->
@@ -639,7 +674,7 @@
       <img src="images/agents/barack.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.3); object-fit:cover" alt="Barack" />
       <div style="display:none; font-size:5em; filter:drop-shadow(0 0 15px rgba(0,217,255,0.4))">🎩</div>
       <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Chief of Staff</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Obama</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 obama</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.6</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
         <source src="audio/barack.mp3" type="audio/mpeg">
@@ -675,7 +710,7 @@
       <img src="images/agents/olivia.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--purple); box-shadow:0 0 30px rgba(168,85,247,0.3); object-fit:cover" alt="Olivia" />
       <div style="display:none; font-size:5em">⚖️</div>
       <div style="margin-top:0.5em"><span class="pill pill-purple" style="font-size:0.5em">Exec Enforcer</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Olivia Benson</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 olivia</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.5</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--purple)" preload="none">
         <source src="audio/olivia.mp3" type="audio/mpeg">
@@ -711,7 +746,7 @@
       <img src="images/agents/marcus.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Marcus" />
       <div style="display:none; font-size:5em">🔍</div>
       <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Research & Intel</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Morgan Freeman</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 rishi</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.5</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
         <source src="audio/marcus.mp3" type="audio/mpeg">
@@ -747,7 +782,7 @@
       <img src="images/agents/riley.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Riley" />
       <div style="display:none; font-size:5em">✍️</div>
       <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Comms & Writing</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Riley voice</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 karen</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Opus 4.5</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
         <source src="audio/riley.mp3" type="audio/mpeg">
@@ -783,7 +818,7 @@
       <img src="images/agents/matlock.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--yellow); box-shadow:0 0 30px rgba(251,191,36,0.2); object-fit:cover" alt="Matlock" />
       <div style="display:none; font-size:5em">⚖️</div>
       <div style="margin-top:0.5em"><span class="pill" style="font-size:0.5em; background:rgba(251,191,36,0.15); color:var(--yellow); border:1px solid rgba(251,191,36,0.3)">Legal Counsel</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 D. Attenborough</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 daniel_gb</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Opus 4.5</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--yellow)" preload="none">
         <source src="audio/matlock.mp3" type="audio/mpeg">
@@ -819,7 +854,7 @@
       <img src="images/agents/sterling.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--green); box-shadow:0 0 30px rgba(34,197,94,0.2); object-fit:cover" alt="Sterling" />
       <div style="display:none; font-size:5em">💼</div>
       <div style="margin-top:0.5em"><span class="pill pill-green" style="font-size:0.5em">Business Ops</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Riley voice</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 karen</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.5</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--green)" preload="none">
         <source src="audio/sterling.mp3" type="audio/mpeg">
@@ -855,7 +890,7 @@
       <img src="images/agents/vega.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Vega" />
       <div style="display:none; font-size:5em">📈</div>
       <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Quant Finance</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Morgan Freeman</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 rishi</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.6</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
         <source src="audio/vega.mp3" type="audio/mpeg">
@@ -891,7 +926,7 @@
       <img src="images/agents/sage.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--purple); box-shadow:0 0 30px rgba(168,85,247,0.2); object-fit:cover" alt="Sage" />
       <div style="display:none; font-size:5em">🎓</div>
       <div style="margin-top:0.5em"><span class="pill pill-purple" style="font-size:0.5em">Teaching Asst</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Taylor Swift</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 lekha</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.5</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--purple)" preload="none">
         <source src="audio/sage.mp3" type="audio/mpeg">
@@ -927,7 +962,7 @@
       <img src="images/agents/forge.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--green); box-shadow:0 0 30px rgba(34,197,94,0.2); object-fit:cover" alt="Forge" />
       <div style="display:none; font-size:5em">🔧</div>
       <div style="margin-top:0.5em"><span class="pill pill-green" style="font-size:0.5em">Infrastructure</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Morgan Freeman</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 rishi</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.6</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--green)" preload="none">
         <source src="audio/forge.mp3" type="audio/mpeg">
@@ -963,7 +998,7 @@
       <img src="images/agents/maxwell.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Maxwell" />
       <div style="display:none; font-size:5em">📣</div>
       <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">PR & Comms</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Obama</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 obama</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Opus 4.5</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
         <source src="audio/maxwell.mp3" type="audio/mpeg">
@@ -999,7 +1034,7 @@
       <img src="images/agents/quinn.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--purple); box-shadow:0 0 30px rgba(168,85,247,0.2); object-fit:cover" alt="Quinn" />
       <div style="display:none; font-size:5em">🏠</div>
       <div style="margin-top:0.5em"><span class="pill pill-purple" style="font-size:0.5em">Personal & Family</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Taylor voice</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 fiona</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-green" style="font-size:0.45em">Haiku 4.5</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--purple)" preload="none">
         <source src="audio/quinn.mp3" type="audio/mpeg">
@@ -1035,7 +1070,7 @@
       <img src="images/agents/taylor.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Taylor" />
       <div style="display:none; font-size:5em">🗓️</div>
       <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Lifestyle & Schedule</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Taylor Swift</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 lekha</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-green" style="font-size:0.45em">Haiku 4.5</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
         <source src="audio/taylor.mp3" type="audio/mpeg">
@@ -1071,7 +1106,7 @@
       <img src="images/agents/inbox.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--cyan); box-shadow:0 0 30px rgba(0,217,255,0.2); object-fit:cover" alt="Inbox" />
       <div style="display:none; font-size:5em">📬</div>
       <div style="margin-top:0.5em"><span class="pill pill-cyan" style="font-size:0.5em">Email Triage</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Obama voice</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 obama voice</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-green" style="font-size:0.45em">Haiku 4.5</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--cyan)" preload="none">
         <source src="audio/inbox.mp3" type="audio/mpeg">
@@ -1107,7 +1142,7 @@
       <img src="images/agents/dev.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" style="width:160px; height:160px; border-radius:50%; border:3px solid var(--green); box-shadow:0 0 30px rgba(34,197,94,0.2); object-fit:cover" alt="Dev" />
       <div style="display:none; font-size:5em">💻</div>
       <div style="margin-top:0.5em"><span class="pill pill-green" style="font-size:0.5em">Software Eng</span></div>
-      <div style="margin-top:0.3em"><span class="voice-badge">🎤 Obama voice</span></div>
+      <div style="margin-top:0.3em"><span class="voice-badge">🎤 obama voice</span></div>
       <div style="margin-top:0.4em"><span class="pill pill-purple" style="font-size:0.45em">Sonnet 4.6</span></div>
       <audio controls style="width:100%; margin-top:1em; accent-color:var(--green)" preload="none">
         <source src="audio/dev.mp3" type="audio/mpeg">
@@ -1539,7 +1574,7 @@ GET /api/states/binary_sensor
     <div class="card">
       <h3>🏠 Home & Life</h3>
       <ul>
-        <li>Morning briefing: 6:45 AM, Obama voice</li>
+        <li>Morning briefing: 6:45 AM, obama voice</li>
         <li>Email triage: saves 1+ hr/day</li>
         <li>Home automations: lights, climate</li>
         <li>Family scheduling: Quinn coordinates</li>
@@ -1898,7 +1933,7 @@ Run on localhost:3000</code></pre>
   → GET Planner (open tasks)
   → GET Weather API
   → POST OpenClaw/Barack (briefing)
-  → Chatterbox TTS (Obama voice)
+  → Chatterbox TTS (obama voice)
   → Sonos HTTP API (play in kitchen)
   → Done ✅</code></pre>
         <p style="font-size:0.65em; color: var(--muted)">Built in n8n visual editor in ~2 hours. Runs every morning without me touching it.</p>
@@ -1944,14 +1979,60 @@ Run on localhost:3000</code></pre>
       </ul>
     </div>
     <div class="card">
-      <h3>🎓 Student Kit</h3>
+      <h3>🎓 Student Starter Kit</h3>
       <ul>
-        <li>All agent templates</li>
+        <li>All 14 agent persona templates</li>
         <li>Copy-paste Claude Code prompts</li>
-        <li>Architecture docs</li>
+        <li>Architecture + hardware docs</li>
         <li>Integration guides</li>
         <li>Real automation examples</li>
       </ul>
+      <div style="margin-top:0.5em">
+        <a href="https://github.com/AdamMeeker/genai-class-student-kit" class="pill pill-green" style="font-size:0.55em">github.com/AdamMeeker/genai-class-student-kit ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 36a: OPENCLAW CREDIT -->
+<!-- ============================================================ -->
+<section>
+  <h2>🦀 Powered By: OpenClaw</h2>
+  <div class="two-col" style="align-items:center">
+    <div>
+      <div class="callout" style="margin-bottom:0.8em; font-size:0.82em">
+        Everything you've seen today — the agents, the routing, the cron jobs, the voice pipeline, the memory system — runs through <strong class="cyan">OpenClaw</strong>, built by <strong class="cyan">Peter Steinberger</strong>.
+      </div>
+      <div class="card" style="margin-bottom:0.6em">
+        <h3>What OpenClaw provides</h3>
+        <ul>
+          <li>🛣️ Agent session management + routing</li>
+          <li>⏰ Cron scheduler (fires morning briefings)</li>
+          <li>📡 Multi-channel: Signal, iMessage, Email, Web</li>
+          <li>🔊 TTS integration + voice pipeline</li>
+          <li>🧠 Memory injection + context management</li>
+          <li>🤖 Sub-agent spawning + ACP harness</li>
+        </ul>
+      </div>
+      <div style="margin-top:0.5em">
+        <a href="https://openclaw.ai" class="pill pill-cyan" style="font-size:0.6em">openclaw.ai ↗</a>
+        <a href="https://discord.com/invite/clawd" class="pill pill-purple" style="font-size:0.6em; margin-left:0.3em">Discord community ↗</a>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="border-color:rgba(0,217,255,0.4); text-align:center; padding:1.5em">
+        <div style="font-size:3em; margin-bottom:0.3em">🦀</div>
+        <h3 style="font-size:1.1em">Peter Steinberger</h3>
+        <p style="font-size:0.7em; color:var(--muted)">Creator of OpenClaw</p>
+        <p style="font-size:0.72em">The nervous system that makes the whole AI infrastructure possible. None of this works without OpenClaw's gateway, session model, and channel multiplexing.</p>
+        <div style="margin-top:0.8em">
+          <span class="pill pill-cyan" style="font-size:0.55em">@steipete</span>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:0.6em; font-size:0.7em; text-align:center">
+        OpenClaw is the glue. Daniel Miessler's PAI is the blueprint.<br>Together: <span class="cyan">Personal AI Infrastructure that actually runs.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -2085,7 +2166,8 @@ Run on localhost:3000</code></pre>
         <ul>
           <li>📧 <span class="cyan">adam@meekertechnologies.com</span></li>
           <li>🌐 <span class="cyan">adammeeker.com/blog</span></li>
-          <li>📦 Student kit in the class repo</li>
+          <li>📦 <span class="cyan">github.com/AdamMeeker/genai-class-student-kit</span></li>
+          <li>🦀 <span class="cyan">openclaw.ai</span> — the gateway (Peter Steinberger)</li>
           <li>🤖 Barack is always listening on Signal</li>
         </ul>
       </div>
