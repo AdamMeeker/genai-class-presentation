@@ -479,29 +479,8 @@
 <!-- ============================================================ -->
 <section>
   <h2>🏛️ Architecture Overview</h2>
-  <div style="text-align:center; margin-bottom:0.6em">
-    <img src="images/mc-architecture.png" alt="Mission Control Architecture" style="max-height:240px; max-width:100%; border-radius:10px; border:1px solid var(--border); box-shadow:0 0 30px rgba(0,217,255,0.1)" />
-  </div>
-  <div class="arch-diagram">
-<span class="layer-label">┌─ HARDWARE LAYER ──────────────────────────────────────────────────────┐</span>
-<span class="node">│  Mac mini M4 (10.0.0.166)    Proxmox Node 1 (10.0.0.55)    Proxmox 2  │</span>
-<span class="node">│  OpenClaw · Mission Control  HA · n8n · AdGuard · OPNsense  Plex · etc │</span>
-<span class="layer-label">└───────────────────────┬───────────────────────────────────────────────┘</span>
-                        <span class="arrow">│</span>
-<span class="layer-label">┌───────────────────────▼───────────────────────────────────────────────┐</span>
-<span class="node">│                    GATEWAY LAYER: OpenClaw                            │</span>
-<span class="node">│     Session Mgmt · Agent Routing · Cron · Channel Multiplexing        │</span>
-<span class="layer-label">└──┬────────────┬────────────┬────────────┬────────────┬───────────────┘</span>
-   <span class="arrow">│</span>            <span class="arrow">│</span>            <span class="arrow">│</span>            <span class="arrow">│</span>            <span class="arrow">│</span>
-<span class="layer-label">┌──▼──┐   ┌───▼───┐   ┌────▼──┐   ┌────▼───┐   ┌────▼──────────────┐</span>
-<span class="node">│Barack│   │Matlock│   │  Vega │   │  Forge │   │  ... 10 more ...  │</span>
-<span class="node">│Chief │   │ Legal │   │Trading│   │ Infra  │   │                   │</span>
-<span class="layer-label">└──────┘   └───────┘   └───────┘   └────────┘   └───────────────────┘</span>
-                        <span class="arrow">│</span>
-<span class="layer-label">┌───────────────────────▼───────────────────────────────────────────────┐</span>
-<span class="node">│                  INTEGRATION LAYER                                    │</span>
-<span class="node">│   M365 Planner · Home Assistant · Signal · Email · Invoice Ninja      │</span>
-<span class="layer-label">└───────────────────────────────────────────────────────────────────────┘</span>
+  <div style="text-align:center">
+    <img src="images/mc-architecture.png" alt="Mission Control Architecture" style="max-height:520px; max-width:95%; border-radius:12px; border:1px solid var(--border); box-shadow:0 0 40px rgba(0,217,255,0.15)" />
   </div>
 </section>
 
@@ -513,7 +492,7 @@
   <div class="three-col">
     <div class="card">
       <h3>🍎 Mac mini M4</h3>
-      <p class="muted" style="font-size:0.65em">Primary compute — ~$800</p>
+      <p class="muted" style="font-size:0.65em">Primary compute — ~$500</p>
       <ul>
         <li>16GB RAM, 228GB SSD</li>
         <li>Apple Silicon (MPS acceleration)</li>
@@ -527,7 +506,7 @@
     </div>
     <div class="card">
       <h3>🗄️ Proxmox Node 1</h3>
-      <p class="muted" style="font-size:0.65em">Intel N100, 16GB — ~$600</p>
+      <p class="muted" style="font-size:0.65em">Intel N100, 16GB — ~$200</p>
       <ul>
         <li>Home Assistant VM (smart home)</li>
         <li>n8n CT (workflow automation)</li>
@@ -538,7 +517,7 @@
     </div>
     <div class="card">
       <h3>🗄️ Proxmox Node 2</h3>
-      <p class="muted" style="font-size:0.65em">Intel N100, 16GB — ~$600</p>
+      <p class="muted" style="font-size:0.65em">Intel N100, 16GB — ~$200</p>
       <ul>
         <li>Plex media server</li>
         <li>Sonarr / Radarr / Prowlarr</li>
@@ -549,8 +528,8 @@
     </div>
   </div>
   <div class="callout" style="margin-top:0.8em">
-    💡 <strong>Total hardware cost: ~$2,000</strong> — less than one month of enterprise AI licensing.
-    The N100 mini-PCs are a revelation: 15W TDP, silent, $150 nodes.
+    💡 <strong>Total hardware cost: ~$900</strong> — less than one month of enterprise AI licensing.
+    The N100 mini-PCs are a revelation: 15W TDP, silent, ~$200 each.
   </div>
 </section>
 
@@ -1597,7 +1576,7 @@ GET /api/states/binary_sensor
       <tr><th>Item</th><th>One-Time</th><th>Monthly</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td>Mac mini M4 (16GB)</td><td class="cyan">$800</td><td>—</td><td>Primary compute, whisper-quiet</td></tr>
+      <tr><td>Mac mini M4 (16GB)</td><td class="cyan">$500</td><td>—</td><td>Primary compute, whisper-quiet</td></tr>
       <tr><td>Proxmox Node 1 (N100)</td><td class="cyan">$600</td><td>—</td><td>HA, n8n, firewall, DNS</td></tr>
       <tr><td>Proxmox Node 2 (N100)</td><td class="cyan">$600</td><td>—</td><td>Media, business tools</td></tr>
       <tr><td>OpenClaw</td><td>—</td><td class="yellow">~$20</td><td>The gateway software</td></tr>
