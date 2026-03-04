@@ -1,782 +1,1609 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Building Personal AI Infrastructure - GENAI Class</title>
-    <link rel="stylesheet" href="reveal/reveal.css">
-    <link rel="stylesheet" href="reveal/black.css">
-    <style>
-        :root {
-            --r-background-color: #0a0e27;
-            --r-main-color: #e8e8e8;
-            --r-heading-color: #00d9ff;
-            --r-link-color: #42affa;
-        }
-        .reveal h1, .reveal h2, .reveal h3 { 
-            color: var(--r-heading-color); 
-            text-transform: none;
-        }
-        .reveal code { 
-            background: #1e2738; 
-            padding: 2px 8px; 
-            border-radius: 4px; 
-        }
-        .reveal pre code { 
-            background: #1e2738; 
-            padding: 20px; 
-            max-height: 500px;
-        }
-        .timeline { 
-            display: flex; 
-            justify-content: space-around; 
-            margin: 40px 0;
-        }
-        .timeline-item { 
-            text-align: center; 
-            flex: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 0 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.2);
-        }
-        .timeline-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.4);
-        }
-        .timeline-item h4 { 
-            color: #00d9ff; 
-            margin-bottom: 10px;
-            font-size: 1.2em;
-        }
-        .comparison-table { 
-            font-size: 0.7em; 
-            margin: 20px 0;
-        }
-        .comparison-table th { 
-            background: #1e2738; 
-            padding: 10px;
-        }
-        .comparison-table td { 
-            padding: 8px; 
-        }
-        .demo-placeholder {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px;
-            border-radius: 10px;
-            font-size: 1.2em;
-            margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-        .warning-box {
-            background: #ff6b6b22;
-            border-left: 4px solid #ff6b6b;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .architecture-diagram {
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 20px 0;
-            position: relative;
-            min-height: 400px;
-            overflow: hidden;
-        }
-        .arch-node {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid #00d9ff;
-            border-radius: 10px;
-            padding: 12px 20px;
-            display: inline-block;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
-            animation: pulse 3s ease-in-out infinite;
-            margin: 10px;
-        }
-        .arch-node.highlight {
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            border-color: #ff6b35;
-            box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
-            font-weight: bold;
-        }
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(0, 217, 255, 0.3); }
-            50% { box-shadow: 0 0 30px rgba(0, 217, 255, 0.6); }
-        }
-        .channel-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 20px;
-        }
-        .channel-card {
-            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
-            border: 2px solid #00d9ff;
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        .channel-card:hover {
-            transform: scale(1.05);
-            border-color: #ff6b35;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-        }
-        .channel-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
-            display: block;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Building a Personal AI Operating System — Adam Meeker</title>
+  <link rel="stylesheet" href="reveal/reveal.css" />
+  <style>
+    /* ===== THEME: Dark Cyber ===== */
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #0f0f1a;
+      --bg3: #141428;
+      --cyan: #00d9ff;
+      --purple: #a855f7;
+      --green: #22c55e;
+      --yellow: #fbbf24;
+      --red: #ef4444;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --border: rgba(0,217,255,0.2);
+    }
+
+    .reveal-viewport { background: var(--bg); }
+    .reveal { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--text); font-size: 36px; }
+    .reveal .slides section { text-align: left; padding: 0 20px; }
+    .reveal h1, .reveal h2, .reveal h3 { font-family: 'Segoe UI', system-ui, sans-serif; text-transform: none; letter-spacing: -0.02em; }
+    .reveal h1 { font-size: 2em; color: var(--cyan); line-height: 1.1; }
+    .reveal h2 { font-size: 1.4em; color: var(--cyan); border-bottom: 1px solid var(--border); padding-bottom: 0.3em; margin-bottom: 0.6em; }
+    .reveal h3 { font-size: 1.1em; color: var(--purple); margin-bottom: 0.4em; }
+    .reveal p { font-size: 0.85em; line-height: 1.6; color: var(--text); }
+    .reveal ul { list-style: none; padding: 0; margin: 0; }
+    .reveal ul li { font-size: 0.8em; padding: 0.25em 0; color: var(--text); }
+    .reveal ul li::before { content: '▸ '; color: var(--cyan); }
+    .reveal a { color: var(--cyan); text-decoration: none; }
+    .reveal code { font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace; }
+    .reveal pre { font-size: 0.65em; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1em; margin: 0.5em 0; box-shadow: 0 0 20px rgba(0,217,255,0.05); }
+    .reveal pre code { background: transparent; padding: 0; color: #a8ff78; }
+    .reveal .progress { color: var(--cyan); }
+    .reveal .controls { color: var(--cyan); }
+    .reveal .slide-number { color: var(--muted); font-size: 0.5em; }
+
+    /* ===== UTILITY CLASSES ===== */
+    .cyan { color: var(--cyan) !important; }
+    .purple { color: var(--purple) !important; }
+    .green { color: var(--green) !important; }
+    .yellow { color: var(--yellow) !important; }
+    .red { color: var(--red) !important; }
+    .muted { color: var(--muted) !important; }
+
+    .text-center { text-align: center !important; }
+    .text-right { text-align: right !important; }
+
+    /* ===== TITLE SLIDE ===== */
+    .title-slide { text-align: center !important; display: flex !important; flex-direction: column; align-items: center; justify-content: center; min-height: 100%; }
+    .title-slide h1 { font-size: 2.2em; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2; margin-bottom: 0.3em; }
+    .title-slide .subtitle { font-size: 0.7em; color: var(--muted); margin-bottom: 1.5em; }
+    .title-slide .presenter { font-size: 0.85em; color: var(--text); }
+    .title-slide .presenter span { color: var(--cyan); }
+    .title-glow { font-size: 4em; margin-bottom: 0.2em; filter: drop-shadow(0 0 20px rgba(0,217,255,0.5)); }
+
+    /* ===== CARDS ===== */
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1em; margin: 0.4em 0; }
+    .card-grid { display: grid; gap: 0.6em; }
+    .card-grid-2 { grid-template-columns: 1fr 1fr; }
+    .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .card h3 { margin: 0 0 0.3em 0; font-size: 1em; }
+    .card p, .card ul li { font-size: 0.72em; }
+    .card ul li::before { color: var(--purple); }
+
+    /* ===== AGENT CARDS ===== */
+    .agent-card { background: linear-gradient(135deg, var(--bg2), var(--bg3)); border: 1px solid var(--border); border-radius: 12px; padding: 1em 1.2em; display: flex; align-items: flex-start; gap: 1em; }
+    .agent-card .emoji { font-size: 2.5em; flex-shrink: 0; filter: drop-shadow(0 0 8px rgba(0,217,255,0.3)); }
+    .agent-card .info h3 { margin: 0; font-size: 0.95em; color: var(--cyan); }
+    .agent-card .info .role { font-size: 0.72em; color: var(--purple); font-weight: 600; margin: 0.1em 0; }
+    .agent-card .info .model { font-size: 0.65em; color: var(--muted); }
+    .agent-card .info p { font-size: 0.7em; margin: 0.3em 0 0 0; line-height: 1.5; }
+    .agent-card .voice-badge { font-size: 0.6em; background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); color: var(--purple); border-radius: 20px; padding: 0.2em 0.6em; display: inline-block; margin-top: 0.3em; }
+
+    /* ===== AGENT MINI GRID ===== */
+    .agent-mini-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5em; }
+    .agent-mini { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 0.6em 0.8em; text-align: center; }
+    .agent-mini .em { font-size: 1.8em; display: block; }
+    .agent-mini .name { font-size: 0.6em; color: var(--cyan); font-weight: 700; display: block; }
+    .agent-mini .role-sm { font-size: 0.55em; color: var(--muted); display: block; }
+
+    /* ===== ARCHITECTURE DIAGRAM ===== */
+    .arch-diagram { font-family: 'Fira Code', monospace; font-size: 0.6em; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.2em; line-height: 1.8; color: var(--text); }
+    .arch-diagram .layer-label { color: var(--purple); font-weight: 700; }
+    .arch-diagram .node { color: var(--cyan); }
+    .arch-diagram .arrow { color: var(--muted); }
+
+    /* ===== CALLOUT ===== */
+    .callout { background: rgba(0,217,255,0.05); border-left: 3px solid var(--cyan); border-radius: 0 8px 8px 0; padding: 0.8em 1em; margin: 0.6em 0; font-size: 0.78em; }
+    .callout.purple { background: rgba(168,85,247,0.05); border-left-color: var(--purple); }
+    .callout.green { background: rgba(34,197,94,0.05); border-left-color: var(--green); }
+    .callout.yellow { background: rgba(251,191,36,0.05); border-left-color: var(--yellow); }
+
+    /* ===== STAT BOXES ===== */
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8em; margin: 0.8em 0; }
+    .stat-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1em; text-align: center; }
+    .stat-box .number { font-size: 1.8em; font-weight: 800; color: var(--cyan); display: block; }
+    .stat-box .label { font-size: 0.6em; color: var(--muted); display: block; margin-top: 0.2em; }
+
+    /* ===== TABLE ===== */
+    .reveal table { font-size: 0.7em; border-collapse: collapse; width: 100%; }
+    .reveal table th { background: rgba(0,217,255,0.1); color: var(--cyan); padding: 0.5em 0.8em; text-align: left; border-bottom: 1px solid var(--border); }
+    .reveal table td { padding: 0.4em 0.8em; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text); }
+    .reveal table tr:hover td { background: rgba(0,217,255,0.03); }
+
+    /* ===== TWO-COL ===== */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; align-items: start; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; align-items: start; }
+
+    /* ===== LEVEL CARD ===== */
+    .level-card { border-radius: 12px; padding: 1.2em; margin: 0.5em 0; }
+    .level-1 { background: linear-gradient(135deg, rgba(0,217,255,0.05), rgba(0,217,255,0.02)); border: 1px solid rgba(0,217,255,0.3); }
+    .level-2 { background: linear-gradient(135deg, rgba(168,85,247,0.05), rgba(168,85,247,0.02)); border: 1px solid rgba(168,85,247,0.3); }
+    .level-3 { background: linear-gradient(135deg, rgba(251,191,36,0.05), rgba(251,191,36,0.02)); border: 1px solid rgba(251,191,36,0.3); }
+    .level-card h3 { font-size: 0.9em; margin: 0 0 0.5em 0; }
+    .level-card ul li { font-size: 0.68em; }
+
+    /* ===== PILL BADGE ===== */
+    .pill { display: inline-block; font-size: 0.6em; padding: 0.2em 0.7em; border-radius: 20px; font-weight: 600; margin: 0.1em; }
+    .pill-cyan { background: rgba(0,217,255,0.15); color: var(--cyan); border: 1px solid rgba(0,217,255,0.3); }
+    .pill-purple { background: rgba(168,85,247,0.15); color: var(--purple); border: 1px solid rgba(168,85,247,0.3); }
+    .pill-green { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+
+    /* ===== FRAGMENT FADE ===== */
+    .reveal .fragment { transition: opacity 0.3s ease; }
+
+    /* ===== FOOTER HINT ===== */
+    .slide-footer { position: absolute; bottom: 0; right: 0; font-size: 0.45em; color: var(--muted); padding: 0.5em; }
+  </style>
 </head>
 <body>
-    <div class="reveal">
-        <div class="slides">
-            
-            <!-- Title Slide -->
-            <section>
-                <h1>Building Personal AI Infrastructure</h1>
-                <h3>From Copilot to Claude Code to OpenClaw</h3>
-                <p>
-                    <strong>Adam Meeker</strong><br>
-                    Adjunct Instructor & Consultant<br>
-                    GENAI Class - University of Iowa MSBA Program
-                </p>
-                <p style="font-size: 0.8em; color: #888;">
-                    Follow along: adammeeker.com/blog
-                </p>
-            </section>
+<div class="reveal">
+<div class="slides">
 
-            <!-- About Me -->
-            <section>
-                <h2>Who Am I?</h2>
-                <ul>
-                    <li><strong>Day Job:</strong> Customer Experience Analytics Manager at Agilent Technologies</li>
-                    <li><strong>Teaching:</strong> MSBA & BBA courses at University of Iowa since 2018</li>
-                    <li><strong>Consulting:</strong> Meeker Technologies - AI systems that empower workers</li>
-                    <li><strong>Background:</strong> Failed out of Iowa State (1.08 GPA) → Comeback story → 5 degrees</li>
-                </ul>
-                <p style="margin-top: 40px; font-style: italic; color: #888;">
-                    "Failing doesn't define you - what you do next does."
-                </p>
-            </section>
-
-            <!-- The Journey -->
-            <section>
-                <h2>The Journey: Evolution of Personal AI</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h4>🤖 Copilot Era</h4>
-                        <p>2023-2024</p>
-                        <ul style="font-size: 0.8em; text-align: left;">
-                            <li>Microsoft Copilot</li>
-                            <li>Locked ecosystem</li>
-                            <li>Mixed results</li>
-                            <li>Limited control</li>
-                        </ul>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>🧠 PAI + Claude Code</h4>
-                        <p>2024-2025</p>
-                        <ul style="font-size: 0.8em; text-align: left;">
-                            <li>User-friendly</li>
-                            <li>Flexible</li>
-                            <li>Any system</li>
-                            <li>Local control</li>
-                        </ul>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>🚀 OpenClaw</h4>
-                        <p>2025-Present</p>
-                        <ul style="font-size: 0.8em; text-align: left;">
-                            <li>Production-ready</li>
-                            <li>Multi-channel</li>
-                            <li>Always-on</li>
-                            <li>Infrastructure</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- What is OpenClaw -->
-            <section>
-                <h2>What is OpenClaw?</h2>
-                <blockquote style="font-size: 0.9em;">
-                    "OpenClaw transforms Claude into a personal infrastructure that works across all your devices and communication channels."
-                </blockquote>
-                <ul>
-                    <li><strong>Multi-channel AI:</strong> Signal, WhatsApp, iMessage, Web, Telegram</li>
-                    <li><strong>Always-on:</strong> Runs 24/7 on your own hardware</li>
-                    <li><strong>Skills system:</strong> Extensible capabilities via modular skills</li>
-                    <li><strong>MCP integration:</strong> Model Context Protocol for tool calling</li>
-                    <li><strong>Privacy-first:</strong> Your data stays on your infrastructure</li>
-                </ul>
-            </section>
-
-            <!-- Architecture Overview -->
-            <section>
-                <h2>System Architecture</h2>
-                <div class="architecture-diagram">
-                    <div style="text-align: center; margin-bottom: 30px;">
-                        <h3 style="color: #00d9ff; font-size: 0.9em; margin-bottom: 20px;">Communication Channels</h3>
-                        <div style="display: flex; justify-content: center; gap: 15px;">
-                            <span class="arch-node">📱 Signal</span>
-                            <span class="arch-node">💬 iMessage</span>
-                            <span class="arch-node">💚 WhatsApp</span>
-                            <span class="arch-node">🌐 Web</span>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin: 30px 0;">
-                        <h3 style="color: #ff6b35; font-size: 1em; margin-bottom: 15px;">OpenClaw Gateway (Mac Mini)</h3>
-                        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                            <span class="arch-node highlight">⚙️ Core Engine</span>
-                            <span class="arch-node highlight">🎯 Skills System</span>
-                            <span class="arch-node highlight">🔧 MCP Tools</span>
-                            <span class="arch-node highlight">🧠 Memory & Context</span>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; justify-content: space-around; margin-top: 30px;">
-                        <div style="text-align: center;">
-                            <h4 style="color: #8a2be2; font-size: 0.9em; margin-bottom: 15px;">Infrastructure</h4>
-                            <div style="display: flex; flex-direction: column; gap: 10px;">
-                                <span class="arch-node">⚡ n8n Automation</span>
-                                <span class="arch-node">🔊 Sonos Audio</span>
-                                <span class="arch-node">📧 Email APIs</span>
-                                <span class="arch-node">📅 Calendar</span>
-                            </div>
-                        </div>
-                        <div style="text-align: center;">
-                            <h4 style="color: #00d9ff; font-size: 0.9em; margin-bottom: 15px;">AI Models</h4>
-                            <div style="display: flex; flex-direction: column; gap: 10px;">
-                                <span class="arch-node">🤖 Claude API</span>
-                                <span class="arch-node">🏠 Ollama (Local)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- My Setup -->
-            <section>
-                <h2>My Infrastructure</h2>
-                <ul style="font-size: 0.85em;">
-                    <li><strong>Mac Mini (10.0.0.166):</strong> OpenClaw gateway, n8n orchestration, Obsidian vault</li>
-                    <li><strong>Windows PC (10.0.0.168):</strong> PAI system, Outlook automation, Chatterbox TTS</li>
-                    <li><strong>Proxmox Cluster:</strong> n8n, Home Assistant, SearXNG, services</li>
-                    <li><strong>Cloudflare:</strong> Tunnels for public services (Invoice Ninja, DocuSeal)</li>
-                    <li><strong>Tailscale VPN:</strong> Secure access to internal services</li>
-                </ul>
-                <p style="margin-top: 30px; font-size: 0.8em; color: #888;">
-                    Total investment: ~$2,500 hardware + ~$50/month services
-                </p>
-            </section>
-
-            <!-- Channel Capabilities -->
-            <section>
-                <h2>Multi-Channel Power</h2>
-                <h3>One AI, Everywhere You Are</h3>
-                <div class="channel-grid">
-                    <div class="channel-card">
-                        <span class="channel-icon">📱</span>
-                        <h4 style="color: #00d9ff; margin: 10px 0;">Signal</h4>
-                        <p style="font-size: 0.85em;">Primary channel<br>Secure & private<br>Voice messages</p>
-                    </div>
-                    <div class="channel-card">
-                        <span class="channel-icon">💬</span>
-                        <h4 style="color: #00d9ff; margin: 10px 0;">iMessage</h4>
-                        <p style="font-size: 0.85em;">Family integration<br>Native iOS<br>Seamless sync</p>
-                    </div>
-                    <div class="channel-card">
-                        <span class="channel-icon">💚</span>
-                        <h4 style="color: #00d9ff; margin: 10px 0;">WhatsApp</h4>
-                        <p style="font-size: 0.85em;">International reach<br>2B+ users<br>Universal access</p>
-                    </div>
-                    <div class="channel-card">
-                        <span class="channel-icon">🌐</span>
-                        <h4 style="color: #00d9ff; margin: 10px 0;">Web Dashboard</h4>
-                        <p style="font-size: 0.85em;">Full-featured UI<br>Tailscale VPN<br>Desktop power</p>
-                    </div>
-                    <div class="channel-card">
-                        <span class="channel-icon">📞</span>
-                        <h4 style="color: #00d9ff; margin: 10px 0;">Voice Calls</h4>
-                        <p style="font-size: 0.85em;">Phone callable<br>Obama voice TTS<br>Real-time AI</p>
-                    </div>
-                    <div class="channel-card">
-                        <span class="channel-icon">🔄</span>
-                        <h4 style="color: #ff6b35; margin: 10px 0;">All Synced</h4>
-                        <p style="font-size: 0.85em;">Same context<br>Same memory<br>Same skills</p>
-                    </div>
-                </div>
-                <div class="demo-placeholder">
-                    📍 DEMO: Switching channels mid-conversation
-                </div>
-            </section>
-
-            <!-- Skills System -->
-            <section>
-                <h2>Skills: The Real Power</h2>
-                <p>Skills are modular capabilities that extend what your AI can do.</p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 0.75em; margin-top: 30px;">
-                    <div>
-                        <h4 style="color: #00d9ff;">Communication</h4>
-                        <ul>
-                            <li>Email triage & drafting</li>
-                            <li>Calendar management</li>
-                            <li>Apple Notes & Reminders</li>
-                            <li>iMessage automation</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 style="color: #00d9ff;">Productivity</h4>
-                        <ul>
-                            <li>Microsoft Planner tasks</li>
-                            <li>Document generation</li>
-                            <li>GitHub operations</li>
-                            <li>n8n workflow control</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 style="color: #00d9ff;">Analysis</h4>
-                        <ul>
-                            <li>Fabric patterns (243+)</li>
-                            <li>Research & synthesis</li>
-                            <li>Content extraction</li>
-                            <li>Student work grading</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 style="color: #00d9ff;">Infrastructure</h4>
-                        <ul>
-                            <li>System health monitoring</li>
-                            <li>Backup automation</li>
-                            <li>Audio generation & mixing</li>
-                            <li>Web scraping (4-tier fallback)</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Skill Deep Dive: Email -->
-            <section>
-                <h2>Skill Deep Dive: Email Automation</h2>
-                <h3>Zero-Touch Inbox Management</h3>
-                <pre><code class="language-plaintext" style="font-size: 0.5em;">
-Workflow:
-1. Fetch unread emails via Outlook API
-2. Classify using local Ollama (zero API cost)
-   → STUDENT, CLIENT, VENDOR, SPAM, etc.
-3. Route to appropriate folders
-4. For important emails:
-   → Draft reply using Claude
-   → Save as Outlook draft
-   → Flag for review
-   → Notify via Signal
-5. For spam/newsletters:
-   → Auto-unsubscribe
-   → Move to trash
-                </code></pre>
-                <p style="font-size: 0.8em; margin-top: 20px;">
-                    <strong>Result:</strong> Wake up to organized inbox + drafted replies
-                </p>
-            </section>
-
-            <!-- Case Study 1: CFO -->
-            <section>
-                <h2>Case Study: Regional CFO</h2>
-                <h3>PAI for Conservative Adoption</h3>
-                <div style="text-align: left; font-size: 0.85em;">
-                    <p><strong>Challenge:</strong> CFO of regional manufacturing company drowning in email, needed ERP integration</p>
-                    <p><strong>Why PAI over OpenClaw:</strong></p>
-                    <ul>
-                        <li>Less aggressive, ad-hoc behavior</li>
-                        <li>Start slow, build trust gradually</li>
-                        <li>Local execution, full control</li>
-                        <li>No always-on proactive actions</li>
-                    </ul>
-                    <p><strong>Solution:</strong></p>
-                    <ul>
-                        <li>Email triage skill (Outlook API automation)</li>
-                        <li>ERP integration (Acumatica API)</li>
-                        <li>Morning calendar briefing</li>
-                        <li>Draft generator for common requests</li>
-                    </ul>
-                    <p><strong>Outcome:</strong> 2-3 hours saved daily, high satisfaction</p>
-                </div>
-            </section>
-
-            <!-- Case Study 2: Teaching -->
-            <section>
-                <h2>Case Study: Teaching Automation</h2>
-                <h3>BAIS 6040 & 4150 Course Management</h3>
-                <ul style="font-size: 0.85em;">
-                    <li><strong>Student submissions →</strong> Auto-grading with Fabric patterns</li>
-                    <li><strong>Email questions →</strong> Drafts saved in Outlook for review</li>
-                    <li><strong>Office hours →</strong> Transcription + summarization</li>
-                    <li><strong>Assignment creation →</strong> Template generation from prompts</li>
-                    <li><strong>Grade posting →</strong> Integration with Canvas LMS</li>
-                </ul>
-                <div class="demo-placeholder" style="margin-top: 30px;">
-                    📍 DEMO: Student email → Auto-draft reply
-                </div>
-            </section>
-
-            <!-- Case Study 3: Consulting -->
-            <section>
-                <h2>Case Study: Business Generation</h2>
-                <h3>Website, Contracts, Invoicing in Minutes</h3>
-                <div style="text-align: left; font-size: 0.8em;">
-                    <p><strong>Meeker Technologies setup (total time: ~3 hours):</strong></p>
-                    <ul>
-                        <li><strong>Website:</strong> Hugo + PaperMod theme → Azure Static Web Apps (free tier)</li>
-                        <li><strong>Invoicing:</strong> Invoice Ninja self-hosted (clients.meekertechnologies.com)</li>
-                        <li><strong>Contracts:</strong> DocuSeal for e-signatures (contracts.meekertechnologies.com)</li>
-                        <li><strong>Analytics:</strong> Metabase for client dashboards</li>
-                        <li><strong>Automation:</strong> n8n workflows for onboarding/billing</li>
-                    </ul>
-                    <p style="margin-top: 20px;"><strong>Traditional approach:</strong> Weeks of setup, thousands in fees</p>
-                    <p><strong>AI-assisted approach:</strong> Weekend project, mostly open-source</p>
-                </div>
-            </section>
-
-            <!-- Tool Comparison -->
-            <section>
-                <h2>When to Use What?</h2>
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Tool</th>
-                            <th>Best For</th>
-                            <th>Limitations</th>
-                            <th>Cost</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>ChatGPT</strong></td>
-                            <td>Quick questions, brainstorming</td>
-                            <td>No memory, no integrations</td>
-                            <td>$20/mo</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Copilot/Copilot Pro</strong></td>
-                            <td>M365 integration, office tasks</td>
-                            <td>Locked to Microsoft ecosystem</td>
-                            <td>$30/mo</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Claude Code</strong></td>
-                            <td>Complex coding tasks, deep work</td>
-                            <td>Session-based, not always-on</td>
-                            <td>Pay-per-use</td>
-                        </tr>
-                        <tr>
-                            <td><strong>PAI</strong></td>
-                            <td>Conservative adoption, local control</td>
-                            <td>Manual triggers, less proactive</td>
-                            <td>Free (local)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>OpenClaw</strong></td>
-                            <td>Always-on infrastructure, multi-channel</td>
-                            <td>Requires setup, self-hosted</td>
-                            <td>API costs only</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <!-- MCP Deep Dive -->
-            <section>
-                <h2>Model Context Protocol (MCP)</h2>
-                <h3>The Secret Sauce of Tool Integration</h3>
-                <p style="font-size: 0.85em;">MCP is Anthropic's standard for connecting AI models to external tools and data sources.</p>
-                <pre><code class="language-typescript" style="font-size: 0.5em;">
-// Example MCP server for email automation
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-
-const server = new Server({
-  name: "email-automation",
-  version: "1.0.0"
-}, {
-  capabilities: {
-    tools: {}
-  }
-});
-
-server.setRequestHandler(ListToolsRequestSchema, async () => ({
-  tools: [
-    {
-      name: "triage_inbox",
-      description: "Classify and route emails to folders",
-      inputSchema: { type: "object", properties: { limit: { type: "number" } } }
-    },
-    {
-      name: "draft_reply",
-      description: "Generate email reply draft",
-      inputSchema: { type: "object", properties: { email_id: { type: "string" } } }
-    }
-  ]
-}));
-                </code></pre>
-            </section>
-
-            <!-- n8n Integration -->
-            <section>
-                <h2>n8n: The Orchestration Layer</h2>
-                <h3>Visual Workflow Automation</h3>
-                <ul style="font-size: 0.85em;">
-                    <li><strong>Morning DJ Briefing:</strong> Calendar + Weather + Tasks → Obama voice → Sonos</li>
-                    <li><strong>Student Submission Pipeline:</strong> Email trigger → Fabric analysis → Grading checklist</li>
-                    <li><strong>Client Onboarding:</strong> Form → Invoice + Contract + Planner task + Welcome email</li>
-                    <li><strong>System Health:</strong> Monitor Proxmox + services → Alert if issues</li>
-                    <li><strong>Blog Publishing:</strong> File trigger → Hugo build → Azure Static Web Apps deploy</li>
-                </ul>
-                <div class="demo-placeholder" style="margin-top: 30px;">
-                    📍 DEMO: n8n workflow visualization
-                </div>
-            </section>
-
-            <!-- Morning Briefing -->
-            <section>
-                <h2>Feature Highlight: Morning DJ Briefing</h2>
-                <h3>Wake Up to Your Personal Radio Station</h3>
-                <pre><code class="language-plaintext" style="font-size: 0.55em;">
-Workflow (runs daily 6:45 AM):
-1. Fetch calendar events (next 48h)
-2. Get weather forecast (Tiffin, Iowa)
-3. Pull Microsoft Planner tasks (top priorities)
-4. Check email for urgent items
-5. Generate briefing script with Claude
-6. Convert to Obama voice (Chatterbox TTS)
-7. Mix with intro/outro music
-8. Play on bathroom Sonos speaker
-9. Send text summary via Signal
-                </code></pre>
-                <p style="font-size: 0.8em; margin-top: 20px;">
-                    <strong>Result:</strong> Professional DJ briefing while getting ready
-                </p>
-            </section>
-
-            <!-- Infrastructure Details -->
-            <section>
-                <h2>Under the Hood: My Stack</h2>
-                <div style="font-size: 0.75em; text-align: left;">
-                    <h4 style="color: #00d9ff;">Hardware</h4>
-                    <ul>
-                        <li>Mac Mini M2 Pro - OpenClaw gateway</li>
-                        <li>Windows PC - PAI, Ollama, Outlook automation</li>
-                        <li>2x Proxmox nodes - VM/container hosting</li>
-                    </ul>
-                    
-                    <h4 style="color: #00d9ff;">Key Services</h4>
-                    <ul>
-                        <li><strong>n8n:</strong> Workflow automation (http://10.0.0.120:5678)</li>
-                        <li><strong>SearXNG:</strong> Self-hosted meta-search</li>
-                        <li><strong>Caddy:</strong> HTTPS reverse proxy with auto Let's Encrypt</li>
-                        <li><strong>Cloudflare Tunnels:</strong> Public access to select services</li>
-                        <li><strong>Tailscale:</strong> Zero-trust VPN for internal access</li>
-                    </ul>
-                    
-                    <h4 style="color: #00d9ff;">Data Storage</h4>
-                    <ul>
-                        <li>Obsidian vault (iCloud sync) - Memory & notes</li>
-                        <li>Git repositories - Code & config</li>
-                        <li>Local SQLite - Session data</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Security & Risks -->
-            <section>
-                <h2>⚠️ Security & Risks</h2>
-                <div class="warning-box">
-                    <h3>USE AT YOUR OWN RISK</h3>
-                    <p>This is bleeding-edge technology with real security implications:</p>
-                </div>
-                <ul style="font-size: 0.85em; text-align: left;">
-                    <li><strong>Prompt Injection:</strong> Malicious emails/messages could manipulate AI behavior</li>
-                    <li><strong>Data Leakage:</strong> AI might inadvertently expose sensitive information</li>
-                    <li><strong>API Costs:</strong> Runaway automation can get expensive fast</li>
-                    <li><strong>System Access:</strong> AI has broad permissions - mistakes have consequences</li>
-                    <li><strong>Privacy:</strong> Transcripts contain everything - secure your infrastructure</li>
-                </ul>
-            </section>
-
-            <!-- Best Practices -->
-            <section>
-                <h2>Security Best Practices</h2>
-                <ol style="font-size: 0.85em; text-align: left;">
-                    <li><strong>Least Privilege:</strong> Only grant necessary permissions</li>
-                    <li><strong>Review Automation:</strong> Start with human-in-the-loop for critical actions</li>
-                    <li><strong>Monitor Costs:</strong> Set API spending limits and alerts</li>
-                    <li><strong>Secure Infrastructure:</strong> VPN, firewall, encrypted storage</li>
-                    <li><strong>Audit Logs:</strong> Keep detailed records in Obsidian/git</li>
-                    <li><strong>Gradual Rollout:</strong> Test extensively before full automation</li>
-                    <li><strong>Backup Strategy:</strong> Regular backups of configs and memory</li>
-                    <li><strong>Secrets Management:</strong> Never commit API keys, use env vars</li>
-                </ol>
-            </section>
-
-            <!-- Lessons Learned -->
-            <section>
-                <h2>Lessons Learned</h2>
-                <ul style="font-size: 0.85em;">
-                    <li><strong>Start simple:</strong> Don't build everything at once</li>
-                    <li><strong>Document obsessively:</strong> Future you will thank present you</li>
-                    <li><strong>Version control everything:</strong> Git is your safety net</li>
-                    <li><strong>Local-first when possible:</strong> Ollama for classification saves $$$</li>
-                    <li><strong>Test in isolation:</strong> Debug skills individually before integration</li>
-                    <li><strong>Embrace failure:</strong> Things will break - build resilience</li>
-                    <li><strong>Community matters:</strong> OpenClaw Discord is invaluable</li>
-                </ul>
-            </section>
-
-            <!-- What's Next -->
-            <section>
-                <h2>What's Next for Me</h2>
-                <ul>
-                    <li><strong>Agilent AI Center of Excellence:</strong> Position as AI expert when it forms</li>
-                    <li><strong>Azure AI Certification:</strong> Formalize expertise</li>
-                    <li><strong>Consulting Growth:</strong> 2-3 clients, $10K revenue in 2026</li>
-                    <li><strong>Advanced Automation:</strong> Full email zero-touch inbox</li>
-                    <li><strong>Multi-agent Systems:</strong> Specialized sub-agents for different domains</li>
-                    <li><strong>Voice-first Interface:</strong> Phone-callable PAI system</li>
-                </ul>
-            </section>
-
-            <!-- Student Takeaways -->
-            <section>
-                <h2>Key Takeaways for You</h2>
-                <ol style="font-size: 0.9em;">
-                    <li><strong>AI is infrastructure,</strong> not just a chatbot</li>
-                    <li><strong>Control matters:</strong> Own your data and systems</li>
-                    <li><strong>Skills compound:</strong> Each capability multiplies the others</li>
-                    <li><strong>Start small, iterate:</strong> You don't need everything day one</li>
-                    <li><strong>Privacy vs Convenience:</strong> Understand the tradeoffs</li>
-                    <li><strong>The tech is ready:</strong> You can build this today</li>
-                </ol>
-            </section>
-
-            <!-- Getting Started Guide -->
-            <section>
-                <h2>Getting Started: Your Path</h2>
-                <div style="font-size: 0.75em; text-align: left;">
-                    <h4 style="color: #00d9ff;">Option 1: Minimal (Weekend project)</h4>
-                    <ul>
-                        <li>Install OpenClaw on your laptop</li>
-                        <li>Connect one channel (Signal or web)</li>
-                        <li>Add 2-3 basic skills</li>
-                        <li>Cost: ~$20/month Claude API</li>
-                    </ul>
-                    
-                    <h4 style="color: #00d9ff;">Option 2: Moderate (1-2 months)</h4>
-                    <ul>
-                        <li>Dedicated Mac Mini or Linux server</li>
-                        <li>Multi-channel setup</li>
-                        <li>n8n for automation</li>
-                        <li>Custom skills for your workflow</li>
-                        <li>Cost: ~$500 hardware + $50/month</li>
-                    </ul>
-                    
-                    <h4 style="color: #00d9ff;">Option 3: Full Stack (3-6 months)</h4>
-                    <ul>
-                        <li>Everything I've shown you today</li>
-                        <li>Proxmox cluster, PAI integration, full automation</li>
-                        <li>Cost: ~$2,500 hardware + $50-100/month</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Prerequisites -->
-            <section>
-                <h2>Technical Prerequisites</h2>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; font-size: 0.8em;">
-                    <div>
-                        <h4 style="color: #00d9ff;">Required Knowledge</h4>
-                        <ul>
-                            <li>Command line basics</li>
-                            <li>Git fundamentals</li>
-                            <li>Environment variables</li>
-                            <li>API concepts</li>
-                            <li>JSON structure</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 style="color: #00d9ff;">Helpful (Not Required)</h4>
-                        <ul>
-                            <li>Docker basics</li>
-                            <li>TypeScript/Python</li>
-                            <li>Networking fundamentals</li>
-                            <li>Linux system administration</li>
-                            <li>API development</li>
-                        </ul>
-                    </div>
-                </div>
-                <p style="margin-top: 30px; font-style: italic; color: #888;">
-                    If you can write Python and use terminal, you can build this.
-                </p>
-            </section>
-
-            <!-- Resources -->
-            <section>
-                <h2>Resources & Documentation</h2>
-                <ul style="font-size: 0.85em;">
-                    <li><strong>OpenClaw:</strong> <a href="https://docs.openclaw.ai">docs.openclaw.ai</a> | <a href="https://github.com/openclaw/openclaw">GitHub</a></li>
-                    <li><strong>My Blog:</strong> <a href="https://adammeeker.com/blog">adammeeker.com/blog</a></li>
-                    <li><strong>Discord Community:</strong> <a href="https://discord.com/invite/clawd">discord.com/invite/clawd</a></li>
-                    <li><strong>Skills Hub:</strong> <a href="https://clawhub.com">clawhub.com</a></li>
-                    <li><strong>Fabric Patterns:</strong> <a href="https://github.com/danielmiessler/fabric">github.com/danielmiessler/fabric</a></li>
-                    <li><strong>n8n Docs:</strong> <a href="https://docs.n8n.io">docs.n8n.io</a></li>
-                </ul>
-                <p style="margin-top: 40px; font-size: 0.9em;">
-                    <strong>Student setup guide included in takeaway materials →</strong>
-                </p>
-            </section>
-
-            <!-- Q&A -->
-            <section>
-                <h2>Questions?</h2>
-                <p style="font-size: 1.2em; margin: 60px 0;">
-                    Let's discuss implementation, security, costs, or anything else.
-                </p>
-                <div style="font-size: 0.85em; color: #888;">
-                    <p><strong>Contact:</strong></p>
-                    <p>adam@meekertechnologies.com</p>
-                    <p>adammeeker.com/blog</p>
-                </div>
-            </section>
-
-            <!-- Thank You -->
-            <section>
-                <h1>Thank You!</h1>
-                <h3>Go Build Something Amazing</h3>
-                <p style="margin-top: 60px;">
-                    <strong>Remember:</strong> The magic you're looking for is in the work you're avoiding.
-                </p>
-                <p style="font-size: 0.8em; color: #888; margin-top: 40px;">
-                    Presentation & setup guide available in your handout materials
-                </p>
-            </section>
-
-        </div>
+<!-- ============================================================ -->
+<!-- SLIDE 1: TITLE -->
+<!-- ============================================================ -->
+<section>
+  <div class="title-slide">
+    <div class="title-glow">🧠</div>
+    <h1>Building a Personal AI<br>Operating System</h1>
+    <p class="subtitle">From one chatbot to a full infrastructure that runs your life</p>
+    <div style="margin-top:1.5em">
+      <p class="presenter"><span>Adam Meeker</span> · Meeker Technologies</p>
+      <p class="presenter muted" style="font-size:0.7em">University of Iowa · MSBA Generative AI · 2026</p>
     </div>
+  </div>
+</section>
 
-    <script src="reveal/reveal.js"></script>
-    <script>
-        Reveal.initialize({
-            hash: true,
-            center: true,
-            transition: 'slide',
-            slideNumber: 'c/t',
-            showSlideNumber: 'all'
-        });
-    </script>
+<!-- ============================================================ -->
+<!-- SLIDE 2: ABOUT ADAM -->
+<!-- ============================================================ -->
+<section>
+  <h2>👋 Who Am I?</h2>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>🎓 Academic</h3>
+        <ul>
+          <li>BBA, MBA, MSBA — University of Iowa</li>
+          <li>Master of Data Analytics Leadership — Drake (Student of the Year)</li>
+          <li>Adjunct since 2018: R, Python, Analytics, Capstone</li>
+          <li>You may have had me before 👋</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:0.5em">
+        <h3>💼 Professional</h3>
+        <ul>
+          <li>CX Analytics Manager @ Agilent Technologies</li>
+          <li>Meeker Technologies (consulting LLC, 2026)</li>
+          <li>Focus: AI systems that <span class="cyan">empower</span>, not replace</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="callout">
+        <strong>The backstory:</strong><br>
+        Failed out of Iowa State freshman year. 1.08 GPA. Worked three jobs. Got my CDL. Then came back and got five degrees from Iowa.<br><br>
+        <span class="muted">Failing doesn't define you. What you do next does.</span>
+      </div>
+      <div class="card" style="margin-top:0.5em">
+        <h3>🏠 Home Base</h3>
+        <ul>
+          <li>Tiffin, Iowa — wife Tiffany, daughters Ellie &amp; Tessa</li>
+          <li>Mini bernedoodle named Maui</li>
+          <li>Running AI infrastructure from my basement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: THE THESIS -->
+<!-- ============================================================ -->
+<section>
+  <h2>🎯 Today's Thesis</h2>
+  <div style="text-align:center; margin: 1.5em 0 1em 0">
+    <div class="callout" style="font-size:1em; text-align:center; border-left:none; border-top: 3px solid var(--cyan); border-radius: 8px;">
+      <strong class="cyan">AI is not a tool. It's infrastructure.</strong><br>
+      <span class="muted" style="font-size:0.85em">And you should run your own.</span>
+    </div>
+  </div>
+  <div class="card-grid card-grid-3" style="margin-top:1em">
+    <div class="card">
+      <h3>🔴 Most people</h3>
+      <p>Open ChatGPT, type a question, get an answer, close the tab. No memory. No context. No continuity.</p>
+    </div>
+    <div class="card">
+      <h3>🟡 Power users</h3>
+      <p>Have a workflow. Use Claude for writing, Cursor for code, Perplexity for research. Siloed tools.</p>
+    </div>
+    <div class="card">
+      <h3>🟢 Infrastructure</h3>
+      <p>A system that knows you, routes intelligently, runs 24/7, and gets smarter over time.</p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:0.8em">
+    By the end of this talk, you'll know how to build the third one.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4: THE PROBLEM -->
+<!-- ============================================================ -->
+<section>
+  <h2>🧩 The Problem: One Brain Can't Do Everything</h2>
+  <div class="two-col">
+    <div>
+      <p style="font-size:0.8em">Think about how your organization works:</p>
+      <ul>
+        <li>You have a <span class="cyan">CEO</span> — vision, decisions</li>
+        <li>You have a <span class="cyan">CFO</span> — numbers and risk</li>
+        <li>You have a <span class="cyan">lawyer</span> — careful, precise</li>
+        <li>You have a <span class="cyan">exec assistant</span> — routing, scheduling</li>
+        <li>Each has a <span class="purple">different communication style</span></li>
+        <li>Each has <span class="purple">domain expertise</span></li>
+        <li>Each has <span class="purple">different risk tolerance</span></li>
+      </ul>
+      <div class="callout" style="margin-top:0.8em">
+        Why would you use ONE AI for all of this?
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>⚠️ Problems with "one big brain"</h3>
+        <ul>
+          <li>Context windows fill up fast</li>
+          <li>No specialization = mediocre at everything</li>
+          <li>No memory between sessions</li>
+          <li>No way to parallelize work</li>
+          <li>No audit trail</li>
+          <li>Single point of failure</li>
+          <li>Can't run autonomously</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5: THE SOLUTION -->
+<!-- ============================================================ -->
+<section>
+  <h2>💡 The Solution: Treat AI Like Infrastructure</h2>
+  <div class="stat-grid">
+    <div class="stat-box">
+      <span class="number">14</span>
+      <span class="label">Specialized agents</span>
+    </div>
+    <div class="stat-box">
+      <span class="number">24/7</span>
+      <span class="label">Continuous operation</span>
+    </div>
+    <div class="stat-box">
+      <span class="number">1</span>
+      <span class="label">Gateway to rule them all</span>
+    </div>
+  </div>
+  <div class="card-grid card-grid-2" style="margin-top:0.5em">
+    <div class="card">
+      <h3>🏗️ Infrastructure principles</h3>
+      <ul>
+        <li><span class="cyan">Specialization</span> — right tool for the job</li>
+        <li><span class="cyan">Redundancy</span> — no single point of failure</li>
+        <li><span class="cyan">Observability</span> — know what's happening</li>
+        <li><span class="cyan">Automation</span> — runs without you</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🤖 Applied to AI</h3>
+      <ul>
+        <li>14 agents, each with a <span class="purple">persona + domain</span></li>
+        <li>Gateway routes to the right agent</li>
+        <li>Scheduled crons run autonomously</li>
+        <li>Memory persists across sessions</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout green" style="margin-top:0.8em">
+    The magic: the whole is greater than the sum of its parts.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6: SYSTEM PHILOSOPHY -->
+<!-- ============================================================ -->
+<section>
+  <h2>🧭 System Philosophy</h2>
+  <div class="three-col">
+    <div class="card">
+      <h3>🎯 Specialization</h3>
+      <p>Each agent has a narrow job and does it well. Barack is chief of staff. Matlock is legal. Vega is trading. Don't cross the streams.</p>
+    </div>
+    <div class="card">
+      <h3>⚡ Always On</h3>
+      <p>Cron jobs fire at 6:45 AM. Inbox is monitored. Briefings happen whether I ask for them or not. This isn't a chatbot — it's a team.</p>
+    </div>
+    <div class="card">
+      <h3>🛡️ Clear Failure Boundaries</h3>
+      <p>Agents know what they can't do. They escalate. They don't hallucinate into dangerous territory. Legal says "consult a real lawyer" when it matters.</p>
+    </div>
+  </div>
+  <div class="three-col" style="margin-top:0.8em">
+    <div class="card">
+      <h3>🔒 Privacy First</h3>
+      <p>Sensitive data never leaves the house. Local TTS. Local memory. Cloud AI for reasoning only.</p>
+    </div>
+    <div class="card">
+      <h3>🔄 Continuous Learning</h3>
+      <p>Memory files grow. Agents get context updates. The system gets smarter as you use it.</p>
+    </div>
+    <div class="card">
+      <h3>🧩 Composable</h3>
+      <p>Add integrations incrementally. Start with one agent. Add hardware when you're ready. Level up over time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7: ARCHITECTURE OVERVIEW -->
+<!-- ============================================================ -->
+<section>
+  <h2>🏛️ Architecture Overview</h2>
+  <div class="arch-diagram">
+<span class="layer-label">┌─ HARDWARE LAYER ──────────────────────────────────────────────────────┐</span>
+<span class="node">│  Mac mini M4 (10.0.0.166)    Proxmox Node 1 (10.0.0.55)    Proxmox 2  │</span>
+<span class="node">│  OpenClaw · Mission Control  HA · n8n · AdGuard · OPNsense  Plex · etc │</span>
+<span class="layer-label">└───────────────────────┬───────────────────────────────────────────────┘</span>
+                        <span class="arrow">│</span>
+<span class="layer-label">┌───────────────────────▼───────────────────────────────────────────────┐</span>
+<span class="node">│                    GATEWAY LAYER: OpenClaw                            │</span>
+<span class="node">│     Session Mgmt · Agent Routing · Cron · Channel Multiplexing        │</span>
+<span class="layer-label">└──┬────────────┬────────────┬────────────┬────────────┬───────────────┘</span>
+   <span class="arrow">│</span>            <span class="arrow">│</span>            <span class="arrow">│</span>            <span class="arrow">│</span>            <span class="arrow">│</span>
+<span class="layer-label">┌──▼──┐   ┌───▼───┐   ┌────▼──┐   ┌────▼───┐   ┌────▼──────────────┐</span>
+<span class="node">│Barack│   │Matlock│   │  Vega │   │  Forge │   │  ... 10 more ...  │</span>
+<span class="node">│Chief │   │ Legal │   │Trading│   │ Infra  │   │                   │</span>
+<span class="layer-label">└──────┘   └───────┘   └───────┘   └────────┘   └───────────────────┘</span>
+                        <span class="arrow">│</span>
+<span class="layer-label">┌───────────────────────▼───────────────────────────────────────────────┐</span>
+<span class="node">│                  INTEGRATION LAYER                                    │</span>
+<span class="node">│   M365 Planner · Home Assistant · Signal · Email · Invoice Ninja      │</span>
+<span class="layer-label">└───────────────────────────────────────────────────────────────────────┘</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8: HARDWARE LAYER -->
+<!-- ============================================================ -->
+<section>
+  <h2>🖥️ Hardware Layer</h2>
+  <div class="three-col">
+    <div class="card">
+      <h3>🍎 Mac mini M4</h3>
+      <p class="muted" style="font-size:0.65em">Primary compute — ~$800</p>
+      <ul>
+        <li>16GB RAM, 228GB SSD</li>
+        <li>Apple Silicon (MPS acceleration)</li>
+        <li>Runs: OpenClaw, Mission Control, Chatterbox TTS</li>
+        <li>Always on, whisper-quiet, 6W idle</li>
+      </ul>
+      <div style="margin-top:0.5em">
+        <span class="pill pill-cyan">Chatterbox TTS</span>
+        <span class="pill pill-cyan">MPS</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>🗄️ Proxmox Node 1</h3>
+      <p class="muted" style="font-size:0.65em">Intel N100, 16GB — ~$600</p>
+      <ul>
+        <li>Home Assistant VM (smart home)</li>
+        <li>n8n CT (workflow automation)</li>
+        <li>AdGuard CT (DNS filtering)</li>
+        <li>OPNsense VM (firewall/router)</li>
+        <li>Metabase CT (analytics)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🗄️ Proxmox Node 2</h3>
+      <p class="muted" style="font-size:0.65em">Intel N100, 16GB — ~$600</p>
+      <ul>
+        <li>Plex media server</li>
+        <li>Sonarr / Radarr / Prowlarr</li>
+        <li>Invoice Ninja (invoicing)</li>
+        <li>DocuSeal (contracts)</li>
+        <li>SearXNG (private search)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:0.8em">
+    💡 <strong>Total hardware cost: ~$2,000</strong> — less than one month of enterprise AI licensing.
+    The N100 mini-PCs are a revelation: 15W TDP, silent, $150 nodes.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: GATEWAY LAYER — OPENCLAW -->
+<!-- ============================================================ -->
+<section>
+  <h2>🦀 Gateway Layer: OpenClaw</h2>
+  <div class="two-col">
+    <div>
+      <p style="font-size:0.78em">OpenClaw is the <span class="cyan">nervous system</span> of the whole operation. Every message, every agent, every cron job flows through it.</p>
+      <div class="card" style="margin-top:0.6em">
+        <h3>What it does</h3>
+        <ul>
+          <li>🔀 <span class="cyan">Session management</span> — maintains context per agent</li>
+          <li>🛣️ <span class="cyan">Agent routing</span> — Barack gets general queries, Vega gets market questions</li>
+          <li>⏰ <span class="cyan">Cron scheduling</span> — briefings, email checks, automations</li>
+          <li>📡 <span class="cyan">Multi-channel</span> — Signal, iMessage, Email, web dashboard</li>
+          <li>🔊 <span class="cyan">TTS integration</span> — voice output on any channel</li>
+          <li>🧠 <span class="cyan">Memory injection</span> — feeds context to agents</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Channels in use</h3>
+        <ul>
+          <li>📱 <span class="cyan">Signal</span> — primary messaging (me → system)</li>
+          <li>💬 <span class="cyan">iMessage</span> — family automations</li>
+          <li>📧 <span class="cyan">Email</span> — Inbox agent monitors</li>
+          <li>🖥️ <span class="cyan">Mission Control</span> — web dashboard</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:0.5em">
+        <h3>Example cron jobs</h3>
+        <ul>
+          <li><span class="muted">6:45 AM</span> — Morning briefing (Barack)</li>
+          <li><span class="muted">Every 30 min</span> — Email triage (Inbox)</li>
+          <li><span class="muted">Friday 4 PM</span> — Weekly status report</li>
+          <li><span class="muted">Sunday 8 PM</span> — Week preview</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10: AGENT TEAM INTRO -->
+<!-- ============================================================ -->
+<section>
+  <h2>🤖 The Agent Team</h2>
+  <p style="font-size:0.78em; margin-bottom:0.8em">14 specialized agents. Each with a persona, domain, model, and voice. Together they cover everything.</p>
+  <div class="agent-mini-grid">
+    <div class="agent-mini"><span class="em">🎩</span><span class="name">Barack</span><span class="role-sm">Chief of Staff</span></div>
+    <div class="agent-mini"><span class="em">⚖️</span><span class="name">Olivia</span><span class="role-sm">Exec Enforcer</span></div>
+    <div class="agent-mini"><span class="em">🔍</span><span class="name">Marcus</span><span class="role-sm">Research</span></div>
+    <div class="agent-mini"><span class="em">✍️</span><span class="name">Riley</span><span class="role-sm">Comms & Writing</span></div>
+    <div class="agent-mini"><span class="em">⚖️</span><span class="name">Matlock</span><span class="role-sm">Legal Counsel</span></div>
+    <div class="agent-mini"><span class="em">💼</span><span class="name">Sterling</span><span class="role-sm">Business Ops</span></div>
+    <div class="agent-mini"><span class="em">📈</span><span class="name">Vega</span><span class="role-sm">Quant Trading</span></div>
+    <div class="agent-mini"><span class="em">🎓</span><span class="name">Sage</span><span class="role-sm">Teaching</span></div>
+    <div class="agent-mini"><span class="em">🔧</span><span class="name">Forge</span><span class="role-sm">Infrastructure</span></div>
+    <div class="agent-mini"><span class="em">📣</span><span class="name">Maxwell</span><span class="role-sm">PR & Comms</span></div>
+    <div class="agent-mini"><span class="em">🏠</span><span class="name">Quinn</span><span class="role-sm">Personal & Family</span></div>
+    <div class="agent-mini"><span class="em">🗓️</span><span class="name">Taylor</span><span class="role-sm">Lifestyle</span></div>
+    <div class="agent-mini"><span class="em">📬</span><span class="name">Inbox</span><span class="role-sm">Email Triage</span></div>
+    <div class="agent-mini"><span class="em">💻</span><span class="name">Dev</span><span class="role-sm">Software Eng</span></div>
+  </div>
+  <div class="callout" style="margin-top:0.8em; font-size:0.7em">
+    Each agent has a <span class="cyan">system prompt</span> (persona + domain rules), a <span class="purple">model selection</span> (matched to task complexity), and often a <span class="green">cloned voice</span>.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11: COMMAND DOMAIN -->
+<!-- ============================================================ -->
+<section>
+  <h2>🎩 Command Domain</h2>
+  <div class="agent-card" style="margin-bottom:0.8em">
+    <div class="emoji">🎩</div>
+    <div class="info">
+      <h3>Barack — Chief of Staff</h3>
+      <div class="role">Command · Coordination · Routing</div>
+      <div class="model">Claude Sonnet 4.6 · Obama voice (cloned)</div>
+      <p>The primary interface for everything. Barack knows the whole system — every agent, every integration, every scheduled job. He routes requests, synthesizes briefings, and makes sure Adam's priorities get executed. Every other agent reports through him.</p>
+      <span class="voice-badge">🎤 Obama voice clone · Chatterbox TTS</span>
+    </div>
+  </div>
+  <div class="agent-card">
+    <div class="emoji">⚖️</div>
+    <div class="info">
+      <h3>Olivia — Executive Enforcer</h3>
+      <div class="role">Accountability · Deadlines · No Excuses</div>
+      <div class="model">Claude Sonnet 4.5 · Olivia Benson voice (cloned)</div>
+      <p>If Barack is the strategic brain, Olivia is the one who makes sure things actually get done. She tracks commitments, calls out slippage, and has zero tolerance for vague timelines. "What's the deadline? What are the blockers? Fix it."</p>
+      <span class="voice-badge">🎤 Olivia Benson voice clone</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12: RESEARCH & COMMS DOMAIN -->
+<!-- ============================================================ -->
+<section>
+  <h2>🔍 Research & Communications Domain</h2>
+  <div class="agent-card" style="margin-bottom:0.6em">
+    <div class="emoji">🔍</div>
+    <div class="info">
+      <h3>Marcus — Research & Intelligence</h3>
+      <div class="role">Deep Research · Analysis · OSINT</div>
+      <div class="model">Claude Sonnet 4.5 · Morgan Freeman voice (cloned)</div>
+      <p>Methodical, thorough, never rushes. Marcus synthesizes complex information from multiple sources, builds research briefs, and provides the intelligence layer for decisions. You ask Marcus about a company, a person, a market — you get a real analysis.</p>
+    </div>
+  </div>
+  <div class="agent-card" style="margin-bottom:0.6em">
+    <div class="emoji">✍️</div>
+    <div class="info">
+      <h3>Riley — Communications & Writing</h3>
+      <div class="role">Copywriting · Editing · Voice</div>
+      <div class="model">Claude Opus 4.5 · Custom voice</div>
+      <p>Opus-powered because writing quality matters. Riley handles blog posts, client proposals, email drafts, teaching materials. Has Adam's voice dialed in — direct, practical, occasionally snarky.</p>
+    </div>
+  </div>
+  <div class="agent-card">
+    <div class="emoji">📣</div>
+    <div class="info">
+      <h3>Maxwell — Communications & PR</h3>
+      <div class="role">Public Relations · Positioning · Messaging</div>
+      <div class="model">Claude Opus 4.5 · Obama voice</div>
+      <p>Where Riley writes, Maxwell strategizes. Handles external communications, consulting positioning, and when to say what to whom. The spin doctor, but honest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13: LEGAL & BUSINESS DOMAIN -->
+<!-- ============================================================ -->
+<section>
+  <h2>⚖️ Legal & Business Domain</h2>
+  <div class="agent-card" style="margin-bottom:0.6em">
+    <div class="emoji">⚖️</div>
+    <div class="info">
+      <h3>Matlock — Legal Counsel</h3>
+      <div class="role">Contracts · Risk · Legal Research</div>
+      <div class="model">Claude Opus 4.5 · David Attenborough voice (cloned)</div>
+      <p>Opus because precision is non-negotiable in legal contexts. Matlock reviews contracts, flags risk clauses, researches legal questions, and always — always — reminds you to consult a real lawyer for anything consequential. That's not a weakness; it's good system design.</p>
+      <span class="voice-badge">🎤 David Attenborough voice clone</span>
+    </div>
+  </div>
+  <div class="agent-card">
+    <div class="emoji">💼</div>
+    <div class="info">
+      <h3>Sterling — Business Operations</h3>
+      <div class="role">Consulting · Clients · Revenue · Operations</div>
+      <div class="model">Claude Sonnet 4.5 · Custom voice</div>
+      <p>Runs the business side of Meeker Technologies. Tracks client relationships, monitors invoices, manages project status, and helps with proposals. The COO to Barack's CEO.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14: FINANCE & TEACHING DOMAIN -->
+<!-- ============================================================ -->
+<section>
+  <h2>📈 Finance & Teaching Domain</h2>
+  <div class="agent-card" style="margin-bottom:0.6em">
+    <div class="emoji">📈</div>
+    <div class="info">
+      <h3>Vega — Quantitative Trading</h3>
+      <div class="role">Markets · Quant Analysis · Portfolio</div>
+      <div class="model">Claude Sonnet 4.6 · Morgan Freeman voice</div>
+      <p>Analyzes market data, runs quantitative models, monitors positions, and explains complex financial concepts. Vega doesn't make trades — that's a human decision — but gives Adam the analytical firepower to make informed ones.</p>
+    </div>
+  </div>
+  <div class="agent-card">
+    <div class="emoji">🎓</div>
+    <div class="info">
+      <h3>Sage — Teaching Assistant</h3>
+      <div class="role">Curriculum · Grading Rubrics · Student Questions</div>
+      <div class="model">Claude Sonnet 4.5 · Taylor Swift voice (cloned)</div>
+      <p>Sage is the TA Adam never had budget for. Helps draft assignment rubrics, answers student-style questions to test explanations, suggests curriculum improvements, and synthesizes student feedback. Teaching load: cut in half.</p>
+      <span class="voice-badge">🎤 Taylor Swift voice clone</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15: TECHNICAL DOMAIN -->
+<!-- ============================================================ -->
+<section>
+  <h2>🔧 Technical Domain</h2>
+  <div class="agent-card" style="margin-bottom:0.6em">
+    <div class="emoji">🔧</div>
+    <div class="info">
+      <h3>Forge — Infrastructure Engineer</h3>
+      <div class="role">DevOps · Proxmox · Networking · Security</div>
+      <div class="model">Claude Sonnet 4.6 · Morgan Freeman voice</div>
+      <p>Keeps the infrastructure running. Forge handles Proxmox management, Docker compose files, network configs, SSL certs, firewall rules. When something breaks at 2 AM, Forge gets the page (via Signal cron), diagnoses it, and wakes Adam only if human action is required.</p>
+    </div>
+  </div>
+  <div class="agent-card">
+    <div class="emoji">💻</div>
+    <div class="info">
+      <h3>Dev — Software Engineering</h3>
+      <div class="role">Code · Architecture · Debugging · Code Review</div>
+      <div class="model">Claude Sonnet 4.6 · Text only</div>
+      <p>The actual coding agent. TypeScript-first (because that's Adam's preference), bun over npm, deterministic and practical. Dev pairs with Claude Code for longer builds. Text only — code doesn't need a voice.</p>
+      <span class="voice-badge">📝 Text only — code speaks for itself</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16: PERSONAL DOMAIN -->
+<!-- ============================================================ -->
+<section>
+  <h2>🏠 Personal Domain</h2>
+  <div class="agent-card" style="margin-bottom:0.6em">
+    <div class="emoji">🏠</div>
+    <div class="info">
+      <h3>Quinn — Personal & Family</h3>
+      <div class="role">Family · Home · Personal Life</div>
+      <div class="model">Claude Haiku 4.5 · Text only</div>
+      <p>The private one. Quinn handles family calendar coordination, gift ideas, trip planning, and personal context that doesn't need to be in the other agents' context. Haiku because personal queries don't need Opus-level horsepower — and it's cheaper at scale.</p>
+    </div>
+  </div>
+  <div class="agent-card" style="margin-bottom:0.6em">
+    <div class="emoji">🗓️</div>
+    <div class="info">
+      <h3>Taylor — Lifestyle & Scheduling</h3>
+      <div class="role">Calendar · Scheduling · Daily Rhythms</div>
+      <div class="model">Claude Haiku 4.5 · Taylor Swift voice (cloned)</div>
+      <p>Handles the daily logistics. What's on the calendar, when's the next appointment, what should Adam eat before a long meeting. The personal assistant experience, without the awkwardness.</p>
+    </div>
+  </div>
+  <div class="agent-card">
+    <div class="emoji">📬</div>
+    <div class="info">
+      <h3>Inbox — Email Triage</h3>
+      <div class="role">Email · Prioritization · Routing</div>
+      <div class="model">Claude Haiku 4.5 · Text only</div>
+      <p>Reads every email, categorizes by urgency, flags action items, and routes to the right agent. Haiku handles volume cheaply. The output: a daily digest with only what needs Adam's attention.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 17: MODEL SELECTION STRATEGY -->
+<!-- ============================================================ -->
+<section>
+  <h2>🎯 Model Selection Strategy</h2>
+  <p style="font-size:0.75em; margin-bottom:0.8em">Not every task needs the best model. Matching model to task is infrastructure thinking.</p>
+  <table>
+    <thead>
+      <tr><th>Tier</th><th>Model</th><th>Use When</th><th>Agents</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pill pill-purple">Opus</span></td>
+        <td>Claude Opus 4.5</td>
+        <td>Legal precision, long-form writing, complex reasoning</td>
+        <td>Matlock, Riley, Maxwell</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-cyan">Sonnet</span></td>
+        <td>Claude Sonnet 4.5/4.6</td>
+        <td>Balanced quality + speed for most work</td>
+        <td>Barack, Marcus, Sage, Dev, Forge, Vega</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-green">Haiku</span></td>
+        <td>Claude Haiku 4.5</td>
+        <td>High-volume triage, simple routing, personal tasks</td>
+        <td>Quinn, Taylor, Inbox</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout" style="margin-top:1em">
+    💡 <strong>Rule of thumb:</strong> Use Haiku for anything that runs 100x/day. Use Opus only when a human would read every word carefully. Sonnet for everything else. This alone cuts API costs by 60%.
+  </div>
+  <div class="callout purple" style="margin-top:0.5em">
+    Sonnet 4.6 for real-time agents (Barack, Vega, Dev, Forge) — the .6 variant is faster for interactive use.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 18: VOICE SYSTEM -->
+<!-- ============================================================ -->
+<section>
+  <h2>🎤 Voice System: Chatterbox TTS</h2>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>🔊 Chatterbox TTS</h3>
+        <ul>
+          <li>Local inference — <span class="cyan">nothing leaves the house</span></li>
+          <li>MPS-accelerated on Apple M4</li>
+          <li>Running at <code>localhost:4126</code></li>
+          <li>6 cloned voices</li>
+          <li>ElevenLabs-compatible API</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:0.6em">
+        <h3>🎭 Cloned Voices</h3>
+        <ul>
+          <li>🎩 <span class="cyan">Obama</span> — Barack, Maxwell (authority)</li>
+          <li>🎸 <span class="cyan">Taylor Swift</span> — Sage, Taylor (approachable)</li>
+          <li>⚖️ <span class="cyan">Olivia Benson</span> — Olivia (direct)</li>
+          <li>🎬 <span class="cyan">David Attenborough</span> — Matlock (gravitas)</li>
+          <li>🎙️ <span class="cyan">Morgan Freeman</span> — Marcus, Forge, Vega</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>🔄 Voice Pipeline</h3>
+        <pre><code>mic input
+  → Web Speech API (STT)
+  → OpenClaw (routing)
+  → Agent (Claude)
+  → Chatterbox TTS
+  → audio playback</code></pre>
+        <p style="font-size:0.68em; margin-top:0.5em">Entirely local except the Claude API call. Voice queries from Mission Control work hands-free.</p>
+      </div>
+      <div class="callout" style="margin-top:0.6em; font-size:0.7em">
+        Voice cloning from a 30-second sample. The voices aren't perfect — but they're <em>consistent</em>, which is what matters for a daily briefing.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 19: MISSION CONTROL -->
+<!-- ============================================================ -->
+<section>
+  <h2>🖥️ Mission Control Dashboard</h2>
+  <div class="two-col">
+    <div>
+      <p style="font-size:0.75em">Next.js dashboard built on top of OpenClaw. 20 pages covering every domain.</p>
+      <div class="card" style="margin-top:0.5em">
+        <h3>📋 Page Groups</h3>
+        <ul>
+          <li><span class="cyan">Core:</span> Dashboard, Feed, Briefing, System</li>
+          <li><span class="cyan">Work:</span> Tasks, Calendar, Projects, Docs</li>
+          <li><span class="cyan">Business:</span> Business, Invoices, Contracts, People</li>
+          <li><span class="cyan">Team:</span> Agents, Team, Channels</li>
+          <li><span class="cyan">Analytics:</span> Trading, Memory</li>
+          <li><span class="cyan">Life:</span> Family, Teaching, Home Assistant</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>🎯 Why a dashboard?</h3>
+        <p style="font-size:0.7em">Chat interfaces are great for conversation. They're terrible for <em>seeing the state of your world</em>.</p>
+        <ul style="margin-top:0.4em">
+          <li>Live task status without asking</li>
+          <li>Agent team overview</li>
+          <li>Invoice + contract status</li>
+          <li>Family calendar at a glance</li>
+          <li>Voice queries from any page</li>
+          <li>Home automation controls</li>
+        </ul>
+      </div>
+      <div class="callout purple" style="margin-top:0.6em; font-size:0.7em">
+        Built entirely by Claude Code from a prompt. Took 3 iterations. Now it's the main interface.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 20: INTEGRATION — MS PLANNER -->
+<!-- ============================================================ -->
+<section>
+  <h2>🔗 Integration: Microsoft Planner</h2>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>What's integrated</h3>
+        <ul>
+          <li>Bidirectional task sync via Graph API</li>
+          <li>OAuth auto-refresh (no manual re-auth)</li>
+          <li>Barack can create/update/complete tasks</li>
+          <li>Mission Control Tasks page pulls live</li>
+          <li>Planner ↔ n8n workflows for automation</li>
+        </ul>
+      </div>
+      <div class="callout" style="margin-top:0.6em; font-size:0.7em">
+        Works with Agilent's Microsoft tenant. The Graph API is the killer feature of M365 that nobody talks about.
+      </div>
+    </div>
+    <div>
+      <pre><code># Barack creates a Planner task
+# via Signal message:
+"Add task: Review Q1 analytics
+ report, due Friday, Agilent board"
+
+# Barack calls Graph API:
+POST /planner/tasks
+{
+  "title": "Review Q1 analytics report",
+  "dueDateTime": "2026-03-07",
+  "planId": "agilent-main"
+}</code></pre>
+    </div>
+  </div>
+  <div class="callout green" style="margin-top:0.6em; font-size:0.75em">
+    Real example: I said "Add these grading tasks" to Barack via Signal while driving. By the time I got home, they were in Planner.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 21: INTEGRATION — HOME ASSISTANT -->
+<!-- ============================================================ -->
+<section>
+  <h2>🏠 Integration: Home Assistant</h2>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>What's connected</h3>
+        <ul>
+          <li>Lights, climate, locks, automations</li>
+          <li>Full bidirectional (read + control)</li>
+          <li>Mission Control has a Home page</li>
+          <li>Voice queries: "Is the garage door open?"</li>
+          <li>Automations triggered by agent actions</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:0.5em">
+        <h3>Real automations</h3>
+        <ul>
+          <li>Morning briefing → lights to 100% in kitchen</li>
+          <li>"I'm leaving" → lock all doors, lower thermostat</li>
+          <li>Kids' bedtime → Ellie's room lights dim at 8 PM</li>
+          <li>Late night work → office stays lit, rest of house dims</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <pre><code># Quinn handles family queries:
+"Turn off Tessa's room lights,
+ she fell asleep"
+
+# Quinn calls HA REST API:
+POST /api/services/light/turn_off
+{
+  "entity_id": "light.tessas_room"
+}
+
+# Barack's morning briefing
+# checks door/lock status:
+GET /api/states/binary_sensor
+      .garage_door</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 22: INTEGRATION — EMAIL -->
+<!-- ============================================================ -->
+<section>
+  <h2>📧 Integration: Email Triage</h2>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>The problem it solves</h3>
+        <p style="font-size:0.72em">Adam gets email from Agilent, U of I, clients, students, vendors, and mailing lists. Reading all of it is a full-time job.</p>
+      </div>
+      <div class="card" style="margin-top:0.5em">
+        <h3>The Inbox agent</h3>
+        <ul>
+          <li>Polls Apple Mail every 30 min via cron</li>
+          <li>Haiku classifies: urgent / action / FYI / noise</li>
+          <li>Routes action items to Barack</li>
+          <li>Sends daily digest to Signal at 9 AM</li>
+          <li>Student emails → Sage gets context</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Sample digest output</h3>
+        <div style="font-size:0.65em; color: var(--text); font-family: monospace; line-height:1.8">
+          📬 <span class="cyan">Morning Digest — 3 Mar 2026</span><br>
+          <br>
+          🔴 <strong>Urgent (2):</strong><br>
+          → Sarah B: Q1 deck review by EOD<br>
+          → Client: Contract revision needed<br>
+          <br>
+          🟡 <strong>Action needed (4):</strong><br>
+          → Student: question about R assignment<br>
+          → Invoice #47: payment received<br>
+          → ... 2 more<br>
+          <br>
+          📚 <strong>FYI (12): </strong><span class="muted">archived</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 23: INTEGRATION — INVOICE NINJA / DOCUSEAL -->
+<!-- ============================================================ -->
+<section>
+  <h2>💰 Integration: Business Operations</h2>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>📄 Invoice Ninja</h3>
+        <ul>
+          <li>Self-hosted at clients.meekertechnologies.com</li>
+          <li>Sterling can create/track invoices</li>
+          <li>Payment status in Mission Control</li>
+          <li>Cloudflare tunnel for public access</li>
+          <li>Client portal for easy payment</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:0.5em">
+        <h3>✍️ DocuSeal</h3>
+        <ul>
+          <li>Self-hosted at contracts.meekertechnologies.com</li>
+          <li>Contract generation + e-signature</li>
+          <li>Matlock reviews before sending</li>
+          <li>Stored locally (not DocuSign's cloud)</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="callout" style="font-size:0.75em">
+        <strong>Full client lifecycle — automated:</strong><br><br>
+        1. Lead comes in via email (Inbox detects)<br>
+        2. Sterling creates proposal from template<br>
+        3. Matlock reviews contract<br>
+        4. DocuSeal sends for e-signature<br>
+        5. Invoice Ninja creates invoice on signing<br>
+        6. Planner creates onboarding tasks<br><br>
+        <span class="cyan">Zero manual steps. Human only reviews at decision points.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 24: MEMORY SYSTEM -->
+<!-- ============================================================ -->
+<section>
+  <h2>🧠 Memory System</h2>
+  <div class="three-col">
+    <div class="card">
+      <h3>📅 Daily Files</h3>
+      <p style="font-size:0.7em"><code>~/clawd/memory/YYYY-MM-DD.md</code></p>
+      <p style="font-size:0.68em">Raw logs of what happened each day. Agent conversations, decisions made, tasks created, events noted. Automatically injected into morning briefing context.</p>
+    </div>
+    <div class="card">
+      <h3>🧬 MEMORY.md</h3>
+      <p style="font-size:0.68em">Long-term curated memory. Distilled from daily logs during heartbeat reviews. Like a human's long-term memory vs. working memory. Updated by agents automatically.</p>
+    </div>
+    <div class="card">
+      <h3>📒 Obsidian Vault</h3>
+      <p style="font-size:0.68em">373+ documents synced via iCloud. Projects, research, notes, teaching materials. Marcus can search it. Riley writes to it. The knowledge graph grows.</p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:0.8em; font-size:0.75em">
+    <strong>The heartbeat loop:</strong> Barack wakes up every session, reads yesterday's memory, loads relevant context, and picks up where we left off. No "what were we working on?" — he already knows.
+  </div>
+  <pre style="margin-top:0.6em; font-size:0.6em"><code># Every morning Barack reads:
+- MEMORY.md (long-term context)
+- memory/2026-03-02.md (yesterday)
+- HEARTBEAT.md (pending items)
+# Then synthesizes the morning briefing</code></pre>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 25: SECURITY & PRIVACY -->
+<!-- ============================================================ -->
+<section>
+  <h2>🔒 Security & Privacy</h2>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>Local-first principles</h3>
+        <ul>
+          <li>TTS inference runs <span class="cyan">on the M4</span>, not cloud</li>
+          <li>Memory files stay <span class="cyan">on local hardware</span></li>
+          <li>Obsidian syncs via <span class="cyan">iCloud</span> (not third-party)</li>
+          <li>Sensitive docs: DocuSeal on local Proxmox</li>
+          <li>Business data: Invoice Ninja on local Proxmox</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:0.5em">
+        <h3>Network security</h3>
+        <ul>
+          <li>OPNsense firewall (not consumer router)</li>
+          <li>AdGuard DNS-level blocking</li>
+          <li>Tailscale VPN for remote access</li>
+          <li>Cloudflare tunnel only for business tools</li>
+          <li>n8n, Home Assistant: VPN-only</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>What goes to the cloud</h3>
+        <ul>
+          <li><span class="yellow">Claude API</span> — reasoning/generation only</li>
+          <li><span class="yellow">Signal</span> — end-to-end encrypted</li>
+          <li><span class="yellow">iCloud</span> — Obsidian sync (encrypted)</li>
+          <li><span class="green">Not:</span> voice audio, memory files, contracts, financial data</li>
+        </ul>
+      </div>
+      <div class="callout purple" style="margin-top:0.6em; font-size:0.72em">
+        The model: use cloud AI for <em>reasoning</em>. Keep <em>data</em> local. Claude never sees your raw memory files — only what you choose to inject into a specific prompt.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 26: REAL RESULTS -->
+<!-- ============================================================ -->
+<section>
+  <h2>📊 Real Results: What This Actually Does</h2>
+  <div class="three-col">
+    <div class="card">
+      <h3>📚 Teaching</h3>
+      <ul>
+        <li>Rubric generation: 30 min → 5 min</li>
+        <li>Student FAQ drafts: instant</li>
+        <li>Lecture prep: summarize papers via Fabric</li>
+        <li>Sage handles "explain this concept" dry runs</li>
+        <li>Grade distribution analysis automated</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>💼 Consulting</h3>
+      <ul>
+        <li>Client proposals: 4 hrs → 45 min</li>
+        <li>Contract review: Matlock flags issues</li>
+        <li>Invoice → payment: zero manual steps</li>
+        <li>Weekly client status: auto-generated</li>
+        <li>Business email drafts: Riley handles</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🏠 Home & Life</h3>
+      <ul>
+        <li>Morning briefing: 6:45 AM, Obama voice</li>
+        <li>Email triage: saves 1+ hr/day</li>
+        <li>Home automations: lights, climate</li>
+        <li>Family scheduling: Quinn coordinates</li>
+        <li>Research: Marcus is faster than Google</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout green" style="margin-top:0.8em; font-size:0.75em">
+    Rough estimate: <strong>10-15 hours/week reclaimed</strong>. Not from replacing work — from eliminating the <em>overhead</em> around work (scheduling, email, routing, context-switching, admin).
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 27: COST BREAKDOWN -->
+<!-- ============================================================ -->
+<section>
+  <h2>💵 Cost Breakdown</h2>
+  <table>
+    <thead>
+      <tr><th>Item</th><th>One-Time</th><th>Monthly</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Mac mini M4 (16GB)</td><td class="cyan">$800</td><td>—</td><td>Primary compute, whisper-quiet</td></tr>
+      <tr><td>Proxmox Node 1 (N100)</td><td class="cyan">$600</td><td>—</td><td>HA, n8n, firewall, DNS</td></tr>
+      <tr><td>Proxmox Node 2 (N100)</td><td class="cyan">$600</td><td>—</td><td>Media, business tools</td></tr>
+      <tr><td>OpenClaw</td><td>—</td><td class="yellow">~$20</td><td>The gateway software</td></tr>
+      <tr><td>Claude API (Anthropic)</td><td>—</td><td class="yellow">$30–80</td><td>Varies by usage; Haiku keeps it low</td></tr>
+      <tr><td>Cloudflare</td><td>—</td><td class="green">Free</td><td>Tunnel + DNS</td></tr>
+      <tr><td>Tailscale</td><td>—</td><td class="green">Free</td><td>Personal tier VPN</td></tr>
+      <tr><td>Invoice Ninja, DocuSeal</td><td>—</td><td class="green">Free</td><td>Self-hosted open source</td></tr>
+    </tbody>
+  </table>
+  <div class="callout" style="margin-top:0.8em; font-size:0.75em">
+    <strong>Total: ~$2,000 hardware + ~$50-100/mo ongoing</strong><br>
+    Compare: Salesforce $150/mo, Notion $16/mo, Calendly $12/mo, DocuSign $25/mo, various AI subscriptions... the self-hosted stack wins fast.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 28: HOW TO BUILD YOUR OWN -->
+<!-- ============================================================ -->
+<section>
+  <h2>🛠️ How to Build Your Own</h2>
+  <div class="callout" style="font-size:0.8em; margin-bottom:0.8em">
+    You don't have to build everything at once. This is a <span class="cyan">three-level journey</span>.
+  </div>
+  <div class="level-card level-1">
+    <h3>🟦 Level 1: The Foundation (Weekend project)</h3>
+    <ul>
+      <li>Mac (any) + OpenClaw installed</li>
+      <li>2-3 agents with distinct personas</li>
+      <li>Signal or iMessage for interaction</li>
+      <li>Basic memory files</li>
+      <li><strong>Cost: $0 new hardware if you have a Mac. ~$20/mo.</strong></li>
+    </ul>
+  </div>
+  <div class="level-card level-2" style="margin-top:0.5em">
+    <h3>🟣 Level 2: Add the Dashboard (1-2 week project)</h3>
+    <ul>
+      <li>Level 1 + Mission Control (Next.js, Claude Code builds it)</li>
+      <li>5-8 agents with voice</li>
+      <li>Email integration, calendar integration</li>
+      <li><strong>Cost: Level 1 + Chatterbox TTS setup</strong></li>
+    </ul>
+  </div>
+  <div class="level-card level-3" style="margin-top:0.5em">
+    <h3>🟡 Level 3: Full Stack (1-2 month project)</h3>
+    <ul>
+      <li>Level 2 + Proxmox nodes</li>
+      <li>14 agents, n8n, Home Assistant, full integrations</li>
+      <li><strong>Cost: ~$2,000 hardware + ongoing</strong></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 29: STUDENT STARTER KIT -->
+<!-- ============================================================ -->
+<section>
+  <h2>📦 Student Starter Kit</h2>
+  <p style="font-size:0.78em; margin-bottom:0.6em">I've built a complete starter kit so you don't start from zero. Available in the class repo.</p>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>📁 What's in it</h3>
+        <ul>
+          <li><code>README.md</code> — full architecture overview</li>
+          <li><code>QUICKSTART.md</code> — 30-min setup guide</li>
+          <li><code>agents/</code> — all 14 agent templates</li>
+          <li><code>prompts/</code> — Claude Code build prompts</li>
+          <li><code>docs/</code> — architecture + integration guides</li>
+          <li><code>examples/</code> — real automations to copy</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>🚀 The prompts are the secret</h3>
+        <p style="font-size:0.7em">Each prompt file is something you can literally paste into Claude Code to build a component of your system:</p>
+        <ul>
+          <li><code>build-mission-control.md</code></li>
+          <li><code>build-agent-team.md</code></li>
+          <li><code>build-voice-system.md</code></li>
+          <li><code>build-integrations.md</code></li>
+        </ul>
+      </div>
+      <div class="callout purple" style="margin-top:0.5em; font-size:0.7em">
+        You're MSBA students. You understand systems. These prompts + Claude Code = your own AI OS in a weekend.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 30: LEVEL 1 DETAIL -->
+<!-- ============================================================ -->
+<section>
+  <h2>🟦 Getting Started: Level 1</h2>
+  <p style="font-size:0.75em; margin-bottom:0.6em">Just OpenClaw on your Mac. This is the foundation everything else builds on.</p>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>Installation</h3>
+        <pre><code># Install OpenClaw
+brew install openclaw
+
+# Initialize workspace
+mkdir ~/clawd && cd ~/clawd
+openclaw init
+
+# Start the gateway
+openclaw gateway start</code></pre>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Your first 3 agents</h3>
+        <pre><code># AGENT 1: Chief of Staff
+name: Chief
+model: claude-sonnet-4-5
+system: "You are my Chief of Staff.
+Route requests intelligently..."
+
+# AGENT 2: Researcher  
+name: Researcher
+model: claude-sonnet-4-5
+system: "You are a research analyst..."
+
+# AGENT 3: Writer
+name: Writer  
+model: claude-opus-4-5
+system: "You write clearly and..."</code></pre>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:0.6em; font-size:0.72em">
+    Connect Signal in OpenClaw settings → now you can message your AI team from your phone. That's it. That's Level 1.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 31: LEVEL 2 DETAIL -->
+<!-- ============================================================ -->
+<section>
+  <h2>🟣 Getting Started: Level 2</h2>
+  <p style="font-size:0.75em; margin-bottom:0.6em">Add Mission Control and voice. Now you have a command center.</p>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>Build Mission Control</h3>
+        <p style="font-size:0.7em">Paste <code>prompts/build-mission-control.md</code> into Claude Code:</p>
+        <pre><code>claude code
+> Read the OpenClaw docs at ...
+> Build a Next.js dashboard with:
+> - Agent status page
+> - Task management
+> - Memory viewer
+> - Voice query support
+> Dark theme, Tailwind CSS</code></pre>
+        <p style="font-size:0.65em; color: var(--muted)">3 iterations later: you have a real dashboard.</p>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Add Chatterbox TTS</h3>
+        <pre><code># Install Chatterbox
+pip install chatterbox-tts
+
+# Clone a voice (30s sample)
+chatterbox clone \
+  --input sample.wav \
+  --name myvoice
+
+# Start server
+chatterbox serve --port 4126
+
+# Configure OpenClaw
+tts.provider = chatterbox
+tts.baseUrl = http://localhost:4126</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 32: LEVEL 3 DETAIL -->
+<!-- ============================================================ -->
+<section>
+  <h2>🟡 Getting Started: Level 3</h2>
+  <p style="font-size:0.75em; margin-bottom:0.6em">Full stack. This is where it gets serious.</p>
+  <div class="three-col">
+    <div class="card">
+      <h3>🗄️ Proxmox Hardware</h3>
+      <ul>
+        <li>Intel N100 mini-PC (~$150-200)</li>
+        <li>16GB RAM upgrade (~$30)</li>
+        <li>Proxmox VE (free)</li>
+        <li>One node = Home Assistant + n8n</li>
+        <li>Add nodes as needed</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🏠 Home Assistant</h3>
+      <ul>
+        <li>HAOS VM on Proxmox</li>
+        <li>Connect smart home devices</li>
+        <li>Enable REST API</li>
+        <li>Wire to OpenClaw via integration</li>
+        <li>Quinn/Quinn control your house</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>⚙️ n8n Automation</h3>
+      <ul>
+        <li>Docker container on Proxmox</li>
+        <li>Connect to OpenClaw webhooks</li>
+        <li>Build email → task workflows</li>
+        <li>Schedule complex automations</li>
+        <li>Visual workflow editor</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:0.6em; font-size:0.72em">
+    The Proxmox nodes are mini-PCs running 24/7 on ~15W each. Electricity cost: ~$3/month per node. The economics are absurd.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 33: CLAUDE CODE AS YOUR BUILDER -->
+<!-- ============================================================ -->
+<section>
+  <h2>🤖 Claude Code: Your Builder</h2>
+  <div class="two-col">
+    <div>
+      <p style="font-size:0.75em">Claude Code is how you build the system. Not by writing code yourself — by <span class="cyan">describing what you want</span> and iterating.</p>
+      <div class="card" style="margin-top:0.5em">
+        <h3>The prompt engineering loop</h3>
+        <ul>
+          <li>1. Describe the system in detail</li>
+          <li>2. Give Claude Code access to docs</li>
+          <li>3. Let it build, run, test</li>
+          <li>4. Review output, refine</li>
+          <li>5. Repeat until it works</li>
+        </ul>
+      </div>
+      <div class="callout" style="margin-top:0.5em; font-size:0.7em">
+        Everything in my stack was built this way. Mission Control: 3 iterations. The integrations: 2-5 each. The TTS proxy: 1.
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Good Claude Code prompts</h3>
+        <pre><code>You are building a Next.js dashboard
+for an AI agent system. The system
+uses OpenClaw (docs at [url]).
+
+Build a page called "Agents" that:
+- Shows all configured agents
+- Displays model, status, last active
+- Has a "Send message" button per agent
+- Uses the OpenClaw REST API
+
+Tech: Next.js 15, TypeScript, Tailwind
+Dark theme: bg #0a0a0f, accent #00d9ff
+Run on localhost:3000</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 34: PROMPT ENGINEERING TIPS -->
+<!-- ============================================================ -->
+<section>
+  <h2>✍️ Prompt Engineering for System Building</h2>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>✅ Agent system prompts</h3>
+        <ul>
+          <li>Define <span class="cyan">persona</span> first — who are they?</li>
+          <li>Define <span class="cyan">domain</span> — what do they own?</li>
+          <li>Define <span class="cyan">boundaries</span> — what do they NOT do?</li>
+          <li>Define <span class="cyan">escalation</span> — when do they defer?</li>
+          <li>Give examples of good/bad responses</li>
+          <li>Include memory context injection point</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>❌ Common mistakes</h3>
+        <ul>
+          <li>Vague personas ("be helpful")</li>
+          <li>No boundary definition (agent sprawl)</li>
+          <li>No escalation path (infinite loops)</li>
+          <li>Too many agents too soon</li>
+          <li>No memory system (Groundhog Day)</li>
+          <li>Using Opus for everything ($$$)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:0.8em; font-size:0.75em">
+    <strong>The persona trick:</strong> Name your agents after people with the right energy. "Matlock" immediately signals "careful, detail-oriented, slightly old-fashioned." The name shapes the behavior — LLMs have strong priors on named personas.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 35: N8N AND WORKFLOW AUTOMATION -->
+<!-- ============================================================ -->
+<section>
+  <h2>⚙️ n8n: The Glue Layer</h2>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <h3>What n8n does</h3>
+        <ul>
+          <li>Visual workflow automation</li>
+          <li>Connects APIs without code</li>
+          <li>Webhooks in and out of OpenClaw</li>
+          <li>Schedule complex multi-step jobs</li>
+          <li>Error handling + retry logic</li>
+          <li>350+ built-in integrations</li>
+        </ul>
+      </div>
+      <div class="callout" style="margin-top:0.5em; font-size:0.7em">
+        n8n is like Zapier/Make but self-hosted. No per-task pricing. No data leaving your network.
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Example: Morning Briefing Workflow</h3>
+        <pre style="font-size:0.55em"><code>CRON (6:45 AM daily)
+  → GET M365 Calendar (today's events)
+  → GET Planner (open tasks)
+  → GET Weather API
+  → POST OpenClaw/Barack (briefing)
+  → Chatterbox TTS (Obama voice)
+  → Sonos HTTP API (play in kitchen)
+  → Done ✅</code></pre>
+        <p style="font-size:0.65em; color: var(--muted)">Built in n8n visual editor in ~2 hours. Runs every morning without me touching it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 36: RESOURCES & LINKS -->
+<!-- ============================================================ -->
+<section>
+  <h2>📚 Resources & Links</h2>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>🦀 Core Stack</h3>
+      <ul>
+        <li><span class="cyan">OpenClaw</span> — openclaw.ai</li>
+        <li><span class="cyan">Claude</span> — claude.ai (Anthropic)</li>
+        <li><span class="cyan">Claude Code</span> — claude.ai/code</li>
+        <li><span class="cyan">Chatterbox TTS</span> — github/resemble-ai/chatterbox</li>
+        <li><span class="cyan">Proxmox VE</span> — proxmox.com (free)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🛠️ Tools Used</h3>
+      <ul>
+        <li><span class="purple">Home Assistant</span> — home-assistant.io</li>
+        <li><span class="purple">n8n</span> — n8n.io (self-host)</li>
+        <li><span class="purple">Invoice Ninja</span> — invoiceninja.com</li>
+        <li><span class="purple">DocuSeal</span> — docuseal.co</li>
+        <li><span class="purple">AdGuard Home</span> — adguard.com</li>
+        <li><span class="purple">Obsidian</span> — obsidian.md</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>📖 Reading</h3>
+      <ul>
+        <li><em>Co-Intelligence</em> — Ethan Mollick</li>
+        <li>Daniel Miessler's Fabric patterns (GitHub)</li>
+        <li>Anthropic's Agent design guides</li>
+        <li>My blog: adammeeker.com/blog</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🎓 Student Kit</h3>
+      <ul>
+        <li>All agent templates</li>
+        <li>Copy-paste Claude Code prompts</li>
+        <li>Architecture docs</li>
+        <li>Integration guides</li>
+        <li>Real automation examples</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 37: THE BIGGER PICTURE -->
+<!-- ============================================================ -->
+<section>
+  <h2>🌐 The Bigger Picture</h2>
+  <div class="two-col">
+    <div>
+      <p style="font-size:0.78em">This isn't just about one person's home lab.</p>
+      <div class="card">
+        <h3>Where this is going</h3>
+        <ul>
+          <li>AI infrastructure will be table stakes for knowledge workers</li>
+          <li>The people who understand <span class="cyan">systems thinking</span> win</li>
+          <li>MSBA skills — data, analytics, architecture — are exactly what this requires</li>
+          <li>The gap between "AI user" and "AI builder" is a career moat</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="callout" style="font-size:0.8em; margin-bottom:0.6em">
+        <strong>"AI should empower workers, not replace them."</strong><br>
+        <span class="muted">— Adam Meeker, probably too many times</span>
+      </div>
+      <div class="card">
+        <h3>Your advantage</h3>
+        <ul>
+          <li>You understand data pipelines</li>
+          <li>You can evaluate AI output critically</li>
+          <li>You know when to trust a model (and when not to)</li>
+          <li>You can design the system, not just use it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 38: WHAT TO DO THIS WEEK -->
+<!-- ============================================================ -->
+<section>
+  <h2>🚀 What to Do This Week</h2>
+  <div class="three-col">
+    <div class="level-card level-1">
+      <h3>🟦 This weekend</h3>
+      <ul>
+        <li>Install OpenClaw on your Mac</li>
+        <li>Create 3 agents</li>
+        <li>Connect to Signal</li>
+        <li>Message your agents for 24 hours</li>
+        <li>Notice what you wished they could do</li>
+      </ul>
+    </div>
+    <div class="level-card level-2">
+      <h3>🟣 This month</h3>
+      <ul>
+        <li>Clone the student kit repo</li>
+        <li>Pick one integration to wire up (calendar, email, or Planner)</li>
+        <li>Write your first agent system prompt from scratch</li>
+        <li>Use Claude Code to build one dashboard page</li>
+      </ul>
+    </div>
+    <div class="level-card level-3">
+      <h3>🟡 This semester</h3>
+      <ul>
+        <li>Full 5-agent team running</li>
+        <li>One workflow automation</li>
+        <li>Memory system working</li>
+        <li>Document your architecture</li>
+        <li>Write a blog post about what you built</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout green" style="margin-top:0.8em; font-size:0.75em">
+    The magic you're looking for is in the work you're avoiding. Start this weekend.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 39: Q&A / THANK YOU -->
+<!-- ============================================================ -->
+<section>
+  <div class="title-slide">
+    <div class="title-glow" style="font-size:3em">🙌</div>
+    <h1 style="font-size:1.8em">Q&amp;A</h1>
+    <p class="subtitle" style="font-size:0.8em">Ask me anything — about the system, the agents,<br>the hardware, the failures, all of it.</p>
+    <div style="margin-top:1.5em">
+      <div class="card" style="max-width:500px; margin:0 auto; text-align:left">
+        <ul>
+          <li>📧 <span class="cyan">adam@meekertechnologies.com</span></li>
+          <li>🌐 <span class="cyan">adammeeker.com/blog</span></li>
+          <li>📦 Student kit in the class repo</li>
+          <li>🤖 Barack is always listening on Signal</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:1.5em; font-size:0.65em; color: var(--muted)">
+      University of Iowa · MSBA Generative AI · 2026<br>
+      <em>"Build the thing. Then tell me how it went."</em>
+    </p>
+  </div>
+</section>
+
+</div><!-- .slides -->
+</div><!-- .reveal -->
+
+<script src="reveal/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    progress: true,
+    controls: true,
+    center: false,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    backgroundTransition: 'fade',
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    plugins: []
+  });
+</script>
 </body>
 </html>
