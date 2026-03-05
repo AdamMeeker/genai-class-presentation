@@ -2401,6 +2401,86 @@ Run on localhost:3000</code></pre>
 </section>
 
 <!-- ============================================================ -->
+<!-- NEW: SUPER SEARCH (QMD) -->
+<!-- ============================================================ -->
+<section>
+  <h2>🔍 Super Search</h2>
+  <p class="muted" style="font-size:0.7em; margin-top:-0.3em">Hybrid Search Across Everything You Own</p>
+  <div class="two-col" style="margin-top:0.5em">
+    <div>
+      <div class="card">
+        <h3>Three Search Modes</h3>
+        <ul>
+          <li><strong class="cyan">BM25</strong> — fast keyword matching</li>
+          <li><strong class="purple">Vector</strong> — semantic similarity (embeddings)</li>
+          <li><strong class="green">Hybrid + Rerank</strong> — best of both + LLM ranking</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:0.5em">
+        <h3>Collections</h3>
+        <ul>
+          <li>Obsidian vault — 360 notes</li>
+          <li>Workspace — 1,180 files</li>
+          <li>Memory — 35 daily journals</li>
+          <li>SOPs — 11 operational procedures</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Fully Local</h3>
+        <ul>
+          <li>Runs on Mac mini M4 with Metal GPU</li>
+          <li>300M embedding model + 600M reranker</li>
+          <li>4,283 vector chunks indexed</li>
+          <li>MCP integration (any agent can search)</li>
+        </ul>
+      </div>
+      <div class="callout" style="margin-top:0.5em; font-size:0.72em">
+        <strong>The power:</strong> Ask Barack "what did we decide about the trading strategy?" and he searches across <span class="cyan">all 1,586 files</span> — notes, memory, SOPs, project docs — in under a second.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- NEW: SOPs + SECURITY -->
+<!-- ============================================================ -->
+<section>
+  <h2>📋 SOPs + Security Automation</h2>
+  <p class="muted" style="font-size:0.7em; margin-top:-0.3em">Codified Workflows That Run Themselves</p>
+  <div class="two-col" style="margin-top:0.5em">
+    <div>
+      <div class="card">
+        <h3>SOPs = Agent Instructions</h3>
+        <ul>
+          <li>Morning briefing — 7:15 AM daily, multi-voice DJ format</li>
+          <li>Trading scans — 3x daily with risk controls</li>
+          <li>GitHub publish — mandatory security scan before every push</li>
+          <li>Research due diligence — tiered depth (5/15/30 min)</li>
+          <li>Trade execution — position sizing, stop-loss, Matlock review</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Built-in Security</h3>
+        <ul>
+          <li><strong class="red">Pre-push hook</strong> — scans for API keys, tokens, PII</li>
+          <li>Catches large files (&gt;50MB) automatically</li>
+          <li>Git history scrubbed when secrets found</li>
+          <li>Secrets backed up locally, never in git</li>
+          <li>All credentials via <code>process.env</code>, not hardcoded</li>
+        </ul>
+      </div>
+      <div class="callout green" style="margin-top:0.5em; font-size:0.72em">
+        <strong>Lesson learned today:</strong> Found Azure API keys hardcoded in repo. Built automated scanner in 15 min. Now it catches secrets before every push — forever.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
 <!-- NEW: THE NUMBERS -->
 <!-- ============================================================ -->
 <section>
