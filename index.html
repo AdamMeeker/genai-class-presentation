@@ -25,16 +25,18 @@
     .reveal { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--text); font-size: 36px; }
     .reveal .slides section { text-align: left; padding: 0 20px; }
     .reveal h1, .reveal h2, .reveal h3 { font-family: 'Segoe UI', system-ui, sans-serif; text-transform: none; letter-spacing: -0.02em; }
-    .reveal h1 { font-size: 2em; color: var(--cyan); line-height: 1.1; }
-    .reveal h2 { font-size: 1.4em; color: var(--cyan); border-bottom: 1px solid var(--border); padding-bottom: 0.3em; margin-bottom: 0.6em; }
-    .reveal h3 { font-size: 1.1em; color: var(--purple); margin-bottom: 0.4em; }
-    .reveal p { font-size: 0.85em; line-height: 1.6; color: var(--text); }
+    .reveal .slides { overflow: visible; }
+    .reveal .slides section { box-sizing: border-box; padding: 0.4em 0.8em; }
+    .reveal h1 { font-size: 1.8em; color: var(--cyan); line-height: 1.1; margin-bottom: 0.2em; }
+    .reveal h2 { font-size: 1.25em; color: var(--cyan); border-bottom: 1px solid var(--border); padding-bottom: 0.2em; margin-bottom: 0.4em; }
+    .reveal h3 { font-size: 1em; color: var(--purple); margin-bottom: 0.3em; }
+    .reveal p { font-size: 0.78em; line-height: 1.5; color: var(--text); margin: 0.2em 0; }
     .reveal ul { list-style: none; padding: 0; margin: 0; }
-    .reveal ul li { font-size: 0.8em; padding: 0.25em 0; color: var(--text); }
+    .reveal ul li { font-size: 0.75em; padding: 0.15em 0; color: var(--text); }
     .reveal ul li::before { content: '▸ '; color: var(--cyan); }
     .reveal a { color: var(--cyan); text-decoration: none; }
     .reveal code { font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace; }
-    .reveal pre { font-size: 0.65em; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1em; margin: 0.5em 0; box-shadow: 0 0 20px rgba(0,217,255,0.05); }
+    .reveal pre { font-size: 0.6em; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 0.6em; margin: 0.3em 0; box-shadow: 0 0 20px rgba(0,217,255,0.05); }
     .reveal pre code { background: transparent; padding: 0; color: #a8ff78; }
     .reveal .progress { color: var(--cyan); }
     .reveal .controls { color: var(--cyan); }
@@ -60,7 +62,7 @@
     .title-glow { font-size: 4em; margin-bottom: 0.2em; filter: drop-shadow(0 0 20px rgba(0,217,255,0.5)); }
 
     /* ===== CARDS ===== */
-    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1em; margin: 0.4em 0; }
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 0.6em 0.8em; margin: 0.25em 0; }
     .card-grid { display: grid; gap: 0.6em; }
     .card-grid-2 { grid-template-columns: 1fr 1fr; }
     .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -103,7 +105,7 @@
     .stat-box .label { font-size: 0.6em; color: var(--muted); display: block; margin-top: 0.2em; }
 
     /* ===== TABLE ===== */
-    .reveal table { font-size: 0.7em; border-collapse: collapse; width: 100%; }
+    .reveal table { font-size: 0.65em; border-collapse: collapse; width: 100%; }
     .reveal table th { background: rgba(0,217,255,0.1); color: var(--cyan); padding: 0.5em 0.8em; text-align: left; border-bottom: 1px solid var(--border); }
     .reveal table td { padding: 0.4em 0.8em; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text); }
     .reveal table tr:hover td { background: rgba(0,217,255,0.03); }
@@ -2596,10 +2598,10 @@ Run on localhost:3000</code></pre>
     transitionSpeed: 'fast',
     backgroundTransition: 'fade',
     width: 1280,
-    height: 720,
-    margin: 0.04,
-    minScale: 0.2,
-    maxScale: 2.0,
+    height: 800,
+    margin: 0.02,
+    minScale: 0.1,
+    maxScale: 2.5,
     plugins: []
   });
 </script>
