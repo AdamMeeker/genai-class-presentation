@@ -2,7 +2,7 @@
 
 **Created for:** GENAI Class - University of Iowa MSBA Program  
 **Instructor:** Adam Meeker  
-**Date:** February 20, 2026
+**Updated:** March 2026 — Added Windows WSL2 setup, 16-agent roster, PRD-based build guide
 
 ---
 
@@ -93,38 +93,81 @@ This guide will help you build your own Personal AI Infrastructure using OpenCla
 
 This gets you a working OpenClaw instance on your laptop in ~2 hours.
 
-### Step 1: Install Node.js
+### Step 1: Install Node.js + OpenClaw
 
-OpenClaw requires Node.js 20+.
+OpenClaw requires Node.js 20+. Setup varies by platform:
 
-**Mac (using Homebrew):**
+---
+
+#### 🍎 Mac
+
 ```bash
-brew install node@20
+# Install Homebrew if you don't have it
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install OpenClaw via Homebrew (recommended)
+brew install openclaw
+
+# Verify
+openclaw --version
 ```
 
-**Windows:**
-Download from https://nodejs.org (LTS version)
+---
 
-**Linux (Ubuntu/Debian):**
+#### 🪟 Windows (WSL2 — Recommended)
+
+WSL2 gives you a real Linux environment inside Windows. It's the best path for running OpenClaw on Windows.
+
+**Enable WSL2** (PowerShell as Administrator):
+```powershell
+wsl --install
+# Restart your computer after this
+```
+
+After restart, open Ubuntu from Start menu. Set your username and password, then:
+
+```bash
+# Install Node.js 20 inside Ubuntu
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Fix npm permissions to avoid sudo issues
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+# Install OpenClaw
+npm install -g openclaw
+openclaw --version
+```
+
+**VS Code integration** (highly recommended for Windows users):
+1. Install VS Code from [code.visualstudio.com](https://code.visualstudio.com)
+2. Install the "WSL" extension
+3. From your Ubuntu terminal: `code .` — opens VS Code connected to WSL
+
+**Key Windows notes:**
+- Keep all project files in Linux filesystem (`~/myai/`) not Windows filesystem (`/mnt/c/...`)
+- Access OpenClaw web UI at `http://localhost:18789` from your Windows browser
+- Signal Desktop runs natively on Windows and works with OpenClaw in WSL
+
+---
+
+#### 🐧 Linux (Ubuntu/Debian)
+
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt-get install -y nodejs
+npm install -g openclaw
+openclaw --version
 ```
+
+---
 
 **Verify installation:**
 ```bash
 node --version  # Should show v20.x.x or higher
-npm --version
-```
-
-### Step 2: Install OpenClaw
-
-```bash
-npm install -g openclaw
-```
-
-**Verify installation:**
-```bash
 openclaw --version
 ```
 
@@ -616,6 +659,37 @@ Get today's events:
 
 ---
 
+## The Full 16-Agent System
+
+The system showcased in class uses 16 specialized agents. Here's the full roster you can build toward:
+
+| # | Agent | Role | Model | Voice |
+|---|-------|------|-------|-------|
+| 1 | Barack | Chief of Staff · primary interface · routing | Sonnet 4.6 | obama |
+| 2 | Olivia | Exec Enforcer · security · accountability | Sonnet 4.5 | olivia |
+| 3 | Marcus | Research & Analytics · briefs · deep dives | Sonnet 4.5 | rishi |
+| 4 | Riley | Communications · writing · editing | Opus 4.6 | karen |
+| 5 | Matlock | Legal · risk · contracts | Opus 4.6 | daniel_gb |
+| 6 | Sterling | Finance · budgets · business ops | Sonnet 4.5 | moira |
+| 7 | Vega | Investments · trading · market intel | Sonnet 4.5 | alex |
+| 8 | Sage | Wellness · priorities · work-life balance | Sonnet 4.5 | lekha |
+| 9 | Forge | Infrastructure · servers · DevOps | Sonnet 4.5 | nicky |
+| 10 | Maxwell | Operations · workflows · logistics | Sonnet 4.5 | samantha |
+| 11 | Quinn | Creative · design · branding | Sonnet 4.5 | fiona |
+| 12 | Taylor | Personal & Family · lifestyle | Haiku 4.5 | taylor |
+| 13 | Inbox | Email Triage · classification · digests | Haiku 4.5 | yuna |
+| 14 | Dev | Software Engineer · code · architecture | Sonnet 4.6 | tessa |
+| 15 | Herky | Hawkeye Sports · scores · schedules | Haiku 4.5 | obama |
+| 16 | Dewey | Knowledge Curator · memory · entity docs | Sonnet 4.6 | dewey |
+
+**Start with 3 (Chief + Researcher + Writer), add more as your needs grow.**
+
+All 16 agent templates are in `student-kit/agents/`. Copy and customize.
+
+Full build instructions: `student-kit/docs/system-prd.md`
+
+---
+
 ## Security Best Practices
 
 ### API Key Management
@@ -830,6 +904,39 @@ openclaw sessions cleanup --older-than 7d
 - [ ] Integrate with your key tools (calendar, email, task manager)
 - [ ] Optimize API costs
 - [ ] Share your skills with the community
+
+---
+
+## Build From Scratch with AI Agents
+
+Want to have Claude Code or an AI agent *build this entire system* for you? That's the meta-move.
+
+**The `system-prd.md` document** (`student-kit/docs/system-prd.md`) contains:
+- Complete architecture specification
+- Component-by-component requirements
+- Copy-paste build prompts for Claude Code
+- Code snippets for every major piece
+- Cost estimates and optimization guide
+
+**How to use it:**
+
+1. Open Claude Code in a fresh directory:
+   ```bash
+   mkdir ~/myai-build && cd ~/myai-build
+   claude
+   ```
+
+2. Paste a build prompt from the PRD:
+   ```
+   Read this PRD and build the minimal dashboard described in Section 6.4:
+   [paste the prompt]
+   ```
+
+3. Claude Code writes, runs, and iterates until it works
+
+4. Repeat for each component
+
+This is exactly how the system in class was built — described in natural language, implemented by AI agents, iterated until working. **You're not writing code. You're writing requirements.**
 
 ---
 

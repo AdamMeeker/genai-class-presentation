@@ -1,20 +1,25 @@
 # Quickstart: Your Personal AI OS in 30 Minutes
 
-> Level 1 setup — Mac + OpenClaw + 3 agents + Signal  
-> Time: ~30 minutes · Cost: ~$20/month
+> Level 1 setup — OpenClaw + 3 agents + Signal  
+> Time: ~30 minutes · Cost: ~$20/month  
+> **Works on:** macOS · Linux · Windows (via WSL2)
 
 ---
 
 ## Prerequisites
 
-- Mac (any model, M-series preferred)
-- Anthropic API key (get one at console.anthropic.com)
+- Anthropic API key → [console.anthropic.com](https://console.anthropic.com)
 - Signal account on your phone
-- Homebrew installed (`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`)
+- One of the following:
+  - **Mac:** Homebrew installed
+  - **Linux:** Ubuntu/Debian 20.04+
+  - **Windows:** WSL2 enabled (see Windows Setup below)
 
 ---
 
-## Step 1: Install OpenClaw (5 minutes)
+## 🍎 Mac Setup
+
+### Step 1: Install OpenClaw (5 minutes)
 
 ```bash
 # Install via Homebrew
@@ -29,7 +34,7 @@ cd ~/myai
 openclaw init
 ```
 
-OpenClaw will create a default config at `~/.openclaw/config.json`. Open it and add your Anthropic API key:
+OpenClaw creates a config at `~/.openclaw/config.json`. Add your API key:
 
 ```json
 {
@@ -38,6 +43,115 @@ OpenClaw will create a default config at `~/.openclaw/config.json`. Open it and 
   }
 }
 ```
+
+---
+
+## 🐧 Linux Setup
+
+### Step 1: Install Node.js 20+
+
+```bash
+# Ubuntu/Debian
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Verify
+node --version  # Should show v20+
+```
+
+### Step 2: Install OpenClaw
+
+```bash
+npm install -g openclaw
+openclaw --version
+```
+
+### Step 3: Initialize
+
+```bash
+mkdir ~/myai && cd ~/myai
+openclaw init
+```
+
+Add your API key to `~/.openclaw/config.json`:
+```json
+{
+  "anthropic": {
+    "apiKey": "sk-ant-your-key-here"
+  }
+}
+```
+
+---
+
+## 🪟 Windows Setup (WSL2)
+
+WSL2 gives you a full Linux environment inside Windows. OpenClaw runs great in it.
+
+### Step 1: Enable WSL2
+
+Open **PowerShell as Administrator** and run:
+
+```powershell
+wsl --install
+```
+
+Restart your computer when prompted. This installs Ubuntu by default.
+
+> **Already have WSL?** Make sure it's WSL2: `wsl --set-default-version 2`
+
+### Step 2: Open Ubuntu Terminal
+
+After restart, search "Ubuntu" in Start menu and open it. You'll set a username and password on first launch.
+
+### Step 3: Install Node.js in WSL
+
+```bash
+# Inside Ubuntu terminal
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+node --version  # Should show v20+
+```
+
+### Step 4: Install OpenClaw
+
+```bash
+npm install -g openclaw
+openclaw --version
+```
+
+### Step 5: Initialize your workspace
+
+```bash
+mkdir ~/myai && cd ~/myai
+openclaw init
+```
+
+Configure your API key:
+
+```bash
+# Option A: Edit directly
+nano ~/.openclaw/config.json
+# Add: "anthropic": { "apiKey": "sk-ant-your-key-here" }
+
+# Option B: Use the CLI
+openclaw config set anthropic.apiKey sk-ant-your-key-here
+```
+
+### Step 6: Set environment variable (optional but recommended)
+
+```bash
+# Add to ~/.bashrc so it persists
+echo 'export ANTHROPIC_API_KEY="sk-ant-your-key-here"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+> **Windows tip:** VS Code has a "WSL" extension — install it and you can edit your Linux files with VS Code's full UI. Run `code .` from the WSL terminal.
+
+---
+
+## 🚀 All Platforms: Steps 2-6
 
 ---
 
@@ -52,6 +166,10 @@ openclaw gateway status
 ```
 
 You should see: `Gateway running on localhost:18789`
+
+Open in browser: [http://localhost:18789](http://localhost:18789)
+
+> **Windows users:** The gateway runs inside WSL, but you can access `localhost:18789` from your Windows browser. It just works.
 
 ---
 
@@ -158,8 +276,8 @@ openclaw agents list
 
 ## Step 4: Connect Signal (5 minutes)
 
-1. Open OpenClaw settings: `openclaw config`
-2. Under Channels, add Signal:
+1. Install **Signal Desktop** → [signal.org/download](https://signal.org/download) *(Mac/Windows — runs natively)*
+2. Open OpenClaw config and add Signal:
 
 ```json
 {
@@ -179,6 +297,8 @@ openclaw channel link signal
 ```
 
 Scan the QR code with Signal on your phone.
+
+> **Windows users:** Signal Desktop runs natively on Windows (not in WSL). OpenClaw communicates with it through a local socket that works across the WSL boundary.
 
 ---
 
@@ -277,6 +397,33 @@ openclaw agents test chief "hello"
 **Signal not connecting:**
 - Ensure Signal Desktop is running on the same machine
 - Try relinking: `openclaw channel unlink signal && openclaw channel link signal`
+
+**Windows / WSL-specific issues:**
+
+*Can't access localhost:18789 from Windows browser:*
+```bash
+# Get your WSL IP address
+hostname -I
+# Try that IP:18789 instead of localhost
+```
+
+*Permission denied installing npm packages:*
+```bash
+# Fix npm global directory permissions
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+# Then retry: npm install -g openclaw
+```
+
+*WSL2 performance is slow:*
+- Keep your project files in the Linux filesystem (`~/myai`) not Windows filesystem (`/mnt/c/...`)
+- Windows filesystem access through WSL is significantly slower
+
+*Signal Desktop on Windows + OpenClaw in WSL:*
+- This combination works but requires OpenClaw 1.4+ for cross-boundary socket support
+- If it fails, run OpenClaw on Windows PowerShell instead (same `npm install -g openclaw`)
 
 ---
 
