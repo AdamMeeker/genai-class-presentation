@@ -967,7 +967,7 @@
         </div>
         <div class="card">
           <h3>Infrastructure managed</h3>
-          <ul><li>Mac mini M4 (10.0.0.166)</li><li>2× Proxmox nodes</li><li>20+ services/containers</li><li>Tailscale VPN mesh</li></ul>
+          <ul><li>Mac mini M4 (192.168.1.100)</li><li>2× Proxmox nodes</li><li>20+ services/containers</li><li>Tailscale VPN mesh</li></ul>
         </div>
       </div>
     </div>
@@ -1417,20 +1417,20 @@ POST /planner/tasks
         <ul>
           <li>Morning briefing → lights to 100% in kitchen</li>
           <li>"I'm leaving" → lock all doors, lower thermostat</li>
-          <li>Kids' bedtime → Ellie's room lights dim at 8 PM</li>
+          <li>Kids' bedtime → Kids' room lights dim at 8 PM</li>
           <li>Late night work → office stays lit, rest of house dims</li>
         </ul>
       </div>
     </div>
     <div>
       <pre><code># Quinn handles family queries:
-"Turn off Tessa's room lights,
+"Turn off Child's room lights,
  she fell asleep"
 
 # Quinn calls HA REST API:
 POST /api/services/light/turn_off
 {
-  "entity_id": "light.tessas_room"
+  "entity_id": "light.childs_room"
 }
 
 # Barack's morning briefing
@@ -1495,7 +1495,7 @@ GET /api/states/binary_sensor
       <div class="card">
         <h3>📄 Invoice Ninja</h3>
         <ul>
-          <li>Self-hosted at clients.meekertechnologies.com</li>
+          <li>Self-hosted at clients.yourdomain.com</li>
           <li>Sterling can create/track invoices</li>
           <li>Payment status in Mission Control</li>
           <li>Cloudflare tunnel for public access</li>
@@ -1505,7 +1505,7 @@ GET /api/states/binary_sensor
       <div class="card" style="margin-top:0.5em">
         <h3>✍️ DocuSeal</h3>
         <ul>
-          <li>Self-hosted at contracts.meekertechnologies.com</li>
+          <li>Self-hosted at contracts.yourdomain.com</li>
           <li>Contract generation + e-signature</li>
           <li>Matlock reviews before sending</li>
           <li>Stored locally (not DocuSign's cloud)</li>

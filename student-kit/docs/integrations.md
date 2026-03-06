@@ -369,10 +369,10 @@ services:
 OpenClaw Gateway:     localhost:18789
 Mission Control:      localhost:3000
 Chatterbox TTS:       localhost:4126
-n8n:                  10.0.0.120:5678  (or localhost:5678)
-Home Assistant:       10.0.0.124:8123
+n8n:                  192.168.1.120:5678  (or localhost:5678)
+Home Assistant:       192.168.1.124:8123
 Invoice Ninja:        localhost:8082
 DocuSeal:             localhost:8083
-Proxmox Node 1:       10.0.0.55:8006
-Proxmox Node 2:       10.0.0.70:8006
+Proxmox Node 1:       192.168.1.55:8006
+Proxmox Node 2:       192.168.1.70:8006
 ```

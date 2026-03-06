@@ -140,7 +140,7 @@ return [{ json: { prompt } }];
 
 ### Node 6: Send to Barack (HTTP Request)
 ```
-URL: http://10.0.0.166:18789/api/agents/barack/message
+URL: http://192.168.1.100:18789/api/agents/barack/message
 Method: POST
 Body (JSON):
 {
@@ -263,7 +263,7 @@ Once the basic briefing works, add:
 - Urgent emails from overnight
 
 **Kids' schedule** (via Quinn):
-- If Ellie has soccer, leave by 5:15 PM
+- If Kid has soccer, leave by 5:15 PM
 
 **Weekly version** (Monday only):
 - Full week preview + last week's wins

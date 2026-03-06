@@ -844,7 +844,7 @@ curl -X POST http://localhost:4125/v1/text-to-speech/obama \
   -o /tmp/audio/briefing.mp3
 
 # Play on speaker
-./play-on-sonos.sh 10.0.0.148 "http://your-machine-ip:8765/briefing.mp3"
+./play-on-sonos.sh 192.168.1.148 "http://your-machine-ip:8765/briefing.mp3"
 ```
 
 ---

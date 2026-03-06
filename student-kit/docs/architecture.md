@@ -185,18 +185,18 @@ Barack → Creates Planner task → Confirms via Signal
 INTERNET
     │
     ├── Cloudflare Tunnel (public services only)
-    │   ├── clients.meekertechnologies.com → Invoice Ninja
-    │   └── contracts.meekertechnologies.com → DocuSeal
+    │   ├── clients.yourdomain.com → Invoice Ninja
+    │   └── contracts.yourdomain.com → DocuSeal
     │
     └── Tailscale VPN (admin access only)
-        ├── n8n (10.0.0.120:5678)
-        ├── Home Assistant (10.0.0.124:8123)
-        └── Proxmox (10.0.0.55, 10.0.0.70)
+        ├── n8n (192.168.1.120:5678)
+        ├── Home Assistant (192.168.1.124:8123)
+        └── Proxmox (192.168.1.55, 192.168.1.70)
 
-LAN (10.0.0.x)
-    ├── Mac mini (10.0.0.166) — primary compute
-    ├── Proxmox 1 (10.0.0.55)
-    └── Proxmox 2 (10.0.0.70)
+LAN (192.168.1.x)
+    ├── Mac mini (192.168.1.100) — primary compute
+    ├── Proxmox 1 (192.168.1.55)
+    └── Proxmox 2 (192.168.1.70)
 ```
 
 ### Data Residency
