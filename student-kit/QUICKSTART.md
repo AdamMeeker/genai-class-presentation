@@ -361,23 +361,46 @@ Configure OpenClaw to inject memory:
 
 ---
 
-## You're Done
+## You're Done With Installation
 
 You now have:
 - ✅ A running AI gateway
-- ✅ 3 specialized agents
-- ✅ Signal integration (message from your phone)
-- ✅ Memory system (context persists)
+- ✅ OpenClaw web UI at localhost:18789
+- ✅ Anthropic API connected
 
 ---
 
-## Next Steps
+## Step 7: Run Your Onboarding Interview (15 minutes)
 
-1. **Use it for 24 hours** — notice what you wish your agents could do
-2. **Add more agents** — use the templates in `agents/`
-3. **Wire up integrations** — see `docs/integrations.md`
-4. **Build Mission Control** — paste `prompts/build-mission-control.md` into Claude Code
-5. **Add voice** — see `prompts/build-voice-system.md`
+This is the most important step. Don't skip it.
+
+Open the web UI at [http://localhost:18789](http://localhost:18789) and paste this:
+
+```
+I just installed OpenClaw. Read the file at student-kit/ONBOARDING.md 
+and run me through the onboarding interview. I want to design my 
+personal AI system from scratch.
+```
+
+**What happens next:**
+- Your agent interviews you (15-20 min)
+- Asks about your role, tools, pain points, and setup
+- Recommends a custom agent team (3-8 agents, not all 16)
+- Generates your personalized `SOUL.md`, `USER.md`, and agent configs
+- Produces a ready-to-run Claude Code prompt that builds your dashboard
+- Sets up your first automation cron job
+
+By the end, Claude Code will be building your Mission Control while you grab lunch.
+
+---
+
+## Next Steps (after onboarding)
+
+1. **Follow the onboarding output** — it'll tell you exactly what to do
+2. **Use it for 24 hours** before adding anything else
+3. **Add more agents** — templates in `agents/`
+4. **Wire up integrations** — see `docs/integrations.md`
+5. **Deep dive** — `docs/system-prd.md` has the full architecture and build prompts
 
 ---
 

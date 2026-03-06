@@ -71,6 +71,23 @@ Think of it as building your own J.A.R.V.I.S. — a system that:
 
 ---
 
+## How to Use This Kit
+
+**The two-step process:**
+
+1. **Install** → follow `QUICKSTART.md` (30 min, Mac/Windows/Linux)
+2. **Design** → open OpenClaw web UI and paste:
+   ```
+   Read ONBOARDING.md and run me through the onboarding interview.
+   I want to design my personal AI system from scratch.
+   ```
+
+The onboarding interview takes ~15 minutes. Your agent asks about your role, tools, pain points, and setup — then generates your personalized agent team, `SOUL.md`, `USER.md`, and a Claude Code prompt that builds your dashboard. By the time the interview ends, you have everything you need to run Claude Code and have a working system.
+
+**Don't skip the interview.** Everyone has different needs. The whole point is building *your* system, not copying someone else's.
+
+---
+
 ## Quick Start (15 Minutes)
 
 ### Prerequisites
@@ -324,7 +341,8 @@ SOPs include **eval sections** — criteria that verify the workflow ran correct
 ```
 student-kit/
 ├── 📖 README.md              ← You are here
-├── 🚀 QUICKSTART.md          ← 30-minute setup guide
+├── 🚀 QUICKSTART.md          ← Step 1: Install everything (30 min)
+├── 🎯 ONBOARDING.md          ← Step 2: Design YOUR system (15 min interview)
 ├── 🤖 agents/
 │   ├── README.md             ← Agent design philosophy
 │   ├── barack.md             ← Chief of Staff template

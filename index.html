@@ -2650,32 +2650,103 @@ Run on localhost:3000</code></pre>
 <!-- ============================================================ -->
 <section>
   <h2>🛠️ Try It Yourself</h2>
-  <p class="muted" style="font-size:0.7em; margin-top:-0.3em">Your starter kit is ready</p>
+  <p class="muted" style="font-size:0.7em; margin-top:-0.3em">Two steps. One hour. Your system is running.</p>
   <div class="two-col" style="margin-top:0.6em">
     <div>
       <div class="card" style="border-color:rgba(0,217,255,0.4)">
-        <h3>Get Started (15 min)</h3>
+        <h3>Step 1 — Install (30 min)</h3>
+        <p style="font-size:0.75em; color:var(--muted)">Follow <code>QUICKSTART.md</code> in the repo</p>
         <ul>
-          <li>📦 <strong class="cyan">github.com/AdamMeeker/<br>&nbsp;&nbsp;&nbsp;&nbsp;genai-class-student-kit</strong></li>
-          <li>Install OpenClaw:<br><code style="font-size:0.85em; color:#a8ff78">npm install -g openclaw</code></li>
-          <li>Install Claude Code:<br><code style="font-size:0.85em; color:#a8ff78">npm install -g @anthropic-ai/claude-code</code></li>
-          <li>Follow the 15-minute quickstart in the repo</li>
+          <li>Install OpenClaw + Claude Code</li>
+          <li>Configure your Anthropic API key</li>
+          <li>Start the gateway → open localhost:18789</li>
+          <li>Works on Mac, Windows (WSL2), Linux</li>
         </ul>
+      </div>
+      <div class="card" style="border-color:rgba(168,85,247,0.4); margin-top:0.5em">
+        <h3>Step 2 — Onboarding Interview (15 min)</h3>
+        <p style="font-size:0.75em; color:var(--muted)">Paste this into OpenClaw's web UI:</p>
+        <pre style="font-size:0.6em; background:var(--bg3); padding:0.6em; border-radius:6px; overflow-x:auto; white-space:pre-wrap; border:1px solid var(--border)">Read ONBOARDING.md and run me through
+the onboarding interview. I want to
+design my personal AI system.</pre>
+        <p style="font-size:0.65em; color:var(--muted); margin-top:0.4em">Your agent interviews you → designs your system → produces a Claude Code build prompt → Claude Code builds your dashboard while you sleep.</p>
       </div>
     </div>
     <div>
+      <div class="card" style="border-color:rgba(34,197,94,0.3); margin-bottom:0.5em">
+        <h3>What the interview covers</h3>
+        <ul style="font-size:0.78em">
+          <li>Who you are + biggest time sinks</li>
+          <li>Your real tools (calendar, email, chat)</li>
+          <li>Your setup (laptop/server, budget)</li>
+          <li>Which agents you actually need (3-8, not 16)</li>
+          <li>Which dashboard pages make sense for you</li>
+          <li>Your first automation</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color:rgba(251,191,36,0.3)">
+        <h3>What you get out</h3>
+        <ul style="font-size:0.78em">
+          <li>Personalized <code>SOUL.md</code> + <code>USER.md</code></li>
+          <li>Custom agent configs (your team, your names)</li>
+          <li>Claude Code prompt → builds your dashboard</li>
+          <li>First cron job ready to paste in</li>
+          <li>Numbered next-steps list, specific to you</li>
+        </ul>
+      </div>
       <!-- QR code placeholder -->
-      <div class="card" style="min-height:260px; display:flex; align-items:center; justify-content:center; border-color:rgba(168,85,247,0.3)">
-        <div style="text-align:center">
-          <p style="font-size:2.5em; margin:0">📱</p>
-          <p class="muted" style="font-size:0.7em">QR Code placeholder</p>
-          <p style="font-size:0.75em; margin-top:0.5em"><strong class="cyan">github.com/AdamMeeker/<br>genai-class-student-kit</strong></p>
-        </div>
+      <div style="text-align:center; margin-top:0.5em">
+        <p style="font-size:0.6em; color:var(--muted)">📱 QR → student kit repo</p>
+        <p style="font-size:0.65em"><strong class="cyan">github.com/AdamMeeker/genai-class-student-kit</strong></p>
       </div>
     </div>
   </div>
-  <div class="callout green" style="margin-top:0.5em; font-size:0.75em; text-align:center">
-    <strong>You have the tools. You have the prompts. Start building tonight.</strong>
+</section>
+
+<!-- ============================================================ -->
+<!-- HOW THE ONBOARDING WORKS -->
+<!-- ============================================================ -->
+<section>
+  <h2>🎯 The Onboarding Interview</h2>
+  <p class="muted" style="font-size:0.7em; margin-top:-0.3em">Your agent designs your system. You answer questions.</p>
+  <div style="display:grid; grid-template-columns:1fr 40px 1fr; gap:0.3em; align-items:center; margin-top:0.8em; font-size:0.72em">
+    <div class="card" style="border-color:rgba(0,217,255,0.4); padding:0.7em">
+      <p style="margin:0; font-size:0.85em; font-style:italic; color:var(--cyan)">"Who are you and what eats your time?"</p>
+      <p style="margin:0.3em 0 0 0; font-size:0.8em; color:var(--muted)">Section 1 of 7 — the agent builds a mental model of your life</p>
+    </div>
+    <div style="text-align:center; color:var(--muted)">→</div>
+    <div class="card" style="border-color:rgba(168,85,247,0.4); padding:0.7em">
+      <p style="margin:0; font-size:0.85em; font-style:italic; color:var(--purple)">"Your biggest wins would be email triage and a morning briefing. Sound right?"</p>
+      <p style="margin:0.3em 0 0 0; font-size:0.8em; color:var(--muted)">Agent confirms understanding before moving on</p>
+    </div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 40px 1fr; gap:0.3em; align-items:center; margin-top:0.3em; font-size:0.72em">
+    <div class="card" style="border-color:rgba(34,197,94,0.3); padding:0.7em">
+      <p style="margin:0; font-size:0.85em; font-style:italic; color:var(--green)">"Gmail, Google Calendar, and you write code. Got it."</p>
+      <p style="margin:0.3em 0 0 0; font-size:0.8em; color:var(--muted)">Only builds integrations for tools you actually use</p>
+    </div>
+    <div style="text-align:center; color:var(--muted)">→</div>
+    <div class="card" style="border-color:rgba(251,191,36,0.3); padding:0.7em">
+      <p style="margin:0; font-size:0.85em; font-style:italic; color:var(--yellow)">"You need 5 agents: Chief, Dev, Research, Inbox, Dewey."</p>
+      <p style="margin:0.3em 0 0 0; font-size:0.8em; color:var(--muted)">Recommends the right team — not all 16</p>
+    </div>
+  </div>
+  <div style="margin-top:0.5em; display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.4em; font-size:0.7em">
+    <div class="card" style="padding:0.6em; text-align:center">
+      <div style="font-size:1.5em">📝</div>
+      <p style="margin:0.2em 0 0 0; font-size:0.85em"><strong>Custom SOUL.md</strong><br><span class="muted">Your agent's personality</span></p>
+    </div>
+    <div class="card" style="padding:0.6em; text-align:center">
+      <div style="font-size:1.5em">🤖</div>
+      <p style="margin:0.2em 0 0 0; font-size:0.85em"><strong>Agent configs</strong><br><span class="muted">Your team, your names</span></p>
+    </div>
+    <div class="card" style="padding:0.6em; text-align:center">
+      <div style="font-size:1.5em">🏗️</div>
+      <p style="margin:0.2em 0 0 0; font-size:0.85em"><strong>Claude Code prompt</strong><br><span class="muted">Builds your dashboard</span></p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:0.5em; font-size:0.72em; text-align:center">
+    The interview takes 15 minutes. The dashboard builds itself. <strong class="cyan">You describe what you want — AI builds it.</strong> That's the whole point.
   </div>
 </section>
 
