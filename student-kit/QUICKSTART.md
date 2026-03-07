@@ -8,12 +8,80 @@
 
 ## Prerequisites
 
-- Anthropic API key → [console.anthropic.com](https://console.anthropic.com)
+- An AI model provider (see options below — pick one)
 - Signal account on your phone
 - One of the following:
   - **Mac:** Homebrew installed
   - **Linux:** Ubuntu/Debian 20.04+
   - **Windows:** WSL2 enabled (see Windows Setup below)
+
+---
+
+## Choosing Your AI Provider
+
+OpenClaw supports multiple AI providers. Pick the option that fits your budget and situation:
+
+### Option A — Anthropic API Key (Recommended for production)
+**Cost:** Pay-per-use (~$5-20/month typical usage)  
+**Get it:** [console.anthropic.com](https://console.anthropic.com) → API Keys  
+**Best for:** Predictable billing, production use, no subscription required
+
+```json
+{ "anthropic": { "apiKey": "sk-ant-your-key-here" } }
+```
+
+### Option B — Claude Pro/Max Subscription (~$20-100/month)
+**Cost:** $20/month (Pro) or $100/month (Max)  
+**Get it:** [claude.ai](https://claude.ai) → Subscribe, then run `openclaw setup-token`  
+**⚠️ Important caveat:** Using a Pro/Max subscription with OpenClaw involves capturing an OAuth token from Claude.ai. This works currently, but Anthropic's terms of service may restrict this use. If it stops working, switch to Option A or Option C.
+
+```bash
+# After subscribing at claude.ai:
+openclaw setup-token
+# Follow the prompts — paste the OAuth token when asked
+```
+
+### Option C — GitHub Copilot Pro+ (~$19/month)
+**Cost:** ~$19/month, includes Claude Sonnet 4.6 + GPT-4o + Gemini  
+**Get it:** [github.com/features/copilot](https://github.com/features/copilot)  
+**Best for:** Students who already have GitHub (education discount available — may be free!)
+
+```bash
+openclaw configure --provider github-copilot
+```
+
+### Option D — OpenRouter (Pay-per-use, many models)
+**Cost:** Pay-per-use, often cheaper than direct APIs  
+**Get it:** [openrouter.ai](https://openrouter.ai) → API Keys  
+**Best for:** Budget-conscious users who want access to many models (Llama, Mistral, Gemini, Claude, etc.)
+
+```bash
+openclaw configure --provider openrouter
+```
+
+### Option E — Google Gemini API (Free tier available)
+**Cost:** Free tier available, then pay-per-use  
+**Get it:** [aistudio.google.com](https://aistudio.google.com) → Get API Key  
+**Best for:** Zero-cost experimentation
+
+```bash
+openclaw configure --provider google
+```
+
+### Option F — Local Models via Ollama (Free, runs on your Mac)
+**Cost:** Free — runs locally on your hardware  
+**Get it:** [ollama.ai](https://ollama.ai) → Install → `ollama pull llama3.2`  
+**Best for:** Privacy, offline use, no API costs. Slower than cloud models.
+
+```bash
+openclaw configure --provider ollama
+```
+
+---
+
+> **Recommendation for students:** Start with **Option C (GitHub Copilot)** if you have a .edu email (free or discounted). Otherwise use **Option A (Anthropic API)** — $5 will last weeks during class.
+
+---
 
 ---
 
@@ -398,7 +466,7 @@ By the end, Claude Code will be building your Mission Control while you grab lun
 
 1. **Follow the onboarding output** — it'll tell you exactly what to do
 2. **Use it for 24 hours** before adding anything else
-3. **Add more agents** — templates in `agents/`
+3. **Add more agents** — 19 templates in `agents/` including Pulse (health coach) and Ralph (autonomous loop agent)
 4. **Wire up integrations** — see `docs/integrations.md`
 5. **Deep dive** — `docs/system-prd.md` has the full architecture and build prompts
 

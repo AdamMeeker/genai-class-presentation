@@ -7,7 +7,7 @@
 
 ## Overview
 
-This presentation demonstrates a complete Personal AI Operating System — a sophisticated network of 14 specialized AI agents running 24/7, integrated with home infrastructure, business tools, and daily workflows.
+This presentation demonstrates a complete Personal AI Operating System — a sophisticated network of 18 specialized AI agents running 24/7, integrated with home infrastructure, business tools, and daily workflows.
 
 **Target Audience:** MSBA students — technically capable, ambitious, want to build their own systems.
 
@@ -17,7 +17,7 @@ This presentation demonstrates a complete Personal AI Operating System — a sop
 
 ## The System (Quick Facts)
 
-- **14 specialized agents** — each with distinct personas, domains, and voices
+- **18 specialized agents** — each with distinct personas, domains, and voices
 - **3-tier hardware** — Mac mini M4 + 2 Proxmox nodes (~$2,000 total)
 - **20-page dashboard** — Mission Control (Next.js, dark theme)
 - **6 cloned voices** — Chatterbox TTS, MPS-accelerated, local inference
@@ -33,11 +33,11 @@ This presentation demonstrates a complete Personal AI Operating System — a sop
 genai-class/
 ├── index.html              ← Main Reveal.js presentation (39 slides)
 ├── reveal/                 ← Reveal.js library files (do not edit)
-├── agent-intros.json       ← Voice intro scripts for all 14 agents
+├── agent-intros.json       ← Voice intro scripts for all 18 agents
 ├── student-kit/            ← Complete starter kit for students
 │   ├── README.md           ← Overview + architecture diagram
 │   ├── QUICKSTART.md       ← 30-minute setup guide
-│   ├── agents/             ← All 14 agent templates + design philosophy
+│   ├── agents/             ← All 18 agent templates + design philosophy
 │   │   ├── README.md
 │   │   ├── barack.md       ← Chief of Staff
 │   │   ├── olivia.md       ← Executive Enforcer
@@ -152,7 +152,7 @@ Emoji-heavy, visual, professional but not corporate boring.
 
 ## Agent Voice Intros
 
-`agent-intros.json` contains 2-3 sentence intro scripts for each of the 14 agents, written in character. These can be used for:
+`agent-intros.json` contains 2-3 sentence intro scripts for each of the 18 agents, written in character. These can be used for:
 
 - TTS demo during the presentation
 - Student understanding of agent personas
@@ -230,6 +230,7 @@ LinkedIn: linkedin.com/in/adammeeker
 ## Version History
 
 - **2026-03-03:** Complete rebuild — new presentation, full student kit, all 14 agents documented
+- **2026-03-06:** Updated to 18 agents — added Hunter (RFP intelligence), Pulse (health coach), Herky (Hawkeye sports), Dewey (knowledge curator)
 - **2026-02-XX:** Original version (now outdated)
 
 ---

@@ -2,6 +2,8 @@
 
 > "Each agent should have a narrow job and do it well."
 
+**19 agent templates in this directory** — including Barack, Sage, Pulse (health coach), Ralph (autonomous loop agent), and 15 more specialists.
+
 ---
 
 ## The Core Insight

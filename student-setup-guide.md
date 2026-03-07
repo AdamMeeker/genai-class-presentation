@@ -62,10 +62,30 @@ This guide will help you build your own Personal AI Infrastructure using OpenCla
 
 ### Required Accounts
 
-1. **Anthropic API Account:** https://console.anthropic.com
-   - Sign up and add payment method
-   - Get your API key
-   - **Cost:** Pay-per-use (Claude Haiku: ~$0.80/million input tokens, ~$4/million output tokens)
+1. **AI Provider — Pick One:**
+
+   **Option A — Anthropic API (Recommended):** https://console.anthropic.com
+   - Sign up and add payment method → get API key
+   - **Cost:** Pay-per-use (~$5-20/month typical. $5 lasts weeks during a class)
+
+   **Option B — Claude Pro/Max Subscription:** https://claude.ai
+   - Subscribe ($20/month Pro, $100/month Max), then run `openclaw setup-token`
+   - ⚠️ Uses an OAuth token capture — works today but may break if Anthropic restricts it. Have a backup provider ready.
+
+   **Option C — GitHub Copilot Pro+:** https://github.com/features/copilot
+   - ~$19/month, includes Claude Sonnet + GPT-4o + Gemini. Free with .edu email via GitHub Education.
+   - Run `openclaw configure --provider github-copilot`
+
+   **Option D — OpenRouter:** https://openrouter.ai
+   - Pay-per-use, access to 100+ models (Claude, Llama, Mistral, Gemini, etc.)
+   - Often cheaper than direct APIs. Great for experimentation.
+
+   **Option E — Google Gemini:** https://aistudio.google.com
+   - Free tier available. Run `openclaw configure --provider google`
+
+   **Option F — Ollama (Local, Free):** https://ollama.ai
+   - Runs entirely on your Mac. No cost, no internet required, full privacy.
+   - Slower than cloud, but great for learning and development.
 
 2. **GitHub Account:** https://github.com
    - For version control and skill management
