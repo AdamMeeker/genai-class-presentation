@@ -68,9 +68,10 @@ This guide will help you build your own Personal AI Infrastructure using OpenCla
    - Sign up and add payment method → get API key
    - **Cost:** Pay-per-use (~$5-20/month typical. $5 lasts weeks during a class)
 
-   **Option B — Claude Pro/Max Subscription:** https://claude.ai
-   - Subscribe ($20/month Pro, $100/month Max), then run `openclaw setup-token`
-   - ⚠️ Uses an OAuth token capture — works today but may break if Anthropic restricts it. Have a backup provider ready.
+   ~~**Option B — Claude Pro/Max Subscription:**~~ ❌ Blocked by Anthropic
+   - Anthropic has blocked OpenClaw and other third-party harnesses from using Pro/Max subscriptions.
+   - Use **Option A (Anthropic API)** instead — pay-as-you-go, $5 lasts weeks for typical class use.
+   - ℹ️ **OpenAI note:** OpenAI announced they *will* allow subscription tokens with third-party harnesses — ChatGPT Plus/Pro users can use OpenAI via Option D (OpenRouter) or a direct OpenAI API key.
 
    **Option C — GitHub Copilot Pro+:** https://github.com/features/copilot
    - $10/month (Pro) or $39/month (Pro+). Free student plan via GitHub Education — check education.github.com/students.
