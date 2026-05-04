@@ -69,7 +69,7 @@ openclaw gateway validate
 **Minimal config.yaml:**
 ```yaml
 models:
-  default: anthropic/claude-sonnet-4-5
+  default: anthropic/claude-sonnet-4-6
 
 providers:
   anthropic:
@@ -99,7 +99,7 @@ providers:
 
 models:
   classification: ollama/llama3.2
-  default: anthropic/claude-sonnet-4-5
+  default: anthropic/claude-sonnet-4-6
 ```
 
 ## Creating a Custom Skill

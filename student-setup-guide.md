@@ -73,7 +73,7 @@ This guide will help you build your own Personal AI Infrastructure using OpenCla
    - ⚠️ Uses an OAuth token capture — works today but may break if Anthropic restricts it. Have a backup provider ready.
 
    **Option C — GitHub Copilot Pro+:** https://github.com/features/copilot
-   - ~$19/month, includes Claude Sonnet + GPT-4o + Gemini. Free with .edu email via GitHub Education.
+   - $10/month (Pro) or $39/month (Pro+). Free student plan via GitHub Education — check education.github.com/students.
    - Run `openclaw configure --provider github-copilot`
 
    **Option D — OpenRouter:** https://openrouter.ai
@@ -215,7 +215,7 @@ Edit `config.yaml`:
 
 ```yaml
 models:
-  default: anthropic/claude-sonnet-4-5
+  default: anthropic/claude-sonnet-4-6
   
 providers:
   anthropic:
@@ -452,7 +452,7 @@ providers:
     
 models:
   classification: ollama/llama3.2  # Use local model for cheap tasks
-  default: anthropic/claude-sonnet-4-5  # Use Claude for important work
+  default: anthropic/claude-sonnet-4-6  # Use Claude for important work
 ```
 
 **Cost savings:** Classification tasks that would cost $0.01-0.05 with Claude API are now free with local Ollama.
@@ -686,16 +686,16 @@ The system showcased in class uses 16 specialized agents. Here's the full roster
 | # | Agent | Role | Model | Voice |
 |---|-------|------|-------|-------|
 | 1 | Barack | Chief of Staff · primary interface · routing | Sonnet 4.6 | obama |
-| 2 | Olivia | Exec Enforcer · security · accountability | Sonnet 4.5 | olivia |
-| 3 | Marcus | Research & Analytics · briefs · deep dives | Sonnet 4.5 | rishi |
+| 2 | Olivia | Exec Enforcer · security · accountability | Sonnet 4.6 | olivia |
+| 3 | Marcus | Research & Analytics · briefs · deep dives | Sonnet 4.6 | rishi |
 | 4 | Riley | Communications · writing · editing | Opus 4.6 | karen |
 | 5 | Matlock | Legal · risk · contracts | Opus 4.6 | daniel_gb |
-| 6 | Sterling | Finance · budgets · business ops | Sonnet 4.5 | moira |
-| 7 | Vega | Investments · trading · market intel | Sonnet 4.5 | alex |
-| 8 | Sage | Wellness · priorities · work-life balance | Sonnet 4.5 | lekha |
-| 9 | Forge | Infrastructure · servers · DevOps | Sonnet 4.5 | nicky |
-| 10 | Maxwell | Operations · workflows · logistics | Sonnet 4.5 | samantha |
-| 11 | Quinn | Creative · design · branding | Sonnet 4.5 | fiona |
+| 6 | Sterling | Finance · budgets · business ops | Sonnet 4.6 | moira |
+| 7 | Vega | Investments · trading · market intel | Sonnet 4.6 | alex |
+| 8 | Sage | Wellness · priorities · work-life balance | Sonnet 4.6 | lekha |
+| 9 | Forge | Infrastructure · servers · DevOps | Sonnet 4.6 | nicky |
+| 10 | Maxwell | Operations · workflows · logistics | Sonnet 4.6 | samantha |
+| 11 | Quinn | Creative · design · branding | Sonnet 4.6 | fiona |
 | 12 | Taylor | Personal & Family · lifestyle | Haiku 4.5 | taylor |
 | 13 | Inbox | Email Triage · classification · digests | Haiku 4.5 | yuna |
 | 14 | Dev | Software Engineer · code · architecture | Sonnet 4.6 | tessa |
