@@ -2751,6 +2751,56 @@ design my personal AI system.</pre>
 </section>
 
 <!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- SLIDE 36g: LIVE EDW DEMO -->
+<!-- ============================================================ -->
+<section>
+  <h2>🗄️ Live Demo: Grounded AI on Real Data</h2>
+  <div class="two-col">
+    <div>
+      <div class="callout" style="margin-bottom:0.6em">
+        <strong>The problem with chatbots:</strong> They answer from training data — or they hallucinate. Neither is acceptable for business decisions.
+      </div>
+      <div class="card">
+        <h3>What grounded AI looks like</h3>
+        <ul>
+          <li>Question → Agent understands intent</li>
+          <li>Agent calls a tool (SQL, API, file)</li>
+          <li>Real data comes back</li>
+          <li>Agent synthesizes into plain English</li>
+          <li>Answer is <span class="green">fact-grounded</span>, not generated</li>
+        </ul>
+      </div>
+      <div class="callout purple" style="margin-top:0.6em; font-size:0.7em">
+        This pattern is called <strong>RAG — Retrieval Augmented Generation</strong>. The model handles language; your database handles facts.
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>🏗️ The Stack</h3>
+        <ul>
+          <li><span class="cyan">Azure SQL</span> — AdventureWorks EDW</li>
+          <li><span class="cyan">Gold layer views</span> — AR Aging, Revenue, Customers, Products</li>
+          <li><span class="cyan">OpenClaw agent</span> — Sterling (Sonnet 4.6)</li>
+          <li><span class="cyan">Tool wrapper</span> — Python SQL runner, whitelist-only queries</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:0.5em">
+        <h3>💬 Demo questions</h3>
+        <ul>
+          <li><em>"How has revenue been trending?"</em></li>
+          <li><em>"How's our AR looking? Any concerns?"</em></li>
+          <li><em>"Which customers are 90+ days overdue?"</em></li>
+          <li><em>"Who are our top 5 customers?"</em></li>
+        </ul>
+      </div>
+      <div style="margin-top:0.5em; font-size:0.65em; color:var(--muted)">
+        Every answer is live. The numbers come from the database, not the model.
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SLIDE 37: THE BIGGER PICTURE -->
 <!-- ============================================================ -->
 <section>
